@@ -12,7 +12,7 @@ pub fn extract_tasks_from_file(file: &NFile) -> Vec<NTask> {
     tasks
 }
 
-pub fn add_task_to_file(file: &mut NFile, new_task_text: &str, due_date: Option<String>) -> NTask {
+pub fn add_task_to_file(file: &mut NFile, new_task_text: &str, due_date: Option<String>) -> Option<NTask> {
     // Construct the new task line
     let due_str = match due_date {
         Some(d) => format!(" @{}", d),
@@ -29,5 +29,5 @@ pub fn add_task_to_file(file: &mut NFile, new_task_text: &str, due_date: Option<
     }
 
     // return the line number of the new task
-    NTask::new(&file.path, file.content.lines().count())
+    NTask::from_line(&line_string, &file.path, file.content.lines().count())
 }
