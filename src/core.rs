@@ -1,3 +1,3 @@
 pub mod entities;
-pub mod utils;
+mod utils;
 pub mod vault_index;

@@ -1,26 +1,28 @@
-use chrono::{Datelike, NaiveDate};
+use std::path::PathBuf;
+
+use chrono::NaiveDate;
 use regex::Regex;
 
 pub struct NTask {
     text: String,
     completed: bool,
     due_date: Option<String>,
-    pub source_file: String,
+    pub source_file: PathBuf,
     pub line_number: usize,
 }
 
 impl NTask {
-    pub fn new(source: &str, line: usize) -> NTask {
+    pub fn new(source: &PathBuf, line: usize) -> NTask {
         NTask { 
             text: String::new(),
             completed: false,
             due_date: None,
-            source_file: source.to_owned(),
+            source_file: source.clone(),
             line_number: line
         }
     }
 
-    pub fn from_line(line: &str, source: &str, line_number: usize) -> Option<NTask> {
+    pub fn from_line(line: &str, source: &PathBuf, line_number: usize) -> Option<NTask> {
         let re = Regex::new(r"^\s*[-*+]\s+\[([ xX])\]\s+(.*?)(?:\s+@(\d{4}-\d{2}-\d{2}))?$").ok()?;
         let caps = re.captures(line)?;
         
@@ -35,7 +37,7 @@ impl NTask {
             text,
             completed,
             due_date,
-            source_file: source.to_string(),
+            source_file: source.clone(),
             line_number
         })
     }
@@ -51,8 +53,8 @@ impl NTask {
         format!("- [{}] {}{}", status, self.text, date_str)
     }
 
-    pub fn complete(&mut self) {
-        self.completed = true
+    pub fn check_uncheck(&mut self) {
+        self.completed = !self.completed
     }
 
     pub fn update(&mut self, text: String) {
@@ -60,7 +62,7 @@ impl NTask {
     }
 
     pub fn set_date(&mut self, date: NaiveDate) {
-        self.due_date = Some(date.format("%y-%m-%d").to_string())
+        self.due_date = Some(date.format("%Y-%m-%d").to_string())
     }
 
     pub fn read_date(&self) -> Option<NaiveDate> {
