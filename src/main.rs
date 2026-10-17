@@ -1,9 +1,11 @@
-use crate::entities::file::NFile;
+use std::path::PathBuf;
 
-mod entities;
+use crate::core::entities::file::NFile;
+
+mod core;
 
 fn main() {
-    let res = NFile::read("./New Note File.md");
+    let res = NFile::read(PathBuf::from("./New Note File.md"));
     match res {
         Ok(some) => {
             println!("File name: {}", some.title);
