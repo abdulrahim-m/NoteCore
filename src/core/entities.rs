@@ -1,3 +1,3 @@
 pub mod file;
-// pub mod dir;
+pub mod dir;
 pub mod task;
