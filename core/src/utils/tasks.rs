@@ -1,4 +1,4 @@
-use crate::core::entities::{file::NFile, task::NTask};
+use crate::entities::{file::NFile, task::NTask};
 
 pub fn extract_tasks_from_file(file: &NFile) -> Vec<NTask> {
     let mut tasks = Vec::new();

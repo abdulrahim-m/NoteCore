@@ -1,6 +1,6 @@
 use std::{collections::HashMap, fs::{self, read_to_string}, io::Result, path::PathBuf};
 
-use crate::core::{entities::task::NTask, utils::tasks::add_task_to_file};
+use crate::{entities::task::NTask, utils::tasks::add_task_to_file};
 
 pub struct NFile {
     pub path: PathBuf,

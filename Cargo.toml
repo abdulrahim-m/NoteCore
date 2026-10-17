@@ -1,8 +1,7 @@
-[package]
-name = "notecore"
-version = "0.1.0"
-edition = "2024"
+[workspace]
+resolver = "2"
+members = [
+    "core",
+    "bindings"
+]
 
-[dependencies]
-chrono = "0.4.45"
-regex = "1.13.1"

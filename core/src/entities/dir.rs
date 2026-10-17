@@ -1,6 +1,6 @@
 use std::{fs, io::Result, path::PathBuf};
 
-use crate::core::{entities::{file::NFile, task::NTask}, utils::tasks::extract_tasks_from_file};
+use crate::{entities::{file::NFile, task::NTask}, utils::tasks::extract_tasks_from_file};
 
 pub struct NDir {
     pub path: PathBuf,

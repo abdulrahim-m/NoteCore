@@ -1,6 +1,6 @@
 use std::{io::Result, path::PathBuf};
 
-use crate::core::{entities::{dir::NDir, task::NTask}};
+use crate::{entities::{dir::NDir, task::NTask}};
 
 pub struct VaultIndex{
     pub directories: Vec<NDir>
@@ -53,7 +53,7 @@ mod tests {
 
         // Initialize and refresh the vault index
         let mut vault = VaultIndex::new();
-        vault.new_dir(temp_dir.clone());
+        assert!(vault.new_dir(temp_dir.clone()).is_ok());
         let refresh_res = vault.refresh();
 
         assert!(refresh_res.is_ok());
