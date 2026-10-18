@@ -2,6 +2,6 @@
 resolver = "2"
 members = [
     "core",
-    "bindings"
+    "mobile_client/rust"
 ]
 
