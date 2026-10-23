@@ -7,7 +7,19 @@ use crate::models::{repo::{List, Model, SearchParams}};
 pub struct NoteGroup {
     pub id: i64,
     pub name: String,
+    pub listed_notes: i64,
     pub placing: i64,
+}
+
+impl NoteGroup {
+    pub fn new(name: &str, placing: i64) -> Self {
+        NoteGroup { 
+            id: 0, 
+            name: name.to_string(),
+            listed_notes: 0,
+            placing: placing,
+        }
+    }
 }
 
 impl Model for NoteGroup {
@@ -19,9 +31,15 @@ impl Model for NoteGroup {
     }
 
     async fn get_all(pool: &SqlitePool, list: Option<List>) -> Result<Vec<Self>, Error> {
-        let mut query_builder = sqlx::QueryBuilder::new(
-            "SELECT id, name, placing FROM note_groups ORDER BY placing ASC"
-        );
+        let mut query_builder = sqlx::QueryBuilder::new("
+            SELECT 
+                ng.id, 
+                ng.name, 
+                ng.placing,
+                (SELECT COUNT(*) FROM notes n WHERE n.group_id = ng.id) AS listed_notes
+            FROM note_groups ng 
+            ORDER BY ng.placing ASC
+        ");
 
         if let Some(l) = list {
             let offset = (l.current_page - 1) * l.limit;
@@ -40,7 +58,16 @@ impl Model for NoteGroup {
     }
 
     async fn get_by_id(pool: &SqlitePool, id: i64) -> Result<Self, Error> {
-        let group = sqlx::query_as("SELECT id, name, placing FROM note_groups WHERE id = ?")
+        let query = "
+            SELECT 
+                ng.id, 
+                ng.name, 
+                ng.placing,
+                (SELECT COUNT(*) FROM notes n WHERE n.group_id = ng.id) AS listed_notes
+            FROM note_groups ng 
+            WHERE ng.id = ?
+        ";
+        let group = sqlx::query_as(query)
             .bind(id)
             .fetch_one(pool)
             .await?;
@@ -48,17 +75,23 @@ impl Model for NoteGroup {
     }
 
     async fn search(pool: &SqlitePool, params: SearchParams) -> Result<Vec<Self>, Error> {
-        let mut query_builder = sqlx::QueryBuilder::new(
-            "SELECT id, name, placing FROM note_groups WHERE 1=1"
-        );
+        let mut query_builder = sqlx::QueryBuilder::new("
+            SELECT 
+                ng.id, 
+                ng.name, 
+                ng.placing,
+                (SELECT COUNT(*) FROM notes n WHERE n.group_id = ng.id) AS listed_notes
+            FROM note_groups ng 
+            WHERE 1=1
+        ");
 
         if let Some(text) = &params.text {
             let pattern = format!("%{}%", text);
-            query_builder.push(" AND name LIKE ");
+            query_builder.push(" AND ng.name LIKE ");
             query_builder.push_bind(pattern);
         }
 
-        query_builder.push(" ORDER BY placing ASC");
+        query_builder.push(" ORDER BY ng.placing ASC");
 
         let rows = query_builder
             .build_query_as::<NoteGroup>()
@@ -68,7 +101,7 @@ impl Model for NoteGroup {
         Ok(rows)
     }
 
-    async fn create(&mut self, pool: &SqlitePool) -> Result<i64, Error> {
+    async fn create(&mut self, pool: &SqlitePool) -> Result<(), Error> {
         let query = "
             INSERT INTO note_groups (name, placing) 
             VALUES (?, ?)
@@ -80,7 +113,9 @@ impl Model for NoteGroup {
             .execute(pool)
             .await?;
 
-        Ok(result.last_insert_rowid())
+        self.id = result.last_insert_rowid();
+        self.listed_notes = 0;
+        Ok(())
     }
 
     async fn update(&mut self, pool: &SqlitePool) -> Result<(), Error> {
@@ -151,6 +186,29 @@ impl Note {
             .await?;
         
         Ok(rows)
+    }
+
+    pub async fn add_to_group(pool: &SqlitePool, group_id: Option<i64>, ids: Vec<i64>) -> Result<(), Error> {
+        if ids.is_empty() {
+            return Ok(());
+        }
+
+        let mut query_builder = sqlx::QueryBuilder::new("UPDATE notes SET group_id = ");
+        query_builder.push_bind(group_id);
+        query_builder.push(" WHERE id IN (");
+
+        let mut separated = query_builder.separated(", ");
+        for id in &ids {
+            separated.push_bind(id);
+        }
+        separated.push_unseparated(")");
+
+        query_builder
+            .build()
+            .execute(pool)
+            .await?;
+
+        Ok(())
     }
 }
 
@@ -238,7 +296,7 @@ impl Model for Note {
         Ok(rows)
     }
 
-    async fn create(&mut self, pool: &SqlitePool) -> Result<i64, Error> {
+    async fn create(&mut self, pool: &SqlitePool) -> Result<(), Error> {
         self.created_at = Utc::now();
         self.updated_at = Utc::now();
 
@@ -257,7 +315,8 @@ impl Model for Note {
             .execute(pool)
             .await?;
 
-        Ok(result.last_insert_rowid())
+        self.id = result.last_insert_rowid();
+        Ok(())
     }
 
     async fn update(&mut self, pool: &SqlitePool) -> Result<(), Error> {

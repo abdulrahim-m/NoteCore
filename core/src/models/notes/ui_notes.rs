@@ -1,16 +1,17 @@
 use chrono::{DateTime, Utc};
 
-use crate::models::tags::UITag;
+use crate::models::{notes::notes::{Note, NoteGroup}, tags::{tags::Tag, ui_tags::UITag}};
 
 pub struct UINoteGroup {
     pub id: i64,
     pub name: String,
+    pub listed_notes: i64,
     pub placing: i64,
 }
 
 impl UINoteGroup {
-    pub fn new() -> Self {
-        UINoteGroup { id: 0, name: String::new(), placing: 0 }
+    pub fn from(group: NoteGroup) -> Self {
+        UINoteGroup { id: group.id, name: group.name.clone(), listed_notes: group.listed_notes, placing: group.placing }
     }
 }
 
@@ -25,13 +26,13 @@ pub struct UINote {
 }
 
 impl UINote {
-    pub fn new() -> Self {
+    pub fn from(n: Note, tags: Vec<Tag>) -> Self {
         UINote { 
-            id: 0, 
-            group_id: None, 
-            title: "untitled".to_string(), 
-            content: String::new(), 
-            tags: Vec::new(), 
+            id: n.id, 
+            group_id: n.group_id, 
+            title: n.title, 
+            content: n.content, 
+            tags: tags.iter().map(|t| UITag::from(t)).collect(),
             created_at: Utc::now(), 
             updated_at: Utc::now()
         }       

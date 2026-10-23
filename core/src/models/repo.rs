@@ -22,7 +22,7 @@ pub trait Model: Sized + for<'r> FromRow<'r, SqliteRow> {
 
     async fn search(pool: &SqlitePool, params: SearchParams) -> Result<Vec<Self>, Error>;
 
-    async fn create(&mut self, pool: &SqlitePool) -> Result<i64, Error>;
+    async fn create(&mut self, pool: &SqlitePool) -> Result<(), Error>;
     async fn update(&mut self, pool: &SqlitePool) -> Result<(), Error>;
     async fn delete(pool: &SqlitePool, id: i64) -> Result<(), Error>;
 }
