@@ -1,13 +1,21 @@
 use chrono::{DateTime, Utc};
 use sqlx::{Error, SqlitePool, prelude::FromRow, types::Json};
 
-use crate::models::repo::{List, Model, SearchParams};
+use crate::models::{repo::{List, Model, SearchParams}, tags::UITag};
 
 #[derive(Debug, Clone, FromRow)]
 pub struct ShortNoteSection {
     pub id: i64,
     pub name: String,
     pub tags: Json<Vec<i64>>,
+    pub created_at: DateTime<Utc>,
+    pub updated_at: DateTime<Utc>,
+}
+
+pub struct UIShortNoteSection {
+    pub id: i64,
+    pub name: String,
+    pub tags: Vec<UITag>,
     pub created_at: DateTime<Utc>,
     pub updated_at: DateTime<Utc>,
 }
@@ -20,17 +28,21 @@ impl Model for ShortNoteSection {
         Ok(count.0)
     }
 
-    async fn get_all(pool: &SqlitePool, list: List) -> Result<Vec<Self>, Error> {
-        let query = "
-            SELECT id, name, tags, created_at, updated_at FROM short_note_sections 
-            ORDER BY created_at DESC
-            LIMIT ? OFFSET ?";
+    async fn get_all(pool: &SqlitePool, list: Option<List>) -> Result<Vec<Self>, Error> {
+        let mut query_builder = sqlx::QueryBuilder::new(
+            "SELECT id, name, tags, created_at, updated_at FROM short_note_sections ORDER BY created_at DESC"
+        );
 
-        let offset = (list.current_page - 1) * list.limit;
-        
-        let rows: Vec<ShortNoteSection> = sqlx::query_as(query)
-            .bind(list.limit)
-            .bind(offset)
+        if let Some(l) = list {
+            let offset = (l.current_page - 1) * l.limit;
+            query_builder.push(" LIMIT ");
+            query_builder.push_bind(l.limit);
+            query_builder.push(" OFFSET ");
+            query_builder.push_bind(offset);
+        }
+
+        let rows: Vec<ShortNoteSection> = query_builder
+            .build_query_as()
             .fetch_all(pool)
             .await?;
         
@@ -138,6 +150,12 @@ impl Model for ShortNoteSection {
 
 #[derive(Debug, Clone, FromRow)]
 pub struct ShortNoteItem {
+    pub id: i64,
+    pub section_id: i64,
+    pub content: String,
+}
+
+pub struct UIShortNoteItem {
     pub id: i64,
     pub section_id: i64,
     pub content: String,

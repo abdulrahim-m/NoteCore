@@ -2,7 +2,7 @@ use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 use sqlx::{Error, SqlitePool, prelude::FromRow, types::Json};
 
-use crate::models::repo::{List, Model, SearchParams};
+use crate::models::{repo::{List, Model, SearchParams}, tags::UITag};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum Schedule {
@@ -51,6 +51,18 @@ pub struct Task {
     pub tags: Json<Vec<i64>>
 }
 
+pub struct UITask {
+    pub id: i64,
+    pub title: String,
+    pub description: String,
+    pub task_type: Type,
+    pub done: bool,
+    pub created_at: DateTime<Utc>,
+    pub updated_at: DateTime<Utc>,
+    pub options: TaskOptions,
+    pub tags: Vec<UITag>
+}
+
 impl Model for Task {
     async fn get_count(pool: &SqlitePool) -> Result<i64, Error> {
         let count: (i64,) = sqlx::query_as("SELECT COUNT(*) FROM tasks")
@@ -59,18 +71,21 @@ impl Model for Task {
         Ok(count.0)
     }
 
-    async fn get_all(pool: &SqlitePool, list: List) -> Result<Vec<Self>, Error> {
-        let query = "
-            SELECT id, title, description, task_type, done, created_at, updated_at, options, tags 
-            FROM tasks 
-            ORDER BY created_at DESC
-            LIMIT ? OFFSET ?";
+    async fn get_all(pool: &SqlitePool, list: Option<List>) -> Result<Vec<Self>, Error> {
+        let mut query_builder = sqlx::QueryBuilder::new(
+            "SELECT id, title, description, task_type, done, created_at, updated_at, options, tags FROM tasks ORDER BY created_at DESC"
+        );
 
-        let offset = (list.current_page - 1) * list.limit;
-        
-        let rows: Vec<Task> = sqlx::query_as(query)
-            .bind(list.limit)
-            .bind(offset)
+        if let Some(l) = list {
+            let offset = (l.current_page - 1) * l.limit;
+            query_builder.push(" LIMIT ");
+            query_builder.push_bind(l.limit);
+            query_builder.push(" OFFSET ");
+            query_builder.push_bind(offset);
+        }
+
+        let rows: Vec<Task> = query_builder
+            .build_query_as()
             .fetch_all(pool)
             .await?;
         

@@ -1,7 +1,7 @@
 use chrono::{DateTime, Utc};
 use sqlx::{Error, SqlitePool, prelude::FromRow, types::Json};
 
-use crate::models::repo::{List, Model, SearchParams};
+use crate::models::{repo::{List, Model, SearchParams}};
 
 #[derive(Debug, Clone, FromRow)]
 pub struct ShortTaskSection {
@@ -20,17 +20,21 @@ impl Model for ShortTaskSection {
         Ok(count.0)
     }
 
-    async fn get_all(pool: &SqlitePool, list: List) -> Result<Vec<Self>, Error> {
-        let query = "
-            SELECT id, title, tags, created_at, updated_at FROM short_task_sections 
-            ORDER BY created_at DESC
-            LIMIT ? OFFSET ?";
+    async fn get_all(pool: &SqlitePool, list: Option<List>) -> Result<Vec<Self>, Error> {
+        let mut query_builder = sqlx::QueryBuilder::new(
+            "SELECT id, title, tags, created_at, updated_at FROM short_task_sections ORDER BY created_at DESC"
+        );
 
-        let offset = (list.current_page - 1) * list.limit;
-        
-        let rows: Vec<ShortTaskSection> = sqlx::query_as(query)
-            .bind(list.limit)
-            .bind(offset)
+        if let Some(l) = list {
+            let offset = (l.current_page - 1) * l.limit;
+            query_builder.push(" LIMIT ");
+            query_builder.push_bind(l.limit);
+            query_builder.push(" OFFSET ");
+            query_builder.push_bind(offset);
+        }
+
+        let rows: Vec<ShortTaskSection> = query_builder
+            .build_query_as()
             .fetch_all(pool)
             .await?;
         

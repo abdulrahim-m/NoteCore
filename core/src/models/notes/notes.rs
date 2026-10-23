@@ -1,16 +1,10 @@
 use chrono::{DateTime, Utc};
 use sqlx::{Error, SqlitePool, prelude::FromRow, types::Json};
 
-use crate::models::repo::{List, Model, SearchParams};
+use crate::models::{repo::{List, Model, SearchParams}};
 
 #[derive(Debug, Clone, FromRow)]
 pub struct NoteGroup {
-    pub id: i64,
-    pub name: String,
-    pub placing: i64,
-}
-
-pub struct UINoteGroup {
     pub id: i64,
     pub name: String,
     pub placing: i64,
@@ -24,17 +18,21 @@ impl Model for NoteGroup {
         Ok(count.0)
     }
 
-    async fn get_all(pool: &SqlitePool, list: List) -> Result<Vec<Self>, Error> {
-        let query = "
-            SELECT id, name, placing FROM note_groups 
-            ORDER BY placing ASC
-            LIMIT ? OFFSET ?";
+    async fn get_all(pool: &SqlitePool, list: Option<List>) -> Result<Vec<Self>, Error> {
+        let mut query_builder = sqlx::QueryBuilder::new(
+            "SELECT id, name, placing FROM note_groups ORDER BY placing ASC"
+        );
 
-        let offset = (list.current_page - 1) * list.limit;
-        
-        let rows: Vec<NoteGroup> = sqlx::query_as(query)
-            .bind(list.limit)
-            .bind(offset)
+        if let Some(l) = list {
+            let offset = (l.current_page - 1) * l.limit;
+            query_builder.push(" LIMIT ");
+            query_builder.push_bind(l.limit);
+            query_builder.push(" OFFSET ");
+            query_builder.push_bind(offset);
+        }
+
+        let rows: Vec<NoteGroup> = query_builder
+            .build_query_as()
             .fetch_all(pool)
             .await?;
         
@@ -123,17 +121,19 @@ pub struct Note {
     pub updated_at: DateTime<Utc>,
 }
 
-pub struct UINote {
-    pub id: i64,
-    pub group_id: Option<i64>,
-    pub title: String,
-    pub content: String,
-    pub tags: Vec<String>,
-    pub created_at: String,
-    pub updated_at: String,
-}
-
 impl Note {
+    pub fn new() -> Self {
+        Note { 
+            id: 0, 
+            group_id: None, 
+            title: "untitled".to_string(), 
+            content: "".to_string(), 
+            tags: Json(Vec::new()), 
+            created_at: Utc::now(), 
+            updated_at: Utc::now() 
+        }
+    }
+
     pub async fn get_with_group_id(pool: &SqlitePool, list: List, group_id: i64) -> Result<Vec<Self>, Error> {
         let query = "
             SELECT id, group_id, title, content, tags, created_at, updated_at FROM notes 
@@ -162,17 +162,21 @@ impl Model for Note {
         Ok(count.0)
     }
 
-    async fn get_all(pool: &SqlitePool, list: List) -> Result<Vec<Self>, Error> {
-        let query = "
-            SELECT id, group_id, title, content, tags, created_at, updated_at FROM notes 
-            ORDER BY created_at DESC
-            LIMIT ? OFFSET ?";
+    async fn get_all(pool: &SqlitePool, list: Option<List>) -> Result<Vec<Self>, Error> {
+        let mut query_builder = sqlx::QueryBuilder::new(
+            "SELECT id, group_id, title, content, tags, created_at, updated_at FROM notes ORDER BY created_at DESC"
+        );
 
-        let offset = (list.current_page - 1) * list.limit;
-        
-        let rows: Vec<Note> = sqlx::query_as(query)
-            .bind(list.limit)
-            .bind(offset)
+        if let Some(l) = list {
+            let offset = (l.current_page - 1) * l.limit;
+            query_builder.push(" LIMIT ");
+            query_builder.push_bind(l.limit);
+            query_builder.push(" OFFSET ");
+            query_builder.push_bind(offset);
+        }
+
+        let rows: Vec<Note> = query_builder
+            .build_query_as()
             .fetch_all(pool)
             .await?;
         
