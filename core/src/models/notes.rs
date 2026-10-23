@@ -10,6 +10,12 @@ pub struct NoteGroup {
     pub placing: i64,
 }
 
+pub struct UINoteGroup {
+    pub id: i64,
+    pub name: String,
+    pub placing: i64,
+}
+
 impl Model for NoteGroup {
     async fn get_count(pool: &SqlitePool) -> Result<i64, Error> {
         let count: (i64,) = sqlx::query_as("SELECT COUNT(*) FROM note_groups")
@@ -115,6 +121,37 @@ pub struct Note {
     pub tags: Json<Vec<i64>>,
     pub created_at: DateTime<Utc>,
     pub updated_at: DateTime<Utc>,
+}
+
+pub struct UINote {
+    pub id: i64,
+    pub group_id: Option<i64>,
+    pub title: String,
+    pub content: String,
+    pub tags: Vec<String>,
+    pub created_at: String,
+    pub updated_at: String,
+}
+
+impl Note {
+    pub async fn get_with_group_id(pool: &SqlitePool, list: List, group_id: i64) -> Result<Vec<Self>, Error> {
+        let query = "
+            SELECT id, group_id, title, content, tags, created_at, updated_at FROM notes 
+            WHERE group_id = ?
+            ORDER BY created_at DESC
+            LIMIT ? OFFSET ?";
+
+        let offset = (list.current_page - 1) * list.limit;
+        
+        let rows: Vec<Note> = sqlx::query_as(query)
+            .bind(group_id)
+            .bind(list.limit)
+            .bind(offset)
+            .fetch_all(pool)
+            .await?;
+        
+        Ok(rows)
+    }
 }
 
 impl Model for Note {
