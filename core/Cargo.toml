@@ -5,7 +5,11 @@ edition = "2024"
 
 [dependencies]
 chrono = "0.4.45"
+flutter_rust_bridge = "2.13.0"
 regex = "1.13.1"
 serde = { version = "1.0.229", features = ["derive"] }
 sqlx = { version = "0.9.0", features = ["sqlite", "runtime-tokio", "tls-rustls", "chrono"] }
 tokio = { version = "1.54.1", features = ["full"] }
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(frb_expand)'] }

@@ -977,6 +977,7 @@ name = "notecore"
 version = "0.1.0"
 dependencies = [
  "chrono",
+ "flutter_rust_bridge",
  "regex",
  "serde",
  "sqlx",
@@ -1187,7 +1188,10 @@ dependencies = [
 name = "rust_lib_mobile_client"
 version = "0.1.0"
 dependencies = [
+ "chrono",
  "flutter_rust_bridge",
+ "notecore",
+ "sqlx",
 ]
 
 [[package]]
