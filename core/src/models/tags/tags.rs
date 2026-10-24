@@ -1,7 +1,7 @@
 use chrono::{DateTime, Utc};
 use sqlx::{Error, SqlitePool, prelude::FromRow};
 
-use crate::models::repo::{List, Model, SearchParams};
+use crate::models::repo::{ListRequest, Model, SearchParams};
 
 #[derive(Debug, Clone, FromRow)]
 pub struct Tag {
@@ -43,7 +43,7 @@ impl Model for Tag {
         Ok(count.0)
     }
 
-    async fn get_all(pool: &SqlitePool, list: Option<List>) -> Result<Vec<Self>, Error> {
+    async fn get_all(pool: &SqlitePool, list: Option<ListRequest>) -> Result<Vec<Self>, Error> {
         let mut query_builder = sqlx::QueryBuilder::new(
             "SELECT id, name, created_at FROM tags ORDER BY created_at DESC"
         );

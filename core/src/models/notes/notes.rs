@@ -1,7 +1,7 @@
 use chrono::{DateTime, Utc};
 use sqlx::{Error, SqlitePool, prelude::FromRow, types::Json};
 
-use crate::models::{repo::{List, Model, SearchParams}};
+use crate::models::{repo::{ListRequest, Model, SearchParams}};
 
 #[derive(Debug, Clone, FromRow)]
 pub struct NoteGroup {
@@ -30,7 +30,7 @@ impl Model for NoteGroup {
         Ok(count.0)
     }
 
-    async fn get_all(pool: &SqlitePool, list: Option<List>) -> Result<Vec<Self>, Error> {
+    async fn get_all(pool: &SqlitePool, list: Option<ListRequest>) -> Result<Vec<Self>, Error> {
         let mut query_builder = sqlx::QueryBuilder::new("
             SELECT 
                 ng.id, 
@@ -169,7 +169,7 @@ impl Note {
         }
     }
 
-    pub async fn get_with_group_id(pool: &SqlitePool, list: List, group_id: i64) -> Result<Vec<Self>, Error> {
+    pub async fn get_with_group_id(pool: &SqlitePool, list: ListRequest, group_id: i64) -> Result<Vec<Self>, Error> {
         let query = "
             SELECT id, group_id, title, content, tags, created_at, updated_at FROM notes 
             WHERE group_id = ?
@@ -220,7 +220,7 @@ impl Model for Note {
         Ok(count.0)
     }
 
-    async fn get_all(pool: &SqlitePool, list: Option<List>) -> Result<Vec<Self>, Error> {
+    async fn get_all(pool: &SqlitePool, list: Option<ListRequest>) -> Result<Vec<Self>, Error> {
         let mut query_builder = sqlx::QueryBuilder::new(
             "SELECT id, group_id, title, content, tags, created_at, updated_at FROM notes ORDER BY created_at DESC"
         );

@@ -7,7 +7,7 @@ use crate::{
             task::{Task, TaskOptions, Type},
             ui_task::UITask,
         },
-        repo::{List, Model, SearchParams},
+        repo::{ListRequest, Model, SearchParams},
         tags::{tags::Tag, ui_tags::UITag},
     },
     utils::app_error::Result,
@@ -29,7 +29,7 @@ impl TasksService {
         self.map_ui_task(task).await
     }
 
-    pub async fn get_list(&self, req: Option<List>) -> Result<Vec<UITask>> {
+    pub async fn get_list(&self, req: Option<ListRequest>) -> Result<Vec<UITask>> {
         let tasks = Task::get_all(&self.pool, req).await?;
         let mut res = Vec::new();
         for task in tasks {

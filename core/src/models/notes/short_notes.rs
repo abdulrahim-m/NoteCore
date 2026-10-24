@@ -1,7 +1,7 @@
 use chrono::{DateTime, Utc};
 use sqlx::{Error, SqlitePool, prelude::FromRow, types::Json};
 
-use crate::models::{repo::{List, Model, SearchParams}};
+use crate::models::{repo::{ListRequest, Model, SearchParams}};
 
 #[derive(Debug, Clone, FromRow)]
 pub struct ShortNoteSection {
@@ -34,7 +34,7 @@ impl Model for ShortNoteSection {
         Ok(count.0)
     }
 
-    async fn get_all(pool: &SqlitePool, list: Option<List>) -> Result<Vec<Self>, Error> {
+    async fn get_all(pool: &SqlitePool, list: Option<ListRequest>) -> Result<Vec<Self>, Error> {
         let mut query_builder = sqlx::QueryBuilder::new("
             SELECT 
                 sns.id, 

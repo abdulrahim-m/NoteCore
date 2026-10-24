@@ -5,7 +5,7 @@ use chrono::Utc;
 use crate::{
     models::{
         tags::{tags::Tag, ui_tags::UITag},
-        repo::{List, Model},
+        repo::{ListRequest, Model},
     },
     utils::app_error::Result,
 };
@@ -21,7 +21,7 @@ impl TagsService {
 
     // --- Getters ---
 
-    pub async fn get_list(&self, req: Option<List>) -> Result<Vec<UITag>> {
+    pub async fn get_list(&self, req: Option<ListRequest>) -> Result<Vec<UITag>> {
         let tags = Tag::get_all(&self.pool, req).await?;
         let ui_tags = tags.iter().map(UITag::from).collect();
         Ok(ui_tags)

@@ -2,7 +2,7 @@ use std::sync::Arc;
 use sqlx::SqlitePool;
 use crate::{
     models::{
-        repo::{List, Model, SearchParams}, tags::{tags::Tag, ui_tags::UITag}, tasks::{short_tasks::{ShortTaskItem, ShortTaskSection}, ui_short_tasks::{UIShortTaskItem, UIShortTaskSection}},
+        repo::{ListRequest, Model, SearchParams}, tags::{tags::Tag, ui_tags::UITag}, tasks::{short_tasks::{ShortTaskItem, ShortTaskSection}, ui_short_tasks::{UIShortTaskItem, UIShortTaskSection}},
     }, utils::app_error::{AppError, ErrorType, Result},
 };
 
@@ -24,7 +24,7 @@ impl ShortTasksService {
         self.map_ui_section(section, items).await
     }
 
-    pub async fn get_all_sections(&self, req: Option<List>) -> Result<Vec<UIShortTaskSection>> {
+    pub async fn get_all_sections(&self, req: Option<ListRequest>) -> Result<Vec<UIShortTaskSection>> {
         let sections = ShortTaskSection::get_all(&self.pool, req).await?;
         let mut res = Vec::new();
 

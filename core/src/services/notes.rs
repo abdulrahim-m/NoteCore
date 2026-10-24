@@ -2,7 +2,7 @@ use std::sync::Arc;
 
 use sqlx::{SqlitePool};
 
-use crate::{models::{notes::{notes::{Note, NoteGroup}, ui_notes::{UINote, UINoteGroup, UINoteListItem}}, repo::{List, Model, SearchParams}, tags::{tags::Tag, ui_tags::UITag}}, utils::app_error::{AppError, ErrorType, Result}};
+use crate::{models::{notes::{notes::{Note, NoteGroup}, ui_notes::{UINote, UINoteGroup, UINoteListItem}}, repo::{ListRequest, Model, SearchParams}, tags::{tags::Tag, ui_tags::UITag}}, utils::app_error::{AppError, ErrorType, Result}};
 
 pub struct NotesService {
     pool: Arc<SqlitePool>,
@@ -20,12 +20,12 @@ impl NotesService {
         self.map_note(item).await
     }
 
-    pub async fn get_list(&self, req: List) -> Result<Vec<UINoteListItem>> {
+    pub async fn get_list(&self, req: ListRequest) -> Result<Vec<UINoteListItem>> {
         let list = Note::get_all(&self.pool, Some(req)).await?;
         self.map_ui_notes(list).await
     }
 
-    pub async fn get_list_group(&self, req: List, group_id: i64) -> Result<Vec<UINoteListItem>> {
+    pub async fn get_list_group(&self, req: ListRequest, group_id: i64) -> Result<Vec<UINoteListItem>> {
         let list = Note::get_with_group_id(&self.pool, req, group_id).await?;
         self.map_ui_notes(list).await
     }

@@ -2,7 +2,7 @@ use std::sync::Arc;
 use sqlx::SqlitePool;
 use crate::{
     models::{
-        notes::{short_notes::{ShortNoteItem, ShortNoteSection}, ui_short_notes::{UIShortNoteItem, UIShortNoteListItem, UIShortNoteSection}}, repo::{List, Model, SearchParams}, tags::{tags::Tag, ui_tags::UITag},
+        notes::{short_notes::{ShortNoteItem, ShortNoteSection}, ui_short_notes::{UIShortNoteItem, UIShortNoteListItem, UIShortNoteSection}}, repo::{ListRequest, Model, SearchParams}, tags::{tags::Tag, ui_tags::UITag},
     }, utils::app_error::{AppError, ErrorType, Result},
 };
 
@@ -37,7 +37,7 @@ impl ShortNotesService {
         Ok(res)
     }
 
-    pub async fn get_all_sections(&self, req: Option<List>) -> Result<Vec<UIShortNoteListItem>> {
+    pub async fn get_all_sections(&self, req: Option<ListRequest>) -> Result<Vec<UIShortNoteListItem>> {
         let sections = ShortNoteSection::get_all(&self.pool, req).await?;
         let mut res = Vec::new();
 
