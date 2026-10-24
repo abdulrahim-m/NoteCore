@@ -10,12 +10,6 @@ pub struct Tag {
     pub created_at: DateTime<Utc>,
 }
 
-pub struct UITag {
-    pub id: i64,
-    pub name: String,
-    pub created_at: DateTime<Utc>,
-}
-
 impl Tag {
     pub async fn get_with_ids(pool: &SqlitePool, ids: Vec<i64>) -> Result<Vec<Self>, Error> {
         if ids.is_empty() {
@@ -111,7 +105,7 @@ impl Model for Tag {
         Ok(rows)
     }
 
-    async fn create(&mut self, pool: &SqlitePool) -> Result<i64, Error> {
+    async fn create(&mut self, pool: &SqlitePool) -> Result<(), Error> {
         self.created_at = Utc::now();
 
         let query = "
@@ -125,7 +119,8 @@ impl Model for Tag {
             .execute(pool)
             .await?;
 
-        Ok(result.last_insert_rowid())
+        self.id = result.last_insert_rowid();
+        Ok(())
     }
 
     async fn update(&mut self, pool: &SqlitePool) -> Result<(), Error> {
