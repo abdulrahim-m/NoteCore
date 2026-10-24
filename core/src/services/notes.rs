@@ -2,7 +2,7 @@ use std::sync::Arc;
 
 use sqlx::{SqlitePool};
 
-use crate::{models::{notes::{notes::{Note, NoteGroup}, ui_notes::{UINote, UINoteGroup, UINoteListItem}}, repo::{List, Model}, tags::{tags::Tag, ui_tags::UITag}}, utils::app_error::{AppError, ErrorType, Result}};
+use crate::{models::{notes::{notes::{Note, NoteGroup}, ui_notes::{UINote, UINoteGroup, UINoteListItem}}, repo::{List, Model, SearchParams}, tags::{tags::Tag, ui_tags::UITag}}, utils::app_error::{AppError, ErrorType, Result}};
 
 pub struct NotesService {
     pool: Arc<SqlitePool>,
@@ -28,6 +28,11 @@ impl NotesService {
     pub async fn get_list_group(&self, req: List, group_id: i64) -> Result<Vec<UINoteListItem>> {
         let list = Note::get_with_group_id(&self.pool, req, group_id).await?;
         self.map_ui_notes(list).await
+    }
+
+    pub async fn search(&self, params: SearchParams) -> Result<Vec<UINoteListItem>> {
+        let notes = Note::search(&self.pool, params).await?;
+        self.map_ui_notes(notes).await
     }
     
     pub async fn get_groups(&self) -> Result<Vec<UINoteGroup>> {
