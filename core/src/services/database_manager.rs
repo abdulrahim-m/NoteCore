@@ -101,29 +101,4 @@ impl DatabaseManager {
 
         Ok(())
     }
-
-    // Helper methods for settings
-
-    pub async fn set_setting(pool: &SqlitePool, key: &str, value: &str) -> Result<(), Error> {
-        sqlx::query(
-            "INSERT OR REPLACE INTO app_settings (key, value) VALUES (?, ?)"
-        )
-        .bind(key)
-        .bind(value)
-        .execute(pool)
-        .await?;
-        
-        Ok(())
-    }
-
-    pub async fn get_setting(pool: &SqlitePool, key: &str) -> Result<Option<String>, Error> {
-        let result: Option<(String,)> = sqlx::query_as(
-            "SELECT value FROM app_settings WHERE key = ?"
-        )
-        .bind(key)
-        .fetch_optional(pool)
-        .await?;
-
-        Ok(result.map(|row| row.0))
-    }
 }
