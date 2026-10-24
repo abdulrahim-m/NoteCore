@@ -1,33 +1,42 @@
-#[derive(Debug)]
+use std::fmt;
+
+#[derive(Debug, Clone)]
 pub enum ErrorType{
     Internal,
     Forbidden,
     Validation
 }
 
-#[derive(Debug)]
-pub struct AppError{
-    pub text: String,
-    pub err_type: ErrorType
+#[derive(Debug, Clone)]
+pub struct AppError {
+    pub message: String,
+    pub error_type: ErrorType,
 }
 
 impl From<sqlx::Error> for AppError {
     fn from(err: sqlx::Error) -> Self {
         AppError{
-            text: err.to_string(),
-            err_type: ErrorType::Internal
+            message: err.to_string(),
+            error_type: ErrorType::Internal
         }
+    }
+}
+
+impl std::error::Error for AppError {}
+
+impl fmt::Display for AppError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{:?}: {}", self.error_type, self.message)
     }
 }
 
 impl AppError {
-    pub fn new(err: &str, err_type: ErrorType) -> Self {
+    pub fn new(err: &str, error_type: ErrorType) -> Self {
         AppError{
-            text: err.to_string(),
-            err_type
+            message: err.to_string(),
+            error_type
         }
     }
 }
-
 
 pub type Result<T, E = AppError> = ::std::result::Result<T, E>;
