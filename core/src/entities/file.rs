@@ -49,8 +49,8 @@ impl NFile {
         Ok(())
     }
 
-    pub fn read(path: PathBuf) -> Result<NFile> {
-        let con = read_to_string(&path)?;
+    pub fn read(path: &PathBuf) -> Result<NFile> {
+        let con = read_to_string(path)?;
 
         let final_content: String;
         let mut final_metadata = HashMap::new();
@@ -81,7 +81,7 @@ impl NFile {
             .unwrap_or("Unknown File")
             .to_owned();
 
-        Ok(NFile { path, title: name, metadata: final_metadata, content: final_content })
+        Ok(NFile { path: path.clone(), title: name, metadata: final_metadata, content: final_content })
     }
 
     pub fn update_title(&mut self, title: &str) -> Result<()> {
@@ -95,7 +95,7 @@ impl NFile {
     }
 
     pub fn add_task(&mut self, new_task_text: &str, due_date: Option<String>) -> Option<NTask> {
-        let mut file = NFile::read(self.path.clone()).ok()?;
+        let mut file = NFile::read(&self.path).ok()?;
         let task = add_task_to_file(&mut file, new_task_text, due_date);
 
         self.save().ok()?;
@@ -133,7 +133,7 @@ mod tests {
 
         // Read it back
         let read_path = temp_dir.join("TestNote.md");
-        let loaded = NFile::read(read_path);
+        let loaded = NFile::read(&read_path);
         assert!(loaded.is_ok());
 
         let loaded = loaded.unwrap();

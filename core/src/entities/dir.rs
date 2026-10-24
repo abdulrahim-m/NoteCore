@@ -9,11 +9,23 @@ pub struct NDir {
 }
 
 impl NDir {
-    pub fn new(pth: PathBuf) -> Result<NDir> {
-        fs::create_dir_all(&pth)?;
+    pub fn new(pth: &PathBuf) -> Result<NDir> {
+        fs::create_dir_all(pth)?;
 
         Ok(NDir{
-            path: pth,
+            path: pth.clone(),
+            files: Vec::new(),
+            sub_dirs: Vec::new()
+        })
+    }
+
+    pub fn from(pth: &PathBuf) -> Option<NDir> {
+        let exists = fs::exists(pth);
+        if exists.is_ok() && !exists.unwrap() {
+            return None;
+        }
+        Some(NDir{
+            path: pth.clone(),
             files: Vec::new(),
             sub_dirs: Vec::new()
         })
@@ -37,7 +49,7 @@ impl NDir {
                     }
                 }
 
-                let mut sub_dir = NDir::new(path_buf)?;
+                let mut sub_dir = NDir::new(&path_buf)?;
                 if let Err(e) = sub_dir.refresh() {
                     println!("Error refreshing {}: {}", path_str, e)
                 };
@@ -75,7 +87,7 @@ impl NDir {
             list.append(&mut dir.get_all_tasks());
         }
         for file in &self.files {
-            if let Ok(note_file) = NFile::read(file.clone()) {
+            if let Ok(note_file) = NFile::read(&file) {
                 list.append(&mut extract_tasks_from_file(&note_file));
             }
         }
@@ -95,7 +107,7 @@ mod tests {
         let temp_dir = std::env::temp_dir().join("dir_test_vault");
         let _ = fs::remove_dir_all(&temp_dir);
 
-        let dir = NDir::new(temp_dir.clone());
+        let dir = NDir::new(&temp_dir);
         assert!(dir.is_ok());
         let mut dir = dir.unwrap();
 
