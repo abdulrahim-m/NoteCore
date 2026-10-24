@@ -2,7 +2,7 @@ use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 use sqlx::{Error, SqlitePool, prelude::FromRow, types::Json};
 
-use crate::models::{repo::{List, Model, SearchParams}, tags::UITag};
+use crate::models::{repo::{List, Model, SearchParams}};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum Schedule {
@@ -51,16 +51,20 @@ pub struct Task {
     pub tags: Json<Vec<i64>>
 }
 
-pub struct UITask {
-    pub id: i64,
-    pub title: String,
-    pub description: String,
-    pub task_type: Type,
-    pub done: bool,
-    pub created_at: DateTime<Utc>,
-    pub updated_at: DateTime<Utc>,
-    pub options: TaskOptions,
-    pub tags: Vec<UITag>
+impl Task {
+    pub fn new(title: &str, description: &str, task_type: Type, options: TaskOptions, tags: Vec<i64>) -> Self {
+        Self {
+            id: 0,
+            title: title.to_string(),
+            description: description.to_string(),
+            task_type,
+            done: false,
+            created_at: Utc::now(),
+            updated_at: Utc::now(),
+            options: Json(options),
+            tags: Json(tags),
+        }
+    }
 }
 
 impl Model for Task {
@@ -148,7 +152,7 @@ impl Model for Task {
         Ok(rows)
     }
 
-    async fn create(&mut self, pool: &SqlitePool) -> Result<i64, Error> {
+    async fn create(&mut self, pool: &SqlitePool) -> Result<(), Error> {
         self.created_at = Utc::now();
         self.updated_at = Utc::now();
 
@@ -169,7 +173,8 @@ impl Model for Task {
             .execute(pool)
             .await?;
 
-        Ok(result.last_insert_rowid())
+        self.id = result.last_insert_rowid();
+        Ok(())
     }
 
     async fn update(&mut self, pool: &SqlitePool) -> Result<(), Error> {

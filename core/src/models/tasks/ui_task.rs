@@ -1,6 +1,6 @@
 use chrono::{DateTime, Utc};
 
-use crate::models::{tags::UITag, tasks::task::{TaskOptions, Type}};
+use crate::models::{tags::ui_tags::UITag, tasks::task::{TaskOptions, Type}};
 
 pub struct UITask {
     pub id: i64,
