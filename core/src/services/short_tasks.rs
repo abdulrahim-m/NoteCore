@@ -6,6 +6,7 @@ use crate::{
     }, utils::app_error::{AppError, ErrorType, Result},
 };
 
+#[derive(Debug, Clone)]
 pub struct ShortTasksService {
     pool: Arc<SqlitePool>,
 }

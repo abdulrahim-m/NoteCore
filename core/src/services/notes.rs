@@ -4,6 +4,7 @@ use sqlx::{SqlitePool};
 
 use crate::{models::{notes::{notes::{Note, NoteGroup}, ui_notes::{UINote, UINoteGroup, UINoteListItem}}, repo::{ListRequest, Model, SearchParams}, tags::{tags::Tag, ui_tags::UITag}}, utils::app_error::{AppError, ErrorType, Result}};
 
+#[derive(Debug, Clone)]
 pub struct NotesService {
     pool: Arc<SqlitePool>,
 }

@@ -13,6 +13,7 @@ use crate::{
     utils::app_error::Result,
 };
 
+#[derive(Debug, Clone)]
 pub struct TasksService {
     pool: Arc<SqlitePool>,
 }
