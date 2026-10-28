@@ -21,7 +21,6 @@ class AppShell extends StatelessWidget {
 
     return Scaffold(
       extendBody: false,
-      backgroundColor: colorScheme.surface,
       
       // Integrated Top Bar with matching partial bottom separator
       appBar: PreferredSize(
