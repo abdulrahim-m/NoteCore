@@ -13,5 +13,11 @@ class AppLocalizationsAr extends AppLocalizations {
   String get shell_navBar_note_view => 'ملاحظات';
 
   @override
+  String get shell_navBar_thought_view => 'أفكار';
+
+  @override
   String get shell_navBar_task_view => 'مهام';
+
+  @override
+  String get shell_navBar_checklist_view => 'القوائم';
 }

@@ -104,11 +104,23 @@ abstract class AppLocalizations {
   /// **'Notes'**
   String get shell_navBar_note_view;
 
+  /// No description provided for @shell_navBar_thought_view.
+  ///
+  /// In en, this message translates to:
+  /// **'Thoughts'**
+  String get shell_navBar_thought_view;
+
   /// No description provided for @shell_navBar_task_view.
   ///
   /// In en, this message translates to:
   /// **'Tasks'**
   String get shell_navBar_task_view;
+
+  /// No description provided for @shell_navBar_checklist_view.
+  ///
+  /// In en, this message translates to:
+  /// **'Checklists'**
+  String get shell_navBar_checklist_view;
 }
 
 class _AppLocalizationsDelegate

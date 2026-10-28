@@ -13,5 +13,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get shell_navBar_note_view => 'Notes';
 
   @override
+  String get shell_navBar_thought_view => 'Thoughts';
+
+  @override
   String get shell_navBar_task_view => 'Tasks';
+
+  @override
+  String get shell_navBar_checklist_view => 'Checklists';
 }

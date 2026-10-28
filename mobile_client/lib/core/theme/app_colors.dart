@@ -16,7 +16,7 @@ abstract class AppColors {
 
   // Dark Palette
   static const Color darkBackground = Color.fromARGB(255, 42, 25, 15);
-  static const Color darkSurface = Color.fromARGB(255, 59, 41, 30);
+  static const Color darkSurface = Color.fromARGB(255, 50, 29, 17);
   static const Color darkTextPrimary = Color.fromARGB(255, 252, 250, 248);
   static const Color darkTextSecondary = Color.fromARGB(255, 184, 165, 148);
   static const Color darkTextMuted = Color.fromARGB(255, 139, 120, 100);

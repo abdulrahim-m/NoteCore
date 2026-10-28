@@ -5,16 +5,12 @@ import 'package:mobile_client/core/context/app_context.dart';
 import 'package:mobile_client/core/di/injection.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
-// final GlobalKey<NavigatorState> _shellNavigatorKey = GlobalKey<NavigatorState>();
 
 final appRouter = GoRouter(
   navigatorKey: _rootNavigatorKey,
   initialLocation: '/notes',
   refreshListenable: getIt<AppContext>(),
   redirect: (context, state) {
-    // final authContext = getIt<AppContext>();
-    // final isLoggingIn = state.matchedLocation == '/login';
-
     return null;
   },
   routes: [
@@ -57,12 +53,5 @@ final appRouter = GoRouter(
         ),
       ],
     ),
-    // GoRoute(
-    //   path: '/posts/:slug',
-    //   builder: (context, state) {
-    //     final slug = state.pathParameters['slug']!;
-    //     return PostScreen(slug: slug,);
-    //   },
-    // ),
   ],
 );
