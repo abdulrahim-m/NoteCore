@@ -1,0 +1,8 @@
+{
+  "@@locale": "en",
+
+  "shell_navBar_note_view": "Notes",
+  "shell_navBar_thought_view": "Thoughts",
+  "shell_navBar_task_view": "Tasks",
+  "shell_navBar_checklist_view": "Checklists"
+}
