@@ -10,6 +10,9 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
+  String get app_title => 'NoteCore';
+
+  @override
   String get shell_navBar_note_view => 'ملاحظات';
 
   @override

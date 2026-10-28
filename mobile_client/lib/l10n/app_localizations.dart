@@ -98,6 +98,12 @@ abstract class AppLocalizations {
     Locale('en'),
   ];
 
+  /// No description provided for @app_title.
+  ///
+  /// In en, this message translates to:
+  /// **'NoteCore'**
+  String get app_title;
+
   /// No description provided for @shell_navBar_note_view.
   ///
   /// In en, this message translates to:

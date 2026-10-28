@@ -16,26 +16,55 @@ class AppShell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
-      extendBody: false, // Connected normally to the bottom screen edge
-      appBar: AppBar(
-        title: Text(
-          "NoteCore",
-          style: Theme.of(context).textTheme.headlineMedium
-              ?.copyWith(color: Theme.of(context).colorScheme.primary),
+      extendBody: false,
+      backgroundColor: colorScheme.surface,
+      
+      // Integrated Top Bar with matching partial bottom separator
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(58),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            AppBar(
+              backgroundColor: colorScheme.surface,
+              elevation: 0,
+              scrolledUnderElevation: 0,
+              title: Text(
+                l10n.app_title,
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      color: colorScheme.primary,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22,
+                    ),
+              ),
+              actions: [
+                IconButton(
+                  onPressed: () {
+                    // TODO: Options?
+                  },
+                  icon: const Icon(Icons.more_vert),
+                ),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32),
+              child: Divider(
+                height: 1,
+                thickness: 0.8,
+                color: colorScheme.outlineVariant.withValues(alpha: 0.5),
+              ),
+            ),
+          ],
         ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              // TODO: Options?
-            },
-            icon: const Icon(Icons.more_vert),
-          ),
-        ],
       ),
 
       body: navigationShell,
 
+      // Integrated Bottom Bar matching the top style
       bottomNavigationBar: _buildIntegratedBottomBar(context),
     );
   }
@@ -75,7 +104,6 @@ class AppShell extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Partial top separator line that does not fully connect on the sides
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 32),
               child: Divider(

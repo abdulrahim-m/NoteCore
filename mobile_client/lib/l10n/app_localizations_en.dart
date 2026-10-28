@@ -10,6 +10,9 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get app_title => 'NoteCore';
+
+  @override
   String get shell_navBar_note_view => 'Notes';
 
   @override

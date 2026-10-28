@@ -1,6 +1,7 @@
 {
   "@@locale": "ar",
 
+  "app_title": "NoteCore",
   "shell_navBar_note_view": "ملاحظات",
   "shell_navBar_thought_view": "أفكار",
   "shell_navBar_task_view": "مهام",
