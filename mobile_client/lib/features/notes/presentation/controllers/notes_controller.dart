@@ -40,7 +40,7 @@ class NotesController extends ChangeNotifier {
   bool _loading = false;
   bool _loadingMore = false;
   bool _hasMore = true;
-  int _page = 1;
+  int _page = 1; // last page that has been fetched
   int _token = 0; // invalidates stale loads
   Timer? _debounce;
 
@@ -56,6 +56,7 @@ class NotesController extends ChangeNotifier {
   bool get selecting => _selectedNoteIds.isNotEmpty;
   bool get loading => _loading;
   bool get loadingMore => _loadingMore;
+  bool get hasMore => _hasMore;
 
   bool get isSearching =>
       _searchText.trim().isNotEmpty ||
@@ -63,8 +64,6 @@ class NotesController extends ChangeNotifier {
       _createdAfter != null ||
       _createdBefore != null;
 
-  /// Number of active filters shown on the filter button badge,
-  /// the text search is visible in its own field.
   int get activeFilterCount =>
       _filterTagIds.length +
       (_createdAfter != null ? 1 : 0) +
@@ -75,12 +74,17 @@ class NotesController extends ChangeNotifier {
     await Future.wait([loadGroups(), loadTags(), reload()]);
   }
 
+  /// Like [loadInitial] but keeps as many pages loaded as before, so the
+  /// scroll position survives (used when coming back from the note view).
+  Future<void> refresh() async {
+    await Future.wait([loadGroups(), loadTags(), reload(keepPages: true)]);
+  }
+
   Future<void> loadGroups() async {
     await _guard(() async {
       final list = await _notesApi.getGroups();
       list.sort((a, b) => a.placing.compareTo(b.placing));
       _groups = list;
-      // The selected group may have vanished.
       if (_selectedGroupId != null &&
           !_groups.any((g) => g.id == _selectedGroupId)) {
         _selectedGroupId = null;
@@ -97,21 +101,32 @@ class NotesController extends ChangeNotifier {
     });
   }
 
-  Future<void> reload() async {
+  Future<void> reload({bool keepPages = false}) async {
     final token = ++_token;
+    final pages = keepPages ? _page : 1;
     _loading = true;
     _loadingMore = false;
-    _hasMore = true;
-    _page = 1;
     notifyListeners();
     try {
-      final items = await _fetch(1);
-      if (token != _token) return;
-      _notes = items;
-      _hasMore = !isSearching && items.length >= pageSize;
+      final all = <NoteListItemDto>[];
+      var hasMore = true;
+      var last = 1;
+      for (var p = 1; p <= pages && hasMore; p++) {
+        final result = await _fetch(p);
+        if (token != _token) return;
+        all.addAll(result.items);
+        hasMore = result.hasMore;
+        last = p;
+      }
+      _notes = all;
+      _hasMore = hasMore;
+      _page = last;
       _selectedNoteIds.removeWhere((id) => !_notes.any((n) => n.id == id));
     } catch (e) {
-      if (token == _token) _report(e);
+      if (token == _token) {
+        _hasMore = false;
+        _report(e);
+      }
     } finally {
       if (token == _token) {
         _loading = false;
@@ -126,13 +141,16 @@ class NotesController extends ChangeNotifier {
     _loadingMore = true;
     notifyListeners();
     try {
-      final items = await _fetch(_page + 1);
+      final result = await _fetch(_page + 1);
       if (token != _token) return;
       _page += 1;
-      _notes = [..._notes, ...items];
-      _hasMore = items.length >= pageSize;
+      _notes = [..._notes, ...result.items];
+      _hasMore = result.hasMore;
     } catch (e) {
-      if (token == _token) _report(e);
+      if (token == _token) {
+        _hasMore = false;
+        _report(e);
+      }
     } finally {
       if (token == _token) {
         _loadingMore = false;
@@ -141,27 +159,37 @@ class NotesController extends ChangeNotifier {
     }
   }
 
-  Future<List<NoteListItemDto>> _fetch(int page) async {
+  /// Fetches one page. `hasMore` is based on the raw page size, because the
+  /// group filter used while searching can shrink a page below [pageSize].
+  Future<({List<NoteListItemDto> items, bool hasMore})> _fetch(int page) async {
     final req = ListRequestDto(currentPage: page, limit: pageSize);
+    final List<NoteListItemDto> raw;
     if (isSearching) {
       final text = _searchText.trim();
-      final results = await _notesApi.search(
+      raw = await _notesApi.search(
         params: SearchParamsDto(
           text: text.isEmpty ? null : text,
           tags: _filterTagIds.isEmpty ? null : _ids(_filterTagIds),
           createdAfter: _createdAfter,
           createdBefore: _createdBefore,
         ),
-        list: req
+        list: req,
       );
-      if (_selectedGroupId == null) return results;
-      return results.where((n) => n.groupId == _selectedGroupId).toList();
+    } else if (_selectedGroupId == null) {
+      raw = await _notesApi.getList(req: req);
+    } else {
+      raw = await _notesApi.getListInGroup(
+        req: req,
+        groupId: _selectedGroupId!,
+      );
     }
 
-    if (_selectedGroupId == null) {
-      return _notesApi.getList(req: req);
-    }
-    return _notesApi.getListInGroup(req: req, groupId: _selectedGroupId!);
+    final hasMore = raw.length >= pageSize;
+    // The search API has no group parameter, so narrow it here.
+    final items = (isSearching && _selectedGroupId != null)
+        ? raw.where((n) => n.groupId == _selectedGroupId).toList()
+        : raw;
+    return (items: items, hasMore: hasMore);
   }
 
   // ------------------------------------------------- group / filter state
@@ -194,6 +222,7 @@ class NotesController extends ChangeNotifier {
     reload();
   }
 
+  /// Clears filters, the text search is left alone.
   void clearFilters() {
     _filterTagIds.clear();
     _createdAfter = null;
@@ -217,15 +246,14 @@ class NotesController extends ChangeNotifier {
   /// Creates an empty note in the current group, if one is selected.
   Future<NoteDto?> createNote() async {
     NoteDto? created;
-    final ok = await _guard(() async {
+    await _guard(() async {
       final note = await _notesApi.createNote();
-      created = note;
       final group = _selectedGroupId;
       if (group != null) {
         await _notesApi.addToGroup(groupId: group, noteIds: _ids([note.id]));
       }
+      created = note;
     });
-    if (ok) await Future.wait([reload(), loadGroups()]);
     return created;
   }
 
@@ -238,7 +266,7 @@ class NotesController extends ChangeNotifier {
       }
     });
     _selectedNoteIds.clear();
-    await Future.wait([reload(), loadGroups()]);
+    await Future.wait([reload(keepPages: true), loadGroups()]);
   }
 
   /// [groupId] == null removes the notes from any group.
@@ -249,7 +277,7 @@ class NotesController extends ChangeNotifier {
       () => _notesApi.addToGroup(groupId: groupId, noteIds: _ids(ids)),
     );
     if (ok) _selectedNoteIds.clear();
-    await Future.wait([reload(), loadGroups()]);
+    await Future.wait([reload(keepPages: true), loadGroups()]);
   }
 
   /// Adds [tagIds] to every selected note, keeping the tags they already have,
@@ -260,12 +288,12 @@ class NotesController extends ChangeNotifier {
     final ok = await _guard(() async {
       for (final note in targets.toList()) {
         final merged = {...note.tags.map((t) => t.id), ...tagIds};
-        if (merged.length == note.tags.length) continue;
+        if (merged.length == note.tags.length) continue; // nothing new
         await _notesApi.updateTags(noteId: note.id, tagIds: _ids(merged));
       }
     });
     if (ok) _selectedNoteIds.clear();
-    await reload();
+    await reload(keepPages: true);
   }
 
   // -------------------------------------------------------- group actions
@@ -312,7 +340,7 @@ class NotesController extends ChangeNotifier {
     if (!ok) return;
     _filterTagIds.remove(id);
     await loadTags();
-    await reload();
+    await reload(keepPages: true);
   }
 
   // -------------------------------------------------------------- helpers

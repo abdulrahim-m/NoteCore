@@ -24,9 +24,11 @@ class NoteCard extends StatelessWidget {
     final cs = theme.colorScheme;
     final l10n = AppLocalizations.of(context)!;
 
-    final title = note.title.trim().isEmpty
+    // New notes are created by the core with the title "untitled".
+    final rawTitle = note.title.trim();
+    final title = rawTitle.isEmpty || rawTitle.toLowerCase() == 'untitled'
         ? l10n.notes_untitled
-        : note.title.trim();
+        : rawTitle;
     final preview = note.preview.trim();
     final visibleTags = note.tags.take(3).toList();
     final extraTags = note.tags.length - visibleTags.length;

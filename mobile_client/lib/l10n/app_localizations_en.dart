@@ -141,4 +141,59 @@ class AppLocalizationsEn extends AppLocalizations {
   String notes_delete_tag_body(String name) {
     return '“$name” will be removed from all notes.';
   }
+
+  @override
+  String get note_title_hint => 'Title';
+
+  @override
+  String get note_content_hint => 'Start writing…';
+
+  @override
+  String get note_saved => 'Saved';
+
+  @override
+  String get note_saving => 'Saving…';
+
+  @override
+  String get note_unsaved => 'Unsaved';
+
+  @override
+  String get note_save_failed => 'Not saved';
+
+  @override
+  String get note_leave_failed =>
+      'Couldn\'t save your changes. Go back again to leave without saving.';
+
+  @override
+  String get note_load_failed => 'Couldn\'t load this note';
+
+  @override
+  String get note_share => 'Share';
+
+  @override
+  String get note_delete_title => 'Delete note?';
+
+  @override
+  String get note_delete_body => 'This note will be permanently deleted.';
+
+  @override
+  String get note_undo => 'Undo';
+
+  @override
+  String get note_redo => 'Redo';
+
+  @override
+  String get note_heading => 'Heading';
+
+  @override
+  String get note_bullet_list => 'Bullet list';
+
+  @override
+  String get note_checklist => 'Checklist';
+
+  @override
+  String get note_indent => 'Indent';
+
+  @override
+  String get note_outdent => 'Outdent';
 }

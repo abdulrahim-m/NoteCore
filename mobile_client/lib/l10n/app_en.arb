@@ -53,5 +53,24 @@
   "@notes_delete_group_body": { "placeholders": { "name": { "type": "String" } } },
   "notes_delete_tag_title": "Delete tag?",
   "notes_delete_tag_body": "“{name}” will be removed from all notes.",
-  "@notes_delete_tag_body": { "placeholders": { "name": { "type": "String" } } }
+  "@notes_delete_tag_body": { "placeholders": { "name": { "type": "String" } } },
+
+  "note_title_hint": "Title",
+  "note_content_hint": "Start writing…",
+  "note_saved": "Saved",
+  "note_saving": "Saving…",
+  "note_unsaved": "Unsaved",
+  "note_save_failed": "Not saved",
+  "note_leave_failed": "Couldn't save your changes. Go back again to leave without saving.",
+  "note_load_failed": "Couldn't load this note",
+  "note_share": "Share",
+  "note_delete_title": "Delete note?",
+  "note_delete_body": "This note will be permanently deleted.",
+  "note_undo": "Undo",
+  "note_redo": "Redo",
+  "note_heading": "Heading",
+  "note_bullet_list": "Bullet list",
+  "note_checklist": "Checklist",
+  "note_indent": "Indent",
+  "note_outdent": "Outdent"
 }

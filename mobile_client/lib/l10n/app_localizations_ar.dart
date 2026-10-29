@@ -141,4 +141,59 @@ class AppLocalizationsAr extends AppLocalizations {
   String notes_delete_tag_body(String name) {
     return 'ستتم إزالة «$name» من جميع الملاحظات.';
   }
+
+  @override
+  String get note_title_hint => 'العنوان';
+
+  @override
+  String get note_content_hint => 'ابدأ الكتابة…';
+
+  @override
+  String get note_saved => 'تم الحفظ';
+
+  @override
+  String get note_saving => 'جارٍ الحفظ…';
+
+  @override
+  String get note_unsaved => 'غير محفوظ';
+
+  @override
+  String get note_save_failed => 'لم يتم الحفظ';
+
+  @override
+  String get note_leave_failed =>
+      'تعذّر حفظ تغييراتك. ارجع مرة أخرى للمغادرة دون حفظ.';
+
+  @override
+  String get note_load_failed => 'تعذّر تحميل هذه الملاحظة';
+
+  @override
+  String get note_share => 'مشاركة';
+
+  @override
+  String get note_delete_title => 'حذف الملاحظة؟';
+
+  @override
+  String get note_delete_body => 'سيتم حذف هذه الملاحظة نهائيًا.';
+
+  @override
+  String get note_undo => 'تراجع';
+
+  @override
+  String get note_redo => 'إعادة';
+
+  @override
+  String get note_heading => 'عنوان';
+
+  @override
+  String get note_bullet_list => 'قائمة نقطية';
+
+  @override
+  String get note_checklist => 'قائمة مهام';
+
+  @override
+  String get note_indent => 'زيادة المسافة البادئة';
+
+  @override
+  String get note_outdent => 'تقليل المسافة البادئة';
 }

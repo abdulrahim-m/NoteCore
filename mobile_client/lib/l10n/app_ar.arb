@@ -48,5 +48,24 @@
   "notes_delete_group_title": "حذف المجموعة؟",
   "notes_delete_group_body": "سيتم حذف «{name}». لا يمكن حذف مجموعة ما زالت تحتوي على ملاحظات.",
   "notes_delete_tag_title": "حذف الوسم؟",
-  "notes_delete_tag_body": "ستتم إزالة «{name}» من جميع الملاحظات."
+  "notes_delete_tag_body": "ستتم إزالة «{name}» من جميع الملاحظات.",
+
+  "note_title_hint": "العنوان",
+  "note_content_hint": "ابدأ الكتابة…",
+  "note_saved": "تم الحفظ",
+  "note_saving": "جارٍ الحفظ…",
+  "note_unsaved": "غير محفوظ",
+  "note_save_failed": "لم يتم الحفظ",
+  "note_leave_failed": "تعذّر حفظ تغييراتك. ارجع مرة أخرى للمغادرة دون حفظ.",
+  "note_load_failed": "تعذّر تحميل هذه الملاحظة",
+  "note_share": "مشاركة",
+  "note_delete_title": "حذف الملاحظة؟",
+  "note_delete_body": "سيتم حذف هذه الملاحظة نهائيًا.",
+  "note_undo": "تراجع",
+  "note_redo": "إعادة",
+  "note_heading": "عنوان",
+  "note_bullet_list": "قائمة نقطية",
+  "note_checklist": "قائمة مهام",
+  "note_indent": "زيادة المسافة البادئة",
+  "note_outdent": "تقليل المسافة البادئة"
 }

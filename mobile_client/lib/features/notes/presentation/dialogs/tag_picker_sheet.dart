@@ -1,31 +1,60 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_client/features/notes/presentation/controllers/notes_controller.dart';
+import 'package:mobile_client/core/rust/dto/tag.dart';
 import 'package:mobile_client/l10n/app_localizations.dart';
 
-/// Multi-select tags (with inline creation). Returns the chosen tag ids, or
+/// Multi-select tags with inline creation. Returns the chosen tag ids, or
 /// `null` if dismissed.
+///
+/// [tags] is read on every [listenable] change, so newly created tags appear
+/// immediately. With [allowEmpty] the user may confirm an empty selection
+/// (needed when editing the exact tag set of one note).
 Future<Set<int>?> showTagPickerSheet(
-  BuildContext context,
-  NotesController controller,
-) {
+  BuildContext context, {
+  required Listenable listenable,
+  required List<TagDto> Function() tags,
+  required Future<TagDto?> Function(String name) onCreate,
+  Set<int> initial = const {},
+  String? title,
+  bool allowEmpty = false,
+}) {
   return showModalBottomSheet<Set<int>>(
     context: context,
     isScrollControlled: true,
     showDragHandle: true,
-    builder: (_) => _TagPickerSheet(controller: controller),
+    builder: (_) => _TagPickerSheet(
+      listenable: listenable,
+      tags: tags,
+      onCreate: onCreate,
+      initial: initial,
+      title: title,
+      allowEmpty: allowEmpty,
+    ),
   );
 }
 
 class _TagPickerSheet extends StatefulWidget {
-  const _TagPickerSheet({required this.controller});
-  final NotesController controller;
+  const _TagPickerSheet({
+    required this.listenable,
+    required this.tags,
+    required this.onCreate,
+    required this.initial,
+    required this.title,
+    required this.allowEmpty,
+  });
+
+  final Listenable listenable;
+  final List<TagDto> Function() tags;
+  final Future<TagDto?> Function(String name) onCreate;
+  final Set<int> initial;
+  final String? title;
+  final bool allowEmpty;
 
   @override
   State<_TagPickerSheet> createState() => _TagPickerSheetState();
 }
 
 class _TagPickerSheetState extends State<_TagPickerSheet> {
-  final Set<int> _picked = {};
+  late final Set<int> _picked = {...widget.initial};
   final _field = TextEditingController();
 
   @override
@@ -38,7 +67,7 @@ class _TagPickerSheetState extends State<_TagPickerSheet> {
     final name = _field.text.trim();
     if (name.isEmpty) return;
     _field.clear();
-    final tag = await widget.controller.createTag(name);
+    final tag = await widget.onCreate(name);
     if (tag != null && mounted) setState(() => _picked.add(tag.id));
   }
 
@@ -53,14 +82,18 @@ class _TagPickerSheetState extends State<_TagPickerSheet> {
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
           child: ListenableBuilder(
-            listenable: widget.controller,
+            listenable: widget.listenable,
             builder: (context, _) {
-              final tags = widget.controller.tags;
+              final tags = widget.tags();
+              final canConfirm = widget.allowEmpty || _picked.isNotEmpty;
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(l10n.notes_add_tag, style: theme.textTheme.titleMedium),
+                  Text(
+                    widget.title ?? l10n.notes_add_tag,
+                    style: theme.textTheme.titleMedium,
+                  ),
                   const SizedBox(height: 12),
                   if (tags.isEmpty)
                     Text(
@@ -103,9 +136,9 @@ class _TagPickerSheetState extends State<_TagPickerSheet> {
                   SizedBox(
                     width: double.infinity,
                     child: FilledButton(
-                      onPressed: _picked.isEmpty
-                          ? null
-                          : () => Navigator.pop(context, {..._picked}),
+                      onPressed: canConfirm
+                          ? () => Navigator.pop(context, {..._picked})
+                          : null,
                       child: Text(l10n.notes_done),
                     ),
                   ),

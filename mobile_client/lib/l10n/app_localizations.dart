@@ -343,6 +343,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'“{name}” will be removed from all notes.'**
   String notes_delete_tag_body(String name);
+
+  /// No description provided for @note_title_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Title'**
+  String get note_title_hint;
+
+  /// No description provided for @note_content_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Start writing…'**
+  String get note_content_hint;
+
+  /// No description provided for @note_saved.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved'**
+  String get note_saved;
+
+  /// No description provided for @note_saving.
+  ///
+  /// In en, this message translates to:
+  /// **'Saving…'**
+  String get note_saving;
+
+  /// No description provided for @note_unsaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Unsaved'**
+  String get note_unsaved;
+
+  /// No description provided for @note_save_failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Not saved'**
+  String get note_save_failed;
+
+  /// No description provided for @note_leave_failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t save your changes. Go back again to leave without saving.'**
+  String get note_leave_failed;
+
+  /// No description provided for @note_load_failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load this note'**
+  String get note_load_failed;
+
+  /// No description provided for @note_share.
+  ///
+  /// In en, this message translates to:
+  /// **'Share'**
+  String get note_share;
+
+  /// No description provided for @note_delete_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete note?'**
+  String get note_delete_title;
+
+  /// No description provided for @note_delete_body.
+  ///
+  /// In en, this message translates to:
+  /// **'This note will be permanently deleted.'**
+  String get note_delete_body;
+
+  /// No description provided for @note_undo.
+  ///
+  /// In en, this message translates to:
+  /// **'Undo'**
+  String get note_undo;
+
+  /// No description provided for @note_redo.
+  ///
+  /// In en, this message translates to:
+  /// **'Redo'**
+  String get note_redo;
+
+  /// No description provided for @note_heading.
+  ///
+  /// In en, this message translates to:
+  /// **'Heading'**
+  String get note_heading;
+
+  /// No description provided for @note_bullet_list.
+  ///
+  /// In en, this message translates to:
+  /// **'Bullet list'**
+  String get note_bullet_list;
+
+  /// No description provided for @note_checklist.
+  ///
+  /// In en, this message translates to:
+  /// **'Checklist'**
+  String get note_checklist;
+
+  /// No description provided for @note_indent.
+  ///
+  /// In en, this message translates to:
+  /// **'Indent'**
+  String get note_indent;
+
+  /// No description provided for @note_outdent.
+  ///
+  /// In en, this message translates to:
+  /// **'Outdent'**
+  String get note_outdent;
 }
 
 class _AppLocalizationsDelegate

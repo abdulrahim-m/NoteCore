@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mobile_client/core/di/injection.dart';
 import 'package:mobile_client/core/rust/api.dart';
 import 'package:mobile_client/features/notes/presentation/controllers/notes_controller.dart';
@@ -54,12 +55,23 @@ class _NotesPageState extends State<NotesPage> {
     if (pos.pixels >= pos.maxScrollExtent - 300) _c.loadMore();
   }
 
+  /// A filtered page can be too short to scroll; keep loading until it is.
+  void _fillViewportIfNeeded() {
+    if (!mounted || !_scrollController.hasClients) return;
+    if (!_c.hasMore || _c.loading || _c.loadingMore) return;
+    final pos = _scrollController.position;
+    if (pos.hasContentDimensions && pos.maxScrollExtent <= 300) _c.loadMore();
+  }
+
   // ------------------------------------------------------------- actions
+  Future<void> _openNote(int id) async {
+    await context.push('/notes/$id');
+    if (mounted) _c.refresh(); // the note may have been edited or deleted
+  }
+
   Future<void> _createNote() async {
     final note = await _c.createNote();
-    if (note != null) {
-      // TODO(next step): open the single-note view for `note.id`.
-    }
+    if (note != null && mounted) await _openNote(note.id);
   }
 
   Future<void> _deleteSelected() async {
@@ -75,12 +87,17 @@ class _NotesPageState extends State<NotesPage> {
   }
 
   Future<void> _changeGroup() async {
-    final result = await showGroupPickerSheet(context, _c);
+    final result = await showGroupPickerSheet(context, _c.groups);
     if (result != null) await _c.moveSelected(result.id);
   }
 
   Future<void> _addTags() async {
-    final ids = await showTagPickerSheet(context, _c);
+    final ids = await showTagPickerSheet(
+      context,
+      listenable: _c,
+      tags: () => _c.tags,
+      onCreate: _c.createTag,
+    );
     if (ids != null) await _c.addTagsToSelected(ids);
   }
 
@@ -185,6 +202,10 @@ class _NotesPageState extends State<NotesPage> {
       );
     }
 
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => _fillViewportIfNeeded(),
+    );
+
     return RefreshIndicator(
       onRefresh: _c.loadInitial,
       child: ListView.builder(
@@ -210,7 +231,7 @@ class _NotesPageState extends State<NotesPage> {
               if (_c.selecting) {
                 _c.toggleSelection(note.id);
               } else {
-                // TODO(next step): open the single-note view for `note.id`.
+                _openNote(note.id);
               }
             },
           );
