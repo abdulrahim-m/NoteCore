@@ -165,6 +165,7 @@ abstract class RustLibApi extends BaseApi {
   Future<List<NoteListItemDto>> crateApiNotesNotesApiSearch({
     required NotesApi that,
     required SearchParamsDto params,
+    required ListRequestDto list,
   });
 
   Future<void> crateApiNotesNotesApiUpdateNote({
@@ -224,6 +225,7 @@ abstract class RustLibApi extends BaseApi {
   crateApiShortNotesShortNotesApiSearch({
     required ShortNotesApi that,
     required SearchParamsDto params,
+    required ListRequestDto req,
   });
 
   Future<void> crateApiShortNotesShortNotesApiUpdateItemContent({
@@ -281,6 +283,7 @@ abstract class RustLibApi extends BaseApi {
   Future<List<ShortTaskSectionDto>> crateApiShortTasksShortTasksApiSearch({
     required ShortTasksApi that,
     required SearchParamsDto params,
+    required ListRequestDto req,
   });
 
   Future<bool> crateApiShortTasksShortTasksApiToggleItemDone({
@@ -348,6 +351,7 @@ abstract class RustLibApi extends BaseApi {
   Future<List<TaskDto>> crateApiTasksTasksApiSearchTasks({
     required TasksApi that,
     required SearchParamsDto params,
+    required ListRequestDto req,
   });
 
   Future<bool> crateApiTasksTasksApiToggleDone({
@@ -1052,6 +1056,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Future<List<NoteListItemDto>> crateApiNotesNotesApiSearch({
     required NotesApi that,
     required SearchParamsDto params,
+    required ListRequestDto list,
   }) {
     return handler.executeNormal(
       NormalTask(
@@ -1062,6 +1067,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             serializer,
           );
           sse_encode_box_autoadd_search_params_dto(params, serializer);
+          sse_encode_box_autoadd_list_request_dto(list, serializer);
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
@@ -1074,7 +1080,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeErrorData: sse_decode_api_error,
         ),
         constMeta: kCrateApiNotesNotesApiSearchConstMeta,
-        argValues: [that, params],
+        argValues: [that, params, list],
         apiImpl: this,
       ),
     );
@@ -1083,7 +1089,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   TaskConstMeta get kCrateApiNotesNotesApiSearchConstMeta =>
       const TaskConstMeta(
         debugName: "NotesApi_search",
-        argNames: ["that", "params"],
+        argNames: ["that", "params", "list"],
       );
 
   @override
@@ -1448,6 +1454,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   crateApiShortNotesShortNotesApiSearch({
     required ShortNotesApi that,
     required SearchParamsDto params,
+    required ListRequestDto req,
   }) {
     return handler.executeNormal(
       NormalTask(
@@ -1458,6 +1465,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             serializer,
           );
           sse_encode_box_autoadd_search_params_dto(params, serializer);
+          sse_encode_box_autoadd_list_request_dto(req, serializer);
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
@@ -1470,7 +1478,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeErrorData: sse_decode_api_error,
         ),
         constMeta: kCrateApiShortNotesShortNotesApiSearchConstMeta,
-        argValues: [that, params],
+        argValues: [that, params, req],
         apiImpl: this,
       ),
     );
@@ -1479,7 +1487,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   TaskConstMeta get kCrateApiShortNotesShortNotesApiSearchConstMeta =>
       const TaskConstMeta(
         debugName: "ShortNotesApi_search",
-        argNames: ["that", "params"],
+        argNames: ["that", "params", "req"],
       );
 
   @override
@@ -1844,6 +1852,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Future<List<ShortTaskSectionDto>> crateApiShortTasksShortTasksApiSearch({
     required ShortTasksApi that,
     required SearchParamsDto params,
+    required ListRequestDto req,
   }) {
     return handler.executeNormal(
       NormalTask(
@@ -1854,6 +1863,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             serializer,
           );
           sse_encode_box_autoadd_search_params_dto(params, serializer);
+          sse_encode_box_autoadd_list_request_dto(req, serializer);
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
@@ -1866,7 +1876,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeErrorData: sse_decode_api_error,
         ),
         constMeta: kCrateApiShortTasksShortTasksApiSearchConstMeta,
-        argValues: [that, params],
+        argValues: [that, params, req],
         apiImpl: this,
       ),
     );
@@ -1875,7 +1885,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   TaskConstMeta get kCrateApiShortTasksShortTasksApiSearchConstMeta =>
       const TaskConstMeta(
         debugName: "ShortTasksApi_search",
-        argNames: ["that", "params"],
+        argNames: ["that", "params", "req"],
       );
 
   @override
@@ -2322,6 +2332,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Future<List<TaskDto>> crateApiTasksTasksApiSearchTasks({
     required TasksApi that,
     required SearchParamsDto params,
+    required ListRequestDto req,
   }) {
     return handler.executeNormal(
       NormalTask(
@@ -2332,6 +2343,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             serializer,
           );
           sse_encode_box_autoadd_search_params_dto(params, serializer);
+          sse_encode_box_autoadd_list_request_dto(req, serializer);
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
@@ -2344,7 +2356,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeErrorData: sse_decode_api_error,
         ),
         constMeta: kCrateApiTasksTasksApiSearchTasksConstMeta,
-        argValues: [that, params],
+        argValues: [that, params, req],
         apiImpl: this,
       ),
     );
@@ -2353,7 +2365,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   TaskConstMeta get kCrateApiTasksTasksApiSearchTasksConstMeta =>
       const TaskConstMeta(
         debugName: "TasksApi_search_tasks",
-        argNames: ["that", "params"],
+        argNames: ["that", "params", "req"],
       );
 
   @override
@@ -4982,11 +4994,14 @@ class NotesApiImpl extends RustOpaque implements NotesApi {
   Future<NoteDto> getNote({required PlatformInt64 id}) =>
       RustLib.instance.api.crateApiNotesNotesApiGetNote(that: this, id: id);
 
-  Future<List<NoteListItemDto>> search({required SearchParamsDto params}) =>
-      RustLib.instance.api.crateApiNotesNotesApiSearch(
-        that: this,
-        params: params,
-      );
+  Future<List<NoteListItemDto>> search({
+    required SearchParamsDto params,
+    required ListRequestDto list,
+  }) => RustLib.instance.api.crateApiNotesNotesApiSearch(
+    that: this,
+    params: params,
+    list: list,
+  );
 
   Future<void> updateNote({
     required PlatformInt64 id,
@@ -5085,9 +5100,11 @@ class ShortNotesApiImpl extends RustOpaque implements ShortNotesApi {
 
   Future<List<ShortNoteSectionListItemDto>> search({
     required SearchParamsDto params,
+    required ListRequestDto req,
   }) => RustLib.instance.api.crateApiShortNotesShortNotesApiSearch(
     that: this,
     params: params,
+    req: req,
   );
 
   Future<void> updateItemContent({
@@ -5181,11 +5198,14 @@ class ShortTasksApiImpl extends RustOpaque implements ShortTasksApi {
         sectionId: sectionId,
       );
 
-  Future<List<ShortTaskSectionDto>> search({required SearchParamsDto params}) =>
-      RustLib.instance.api.crateApiShortTasksShortTasksApiSearch(
-        that: this,
-        params: params,
-      );
+  Future<List<ShortTaskSectionDto>> search({
+    required SearchParamsDto params,
+    required ListRequestDto req,
+  }) => RustLib.instance.api.crateApiShortTasksShortTasksApiSearch(
+    that: this,
+    params: params,
+    req: req,
+  );
 
   /// Flips the item's `done` flag and returns the new value.
   Future<bool> toggleItemDone({required PlatformInt64 id}) => RustLib
@@ -5295,11 +5315,14 @@ class TasksApiImpl extends RustOpaque implements TasksApi {
   Future<TaskDto> getTask({required PlatformInt64 id}) =>
       RustLib.instance.api.crateApiTasksTasksApiGetTask(that: this, id: id);
 
-  Future<List<TaskDto>> searchTasks({required SearchParamsDto params}) =>
-      RustLib.instance.api.crateApiTasksTasksApiSearchTasks(
-        that: this,
-        params: params,
-      );
+  Future<List<TaskDto>> searchTasks({
+    required SearchParamsDto params,
+    required ListRequestDto req,
+  }) => RustLib.instance.api.crateApiTasksTasksApiSearchTasks(
+    that: this,
+    params: params,
+    req: req,
+  );
 
   /// Flips the task's `done` flag and returns the new value.
   Future<bool> toggleDone({required PlatformInt64 id}) =>
