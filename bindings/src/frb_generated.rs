@@ -1047,6 +1047,7 @@ fn wire__crate__api__notes__NotesApi_search_impl(
                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<NotesApi>,
             >>::sse_decode(&mut deserializer);
             let api_params = <crate::dto::query::SearchParamsDto>::sse_decode(&mut deserializer);
+            let api_list = <crate::dto::query::ListRequestDto>::sse_decode(&mut deserializer);
             deserializer.end();
             move |context| async move {
                 transform_result_sse::<_, crate::error::ApiError>(
@@ -1068,9 +1069,12 @@ fn wire__crate__api__notes__NotesApi_search_impl(
                             }
                         }
                         let api_that_guard = api_that_guard.unwrap();
-                        let output_ok =
-                            crate::api::notes::NotesApi::search(&*api_that_guard, api_params)
-                                .await?;
+                        let output_ok = crate::api::notes::NotesApi::search(
+                            &*api_that_guard,
+                            api_params,
+                            api_list,
+                        )
+                        .await?;
                         std::result::Result::Ok(output_ok)
                     })()
                     .await,
@@ -1660,6 +1664,7 @@ fn wire__crate__api__short_notes__ShortNotesApi_search_impl(
                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ShortNotesApi>,
             >>::sse_decode(&mut deserializer);
             let api_params = <crate::dto::query::SearchParamsDto>::sse_decode(&mut deserializer);
+            let api_req = <crate::dto::query::ListRequestDto>::sse_decode(&mut deserializer);
             deserializer.end();
             move |context| async move {
                 transform_result_sse::<_, crate::error::ApiError>(
@@ -1684,6 +1689,7 @@ fn wire__crate__api__short_notes__ShortNotesApi_search_impl(
                         let output_ok = crate::api::short_notes::ShortNotesApi::search(
                             &*api_that_guard,
                             api_params,
+                            api_req,
                         )
                         .await?;
                         std::result::Result::Ok(output_ok)
@@ -2276,6 +2282,7 @@ fn wire__crate__api__short_tasks__ShortTasksApi_search_impl(
                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ShortTasksApi>,
             >>::sse_decode(&mut deserializer);
             let api_params = <crate::dto::query::SearchParamsDto>::sse_decode(&mut deserializer);
+            let api_req = <crate::dto::query::ListRequestDto>::sse_decode(&mut deserializer);
             deserializer.end();
             move |context| async move {
                 transform_result_sse::<_, crate::error::ApiError>(
@@ -2300,6 +2307,7 @@ fn wire__crate__api__short_tasks__ShortTasksApi_search_impl(
                         let output_ok = crate::api::short_tasks::ShortTasksApi::search(
                             &*api_that_guard,
                             api_params,
+                            api_req,
                         )
                         .await?;
                         std::result::Result::Ok(output_ok)
@@ -2999,6 +3007,7 @@ fn wire__crate__api__tasks__TasksApi_search_tasks_impl(
                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<TasksApi>,
             >>::sse_decode(&mut deserializer);
             let api_params = <crate::dto::query::SearchParamsDto>::sse_decode(&mut deserializer);
+            let api_req = <crate::dto::query::ListRequestDto>::sse_decode(&mut deserializer);
             deserializer.end();
             move |context| async move {
                 transform_result_sse::<_, crate::error::ApiError>(
@@ -3020,9 +3029,12 @@ fn wire__crate__api__tasks__TasksApi_search_tasks_impl(
                             }
                         }
                         let api_that_guard = api_that_guard.unwrap();
-                        let output_ok =
-                            crate::api::tasks::TasksApi::search_tasks(&*api_that_guard, api_params)
-                                .await?;
+                        let output_ok = crate::api::tasks::TasksApi::search_tasks(
+                            &*api_that_guard,
+                            api_params,
+                            api_req,
+                        )
+                        .await?;
                         std::result::Result::Ok(output_ok)
                     })()
                     .await,

@@ -38,8 +38,8 @@ impl ShortTasksService {
         Ok(res)
     }
 
-    pub async fn search(&self, params: SearchParams) -> Result<Vec<UIShortTaskSection>> {
-        let sections = ShortTaskSection::search(&self.pool, params).await?;
+    pub async fn search(&self, params: SearchParams, list: ListRequest) -> Result<Vec<UIShortTaskSection>> {
+        let sections = ShortTaskSection::search(&self.pool, params, Some(list)).await?;
         let mut res = Vec::new();
 
         for section in sections {

@@ -31,8 +31,8 @@ impl NotesService {
         self.map_ui_notes(list).await
     }
 
-    pub async fn search(&self, params: SearchParams) -> Result<Vec<UINoteListItem>> {
-        let notes = Note::search(&self.pool, params).await?;
+    pub async fn search(&self, params: SearchParams, list: ListRequest) -> Result<Vec<UINoteListItem>> {
+        let notes = Note::search(&self.pool, params, Some(list)).await?;
         self.map_ui_notes(notes).await
     }
     

@@ -25,8 +25,8 @@ impl ShortNotesService {
         self.map_ui_section(section, items).await
     }
 
-    pub async fn search(&self, params: SearchParams) -> Result<Vec<UIShortNoteListItem>> {
-        let sections = ShortNoteSection::search(&self.pool, params).await?;
+    pub async fn search(&self, params: SearchParams, list: ListRequest) -> Result<Vec<UIShortNoteListItem>> {
+        let sections = ShortNoteSection::search(&self.pool, params, Some(list)).await?;
         let mut res = Vec::new();
 
         for section in sections {

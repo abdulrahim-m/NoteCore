@@ -72,7 +72,7 @@ impl Model for Tag {
         Ok(tag)
     }
 
-    async fn search(pool: &SqlitePool, params: SearchParams) -> Result<Vec<Self>, Error> {
+    async fn search(pool: &SqlitePool, params: SearchParams, list: Option<ListRequest>) -> Result<Vec<Self>, Error> {
         let mut query_builder = sqlx::QueryBuilder::new(
             "SELECT id, name, created_at FROM tags WHERE 1=1"
         );
@@ -96,6 +96,14 @@ impl Model for Tag {
         }
 
         query_builder.push(" ORDER BY created_at DESC");
+
+        if let Some(req) = list {
+            let offset = (req.current_page - 1) * req.limit;
+            query_builder.push(" LIMIT ");
+            query_builder.push_bind(req.limit);
+            query_builder.push(" OFFSET ");
+            query_builder.push_bind(offset);
+        }
 
         let rows = query_builder
             .build_query_as::<Tag>()

@@ -39,8 +39,8 @@ impl TasksService {
         Ok(res)
     }
 
-    pub async fn search_tasks(&self, params: SearchParams) -> Result<Vec<UITask>> {
-        let tasks = Task::search(&self.pool, params).await?;
+    pub async fn search_tasks(&self, params: SearchParams, list: ListRequest) -> Result<Vec<UITask>> {
+        let tasks = Task::search(&self.pool, params, Some(list)).await?;
         let mut res = Vec::new();
         for task in tasks {
             res.push(self.map_ui_task(task).await?);

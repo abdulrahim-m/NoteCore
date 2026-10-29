@@ -1,4 +1,5 @@
 use flutter_rust_bridge::frb;
+use notecore::models::repo::ListRequest;
 use notecore::services::tasks::TasksService;
 
 use crate::dto::query::{list_request_opt, ListRequestDto, SearchParamsDto};
@@ -28,8 +29,8 @@ impl TasksApi {
         Ok(list.into_iter().map(Into::into).collect())
     }
 
-    pub async fn search_tasks(&self, params: SearchParamsDto) -> Result<Vec<TaskDto>, ApiError> {
-        let list = self.service.search_tasks(params.into()).await?;
+    pub async fn search_tasks(&self, params: SearchParamsDto, req: ListRequestDto) -> Result<Vec<TaskDto>, ApiError> {
+        let list = self.service.search_tasks(params.into(), ListRequest::try_from(req)?).await?;
         Ok(list.into_iter().map(Into::into).collect())
     }
 

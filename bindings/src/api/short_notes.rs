@@ -1,4 +1,5 @@
 use flutter_rust_bridge::frb;
+use notecore::models::repo::ListRequest;
 use notecore::services::short_notes::ShortNotesService;
 
 use crate::dto::query::{list_request_opt, ListRequestDto, SearchParamsDto};
@@ -34,8 +35,9 @@ impl ShortNotesApi {
     pub async fn search(
         &self,
         params: SearchParamsDto,
+        req: ListRequestDto,
     ) -> Result<Vec<ShortNoteSectionListItemDto>, ApiError> {
-        let list = self.service.search(params.into()).await?;
+        let list = self.service.search(params.into(), ListRequest::try_from(req)?).await?;
         Ok(list.into_iter().map(Into::into).collect())
     }
 

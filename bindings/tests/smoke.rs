@@ -50,7 +50,7 @@ async fn notes_and_groups() {
             tags: Some(vec![tag.id]),
             created_before: None,
             created_after: None,
-        })
+        }, page(1, 10))
         .await
         .unwrap();
     assert_eq!(found.len(), 1);

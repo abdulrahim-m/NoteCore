@@ -40,8 +40,8 @@ impl NotesApi {
         Ok(list.into_iter().map(Into::into).collect())
     }
 
-    pub async fn search(&self, params: SearchParamsDto) -> Result<Vec<NoteListItemDto>, ApiError> {
-        let list = self.service.search(params.into()).await?;
+    pub async fn search(&self, params: SearchParamsDto, list: ListRequestDto) -> Result<Vec<NoteListItemDto>, ApiError> {
+        let list = self.service.search(params.into(), ListRequest::try_from(list)?).await?;
         Ok(list.into_iter().map(Into::into).collect())
     }
 
