@@ -69,7 +69,7 @@ class _TagsDrawerState extends State<TagsDrawer> {
                     children: [
                       Expanded(
                         child: Text(
-                          l10n.notes_filters,
+                          l10n.general_filters,
                           style: theme.textTheme.headlineMedium?.copyWith(
                             fontSize: 20,
                           ),

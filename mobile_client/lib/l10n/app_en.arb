@@ -7,6 +7,8 @@
   "shell_navBar_task_view": "Tasks",
   "shell_navBar_checklist_view": "Checklists",
 
+  "general_filters": "Filters",
+
   "notes_all": "All",
   "notes_delete": "Delete",
   "notes_change_group": "Change Group",
@@ -22,7 +24,6 @@
   "notes_new_note": "New note",
   "notes_clear_selection": "Cancel selection",
 
-  "notes_filters": "Filters",
   "notes_clear_filters": "Clear",
   "notes_created_after": "Created after",
   "notes_created_before": "Created before",

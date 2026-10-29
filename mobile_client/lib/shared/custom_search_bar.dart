@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_client/l10n/app_localizations.dart';
 
-class NotesSearchBar extends StatelessWidget {
-  const NotesSearchBar({
+class CustomSearchBar extends StatelessWidget {
+  const CustomSearchBar({
     super.key,
+    required this.hint,
     required this.controller,
     required this.onChanged,
     required this.onFilterTap,
     required this.filterCount,
   });
 
+  final String hint;
   final TextEditingController controller;
   final ValueChanged<String> onChanged;
   final VoidCallback onFilterTap;
@@ -29,7 +31,7 @@ class NotesSearchBar extends StatelessWidget {
               onChanged: onChanged,
               textInputAction: TextInputAction.search,
               decoration: InputDecoration(
-                hintText: l10n.notes_search_hint,
+                hintText: hint,
                 isDense: true,
                 prefixIcon: const Icon(Icons.search),
                 suffixIcon: ValueListenableBuilder<TextEditingValue>(
@@ -49,7 +51,7 @@ class NotesSearchBar extends StatelessWidget {
           ),
           const SizedBox(width: 8),
           IconButton.filledTonal(
-            tooltip: l10n.notes_filters,
+            tooltip: l10n.general_filters,
             onPressed: onFilterTap,
             icon: Badge(
               isLabelVisible: filterCount > 0,

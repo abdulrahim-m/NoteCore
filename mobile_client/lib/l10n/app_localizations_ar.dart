@@ -25,6 +25,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get shell_navBar_checklist_view => 'القوائم';
 
   @override
+  String get general_filters => 'التصفية';
+
+  @override
   String get notes_all => 'الكل';
 
   @override
@@ -61,9 +64,6 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get notes_clear_selection => 'إلغاء التحديد';
-
-  @override
-  String get notes_filters => 'التصفية';
 
   @override
   String get notes_clear_filters => 'مسح';

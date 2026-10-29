@@ -10,7 +10,7 @@ import 'package:mobile_client/features/notes/presentation/dialogs/dialogs.dart';
 import 'package:mobile_client/features/notes/presentation/dialogs/group_picker_sheet.dart';
 import 'package:mobile_client/features/notes/presentation/dialogs/tag_picker_sheet.dart';
 import 'package:mobile_client/features/notes/presentation/markdown/markdown_editing.dart';
-import 'package:mobile_client/features/notes/presentation/markdown/text_direction_utils.dart';
+import 'package:mobile_client/shared/text_direction_utils.dart';
 import 'package:mobile_client/features/notes/presentation/widgets/markdown_toolbar.dart';
 import 'package:mobile_client/l10n/app_localizations.dart';
 import 'package:share_plus/share_plus.dart';

@@ -9,7 +9,7 @@ import 'package:mobile_client/features/notes/presentation/dialogs/group_picker_s
 import 'package:mobile_client/features/notes/presentation/dialogs/tag_picker_sheet.dart';
 import 'package:mobile_client/features/notes/presentation/widgets/group_slider.dart';
 import 'package:mobile_client/features/notes/presentation/widgets/note_card.dart';
-import 'package:mobile_client/features/notes/presentation/widgets/notes_search_bar.dart';
+import 'package:mobile_client/shared/custom_search_bar.dart';
 import 'package:mobile_client/features/notes/presentation/widgets/selection_bar.dart';
 import 'package:mobile_client/features/notes/presentation/widgets/tags_drawer.dart';
 import 'package:mobile_client/l10n/app_localizations.dart';
@@ -140,7 +140,8 @@ class _NotesPageState extends State<NotesPage> {
                       : Column(
                           key: const ValueKey('browse'),
                           children: [
-                            NotesSearchBar(
+                            CustomSearchBar(
+                              hint: l10n.notes_search_hint,
                               controller: _searchController,
                               onChanged: _c.setSearchText,
                               onFilterTap: () =>

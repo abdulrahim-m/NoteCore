@@ -128,6 +128,12 @@ abstract class AppLocalizations {
   /// **'Checklists'**
   String get shell_navBar_checklist_view;
 
+  /// No description provided for @general_filters.
+  ///
+  /// In en, this message translates to:
+  /// **'Filters'**
+  String get general_filters;
+
   /// No description provided for @notes_all.
   ///
   /// In en, this message translates to:
@@ -199,12 +205,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cancel selection'**
   String get notes_clear_selection;
-
-  /// No description provided for @notes_filters.
-  ///
-  /// In en, this message translates to:
-  /// **'Filters'**
-  String get notes_filters;
 
   /// No description provided for @notes_clear_filters.
   ///

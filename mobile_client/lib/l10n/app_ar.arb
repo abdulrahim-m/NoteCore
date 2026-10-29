@@ -7,6 +7,8 @@
   "shell_navBar_task_view": "مهام",
   "shell_navBar_checklist_view": "القوائم",
 
+  "general_filters": "التصفية",
+  
   "notes_all": "الكل",
   "notes_delete": "حذف",
   "notes_change_group": "تغيير المجموعة",
@@ -21,7 +23,6 @@
   "notes_new_note": "ملاحظة جديدة",
   "notes_clear_selection": "إلغاء التحديد",
 
-  "notes_filters": "التصفية",
   "notes_clear_filters": "مسح",
   "notes_created_after": "أُنشئت بعد",
   "notes_created_before": "أُنشئت قبل",
