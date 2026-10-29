@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mobile_client/app/app_shell.dart';
 import 'package:mobile_client/core/context/app_context.dart';
 import 'package:mobile_client/core/di/injection.dart';
+import 'package:mobile_client/features/notes/presentation/pages/notes_page.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -23,7 +24,7 @@ final appRouter = GoRouter(
           routes: [
             GoRoute(
               path: '/notes',
-              builder: (_, _) => const Center(child: Text("Notes")),
+              builder: (_, _) => const NotesPage(),
             ),
           ],
         ),
