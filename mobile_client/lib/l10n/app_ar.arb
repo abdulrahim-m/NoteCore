@@ -5,5 +5,48 @@
   "shell_navBar_note_view": "ملاحظات",
   "shell_navBar_thought_view": "أفكار",
   "shell_navBar_task_view": "مهام",
-  "shell_navBar_checklist_view": "القوائم"
+  "shell_navBar_checklist_view": "القوائم",
+
+  "notes_all": "الكل",
+  "notes_delete": "حذف",
+  "notes_change_group": "تغيير المجموعة",
+  "notes_select_group": "نقل إلى مجموعة",
+  "notes_empty": "لا توجد ملاحظات",
+  "notes_unassigned": "بدون مجموعة",
+  "notes_selected_count": "تم تحديد {count}",
+
+  "notes_search_hint": "ابحث في الملاحظات",
+  "notes_no_results": "لا توجد ملاحظات مطابقة",
+  "notes_untitled": "بدون عنوان",
+  "notes_new_note": "ملاحظة جديدة",
+  "notes_clear_selection": "إلغاء التحديد",
+
+  "notes_filters": "التصفية",
+  "notes_clear_filters": "مسح",
+  "notes_created_after": "أُنشئت بعد",
+  "notes_created_before": "أُنشئت قبل",
+
+  "notes_tags": "الوسوم",
+  "notes_tags_empty": "لا توجد وسوم بعد",
+  "notes_new_tag": "وسم جديد",
+  "notes_add_tag": "إضافة وسم",
+
+  "notes_manage_groups": "إدارة المجموعات",
+  "notes_new_group": "مجموعة جديدة",
+  "notes_rename_group": "إعادة تسمية المجموعة",
+  "notes_group_name": "اسم المجموعة",
+  "notes_groups_empty": "لا توجد مجموعات بعد",
+  "notes_count": "{count} ملاحظات",
+
+  "notes_cancel": "إلغاء",
+  "notes_save": "حفظ",
+  "notes_create": "إنشاء",
+  "notes_done": "تم",
+
+  "notes_delete_notes_title": "حذف الملاحظات؟",
+  "notes_delete_notes_body": "سيتم حذف {count} من الملاحظات المحددة نهائيًا.",
+  "notes_delete_group_title": "حذف المجموعة؟",
+  "notes_delete_group_body": "سيتم حذف «{name}». لا يمكن حذف مجموعة ما زالت تحتوي على ملاحظات.",
+  "notes_delete_tag_title": "حذف الوسم؟",
+  "notes_delete_tag_body": "ستتم إزالة «{name}» من جميع الملاحظات."
 }

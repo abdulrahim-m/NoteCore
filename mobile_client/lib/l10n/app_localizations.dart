@@ -127,6 +127,222 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Checklists'**
   String get shell_navBar_checklist_view;
+
+  /// No description provided for @notes_all.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get notes_all;
+
+  /// No description provided for @notes_delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get notes_delete;
+
+  /// No description provided for @notes_change_group.
+  ///
+  /// In en, this message translates to:
+  /// **'Change Group'**
+  String get notes_change_group;
+
+  /// No description provided for @notes_select_group.
+  ///
+  /// In en, this message translates to:
+  /// **'Move to Group'**
+  String get notes_select_group;
+
+  /// No description provided for @notes_empty.
+  ///
+  /// In en, this message translates to:
+  /// **'No notes found'**
+  String get notes_empty;
+
+  /// No description provided for @notes_unassigned.
+  ///
+  /// In en, this message translates to:
+  /// **'Unassigned'**
+  String get notes_unassigned;
+
+  /// No description provided for @notes_selected_count.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} selected'**
+  String notes_selected_count(int count);
+
+  /// No description provided for @notes_search_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search notes'**
+  String get notes_search_hint;
+
+  /// No description provided for @notes_no_results.
+  ///
+  /// In en, this message translates to:
+  /// **'No matching notes'**
+  String get notes_no_results;
+
+  /// No description provided for @notes_untitled.
+  ///
+  /// In en, this message translates to:
+  /// **'Untitled'**
+  String get notes_untitled;
+
+  /// No description provided for @notes_new_note.
+  ///
+  /// In en, this message translates to:
+  /// **'New note'**
+  String get notes_new_note;
+
+  /// No description provided for @notes_clear_selection.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel selection'**
+  String get notes_clear_selection;
+
+  /// No description provided for @notes_filters.
+  ///
+  /// In en, this message translates to:
+  /// **'Filters'**
+  String get notes_filters;
+
+  /// No description provided for @notes_clear_filters.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get notes_clear_filters;
+
+  /// No description provided for @notes_created_after.
+  ///
+  /// In en, this message translates to:
+  /// **'Created after'**
+  String get notes_created_after;
+
+  /// No description provided for @notes_created_before.
+  ///
+  /// In en, this message translates to:
+  /// **'Created before'**
+  String get notes_created_before;
+
+  /// No description provided for @notes_tags.
+  ///
+  /// In en, this message translates to:
+  /// **'Tags'**
+  String get notes_tags;
+
+  /// No description provided for @notes_tags_empty.
+  ///
+  /// In en, this message translates to:
+  /// **'No tags yet'**
+  String get notes_tags_empty;
+
+  /// No description provided for @notes_new_tag.
+  ///
+  /// In en, this message translates to:
+  /// **'New tag'**
+  String get notes_new_tag;
+
+  /// No description provided for @notes_add_tag.
+  ///
+  /// In en, this message translates to:
+  /// **'Add tag'**
+  String get notes_add_tag;
+
+  /// No description provided for @notes_manage_groups.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage groups'**
+  String get notes_manage_groups;
+
+  /// No description provided for @notes_new_group.
+  ///
+  /// In en, this message translates to:
+  /// **'New group'**
+  String get notes_new_group;
+
+  /// No description provided for @notes_rename_group.
+  ///
+  /// In en, this message translates to:
+  /// **'Rename group'**
+  String get notes_rename_group;
+
+  /// No description provided for @notes_group_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Group name'**
+  String get notes_group_name;
+
+  /// No description provided for @notes_groups_empty.
+  ///
+  /// In en, this message translates to:
+  /// **'No groups yet'**
+  String get notes_groups_empty;
+
+  /// No description provided for @notes_count.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} notes'**
+  String notes_count(int count);
+
+  /// No description provided for @notes_cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get notes_cancel;
+
+  /// No description provided for @notes_save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get notes_save;
+
+  /// No description provided for @notes_create.
+  ///
+  /// In en, this message translates to:
+  /// **'Create'**
+  String get notes_create;
+
+  /// No description provided for @notes_done.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get notes_done;
+
+  /// No description provided for @notes_delete_notes_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete notes?'**
+  String get notes_delete_notes_title;
+
+  /// No description provided for @notes_delete_notes_body.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} selected notes will be permanently deleted.'**
+  String notes_delete_notes_body(int count);
+
+  /// No description provided for @notes_delete_group_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete group?'**
+  String get notes_delete_group_title;
+
+  /// No description provided for @notes_delete_group_body.
+  ///
+  /// In en, this message translates to:
+  /// **'“{name}” will be deleted. A group that still contains notes can\'t be deleted.'**
+  String notes_delete_group_body(String name);
+
+  /// No description provided for @notes_delete_tag_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete tag?'**
+  String get notes_delete_tag_title;
+
+  /// No description provided for @notes_delete_tag_body.
+  ///
+  /// In en, this message translates to:
+  /// **'“{name}” will be removed from all notes.'**
+  String notes_delete_tag_body(String name);
 }
 
 class _AppLocalizationsDelegate

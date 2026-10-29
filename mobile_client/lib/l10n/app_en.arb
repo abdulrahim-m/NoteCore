@@ -5,5 +5,53 @@
   "shell_navBar_note_view": "Notes",
   "shell_navBar_thought_view": "Thoughts",
   "shell_navBar_task_view": "Tasks",
-  "shell_navBar_checklist_view": "Checklists"
+  "shell_navBar_checklist_view": "Checklists",
+
+  "notes_all": "All",
+  "notes_delete": "Delete",
+  "notes_change_group": "Change Group",
+  "notes_select_group": "Move to Group",
+  "notes_empty": "No notes found",
+  "notes_unassigned": "Unassigned",
+  "notes_selected_count": "{count} selected",
+  "@notes_selected_count": { "placeholders": { "count": { "type": "int" } } },
+
+  "notes_search_hint": "Search notes",
+  "notes_no_results": "No matching notes",
+  "notes_untitled": "Untitled",
+  "notes_new_note": "New note",
+  "notes_clear_selection": "Cancel selection",
+
+  "notes_filters": "Filters",
+  "notes_clear_filters": "Clear",
+  "notes_created_after": "Created after",
+  "notes_created_before": "Created before",
+
+  "notes_tags": "Tags",
+  "notes_tags_empty": "No tags yet",
+  "notes_new_tag": "New tag",
+  "notes_add_tag": "Add tag",
+
+  "notes_manage_groups": "Manage groups",
+  "notes_new_group": "New group",
+  "notes_rename_group": "Rename group",
+  "notes_group_name": "Group name",
+  "notes_groups_empty": "No groups yet",
+  "notes_count": "{count} notes",
+  "@notes_count": { "placeholders": { "count": { "type": "int" } } },
+
+  "notes_cancel": "Cancel",
+  "notes_save": "Save",
+  "notes_create": "Create",
+  "notes_done": "Done",
+
+  "notes_delete_notes_title": "Delete notes?",
+  "notes_delete_notes_body": "{count} selected notes will be permanently deleted.",
+  "@notes_delete_notes_body": { "placeholders": { "count": { "type": "int" } } },
+  "notes_delete_group_title": "Delete group?",
+  "notes_delete_group_body": "“{name}” will be deleted. A group that still contains notes can't be deleted.",
+  "@notes_delete_group_body": { "placeholders": { "name": { "type": "String" } } },
+  "notes_delete_tag_title": "Delete tag?",
+  "notes_delete_tag_body": "“{name}” will be removed from all notes.",
+  "@notes_delete_tag_body": { "placeholders": { "name": { "type": "String" } } }
 }
