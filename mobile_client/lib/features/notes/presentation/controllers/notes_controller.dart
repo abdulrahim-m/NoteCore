@@ -8,10 +8,11 @@ import 'package:mobile_client/core/rust/dto/note.dart';
 import 'package:mobile_client/core/rust/dto/query.dart';
 import 'package:mobile_client/core/rust/dto/tag.dart';
 import 'package:mobile_client/core/rust/error.dart';
+import 'package:mobile_client/shared/filterable_controller.dart';
 
 /// State + actions for the notes list (groups, tags, search, filters,
 /// selection). The UI listens to it and never talks to the Rust API directly.
-class NotesController extends ChangeNotifier {
+class NotesController extends ChangeNotifier implements FilterableListController {
   NotesController({required NotesApi notes, required TagsApi tags})
     : _notesApi = notes,
       _tagsApi = tags;

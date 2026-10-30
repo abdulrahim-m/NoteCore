@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_client/features/notes/presentation/controllers/notes_controller.dart';
-import 'package:mobile_client/features/notes/presentation/dialogs/dialogs.dart';
+import 'package:mobile_client/shared/filterable_controller.dart';
+import 'package:mobile_client/shared/dialogs.dart';
 import 'package:mobile_client/l10n/app_localizations.dart';
 
-/// Left sliding panel: date filters + every tag (select to filter, add new,
-/// delete). Reads/writes through [NotesController].
+/// Left sliding panel: date filters + every tag. Works with any FilterableListController.
 class TagsDrawer extends StatefulWidget {
   const TagsDrawer({super.key, required this.controller});
-  final NotesController controller;
+  final FilterableListController controller;
 
   @override
   State<TagsDrawer> createState() => _TagsDrawerState();
@@ -16,7 +15,7 @@ class TagsDrawer extends StatefulWidget {
 class _TagsDrawerState extends State<TagsDrawer> {
   final _tagField = TextEditingController();
 
-  NotesController get c => widget.controller;
+  FilterableListController get c => widget.controller;
 
   @override
   void dispose() {

@@ -3,16 +3,16 @@ import 'package:go_router/go_router.dart';
 import 'package:mobile_client/core/di/injection.dart';
 import 'package:mobile_client/core/rust/api.dart';
 import 'package:mobile_client/features/notes/presentation/controllers/notes_controller.dart';
-import 'package:mobile_client/features/notes/presentation/dialogs/dialogs.dart';
+import 'package:mobile_client/shared/dialogs.dart';
 import 'package:mobile_client/features/notes/presentation/dialogs/group_management_sheet.dart';
 import 'package:mobile_client/features/notes/presentation/dialogs/group_picker_sheet.dart';
 import 'package:mobile_client/features/notes/presentation/dialogs/tag_picker_sheet.dart';
 import 'package:mobile_client/features/notes/presentation/widgets/group_slider.dart';
 import 'package:mobile_client/features/notes/presentation/widgets/note_card.dart';
 import 'package:mobile_client/shared/custom_search_bar.dart';
-import 'package:mobile_client/features/notes/presentation/widgets/selection_bar.dart';
-import 'package:mobile_client/features/notes/presentation/widgets/tags_drawer.dart';
 import 'package:mobile_client/l10n/app_localizations.dart';
+import 'package:mobile_client/shared/selection_bar.dart';
+import 'package:mobile_client/shared/tags_drawer.dart';
 
 class NotesPage extends StatefulWidget {
   const NotesPage({super.key});
@@ -133,9 +133,23 @@ class _NotesPageState extends State<NotesPage> {
                           key: const ValueKey('selection'),
                           count: _c.selectedNoteIds.length,
                           onClose: _c.clearSelection,
-                          onAddTag: _addTags,
-                          onChangeGroup: _changeGroup,
-                          onDelete: _deleteSelected,
+                          actions: [
+                            IconButton(
+                              tooltip: l10n.notes_add_tag,
+                              onPressed: _addTags,
+                              icon: const Icon(Icons.label_outline),
+                            ),
+                            IconButton(
+                              tooltip: l10n.notes_change_group,
+                              onPressed: _changeGroup,
+                              icon: const Icon(Icons.folder_open),
+                            ),
+                            IconButton(
+                              tooltip: l10n.notes_delete,
+                              onPressed: _deleteSelected,
+                              icon: Icon(Icons.delete_outline, color: Theme.of(context).colorScheme.error),
+                            ),
+                          ],
                         )
                       : Column(
                           key: const ValueKey('browse'),

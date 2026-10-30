@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mobile_client/core/di/injection.dart';
 import 'package:mobile_client/core/rust/api.dart';
 import 'package:mobile_client/features/notes/presentation/controllers/note_editor_controller.dart';
-import 'package:mobile_client/features/notes/presentation/dialogs/dialogs.dart';
+import 'package:mobile_client/shared/dialogs.dart';
 import 'package:mobile_client/features/notes/presentation/dialogs/group_picker_sheet.dart';
 import 'package:mobile_client/features/notes/presentation/dialogs/tag_picker_sheet.dart';
 import 'package:mobile_client/features/notes/presentation/markdown/markdown_editing.dart';

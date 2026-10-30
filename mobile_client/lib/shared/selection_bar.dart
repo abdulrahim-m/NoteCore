@@ -1,22 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_client/l10n/app_localizations.dart';
 
-/// Contextual bar shown instead of search + groups while notes are selected.
+/// A flexible contextual selection bar that accepts arbitrary action widgets.
 class SelectionBar extends StatelessWidget {
   const SelectionBar({
     super.key,
     required this.count,
     required this.onClose,
-    required this.onAddTag,
-    required this.onChangeGroup,
-    required this.onDelete,
+    required this.actions,
   });
 
   final int count;
   final VoidCallback onClose;
-  final VoidCallback onAddTag;
-  final VoidCallback onChangeGroup;
-  final VoidCallback onDelete;
+  final List<Widget> actions;
 
   @override
   Widget build(BuildContext context) {
@@ -42,21 +38,7 @@ class SelectionBar extends StatelessWidget {
               ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
             ),
           ),
-          IconButton(
-            tooltip: l10n.notes_add_tag,
-            onPressed: onAddTag,
-            icon: const Icon(Icons.label_outline),
-          ),
-          IconButton(
-            tooltip: l10n.notes_change_group,
-            onPressed: onChangeGroup,
-            icon: const Icon(Icons.folder_open),
-          ),
-          IconButton(
-            tooltip: l10n.notes_delete,
-            onPressed: onDelete,
-            icon: Icon(Icons.delete_outline, color: cs.error),
-          ),
+          ...actions,
         ],
       ),
     );

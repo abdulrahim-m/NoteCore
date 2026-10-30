@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_client/features/notes/presentation/controllers/notes_controller.dart';
-import 'package:mobile_client/features/notes/presentation/dialogs/dialogs.dart';
 import 'package:mobile_client/l10n/app_localizations.dart';
+import 'package:mobile_client/shared/dialogs.dart';
 
 /// Create / rename / delete groups. Deleting a group that still has notes is
 /// refused by the Rust core, its message is shown via the controller's
