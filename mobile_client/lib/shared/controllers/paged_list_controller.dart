@@ -31,6 +31,14 @@ abstract class PagedListController<T> extends ChangeNotifier with ApiGuard {
   bool get loadingMore => _loadingMore;
   bool get hasMore => _hasMore;
 
+  /// Replaces every loaded item matching [where] with `update(item)` (for
+  /// optimistic local edits) and notifies.
+  @protected
+  void updateWhere(bool Function(T item) where, T Function(T item) update) {
+    _items = [for (final i in _items) where(i) ? update(i) : i];
+    notifyListeners();
+  }
+
   // ------------------------------------------------------------ selection
   Set<int> get selectedIds => _selected;
   bool get selecting => _selected.isNotEmpty;
