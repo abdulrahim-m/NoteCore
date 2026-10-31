@@ -91,6 +91,35 @@
   "thoughts_grid_view": "Grid view",
   "thoughts_list_view": "List view",
   "thoughts_load_failed": "Couldn't load this section",
-  "thoughts_section_empty": "Nothing here yet. Add your first thought below."
+  "thoughts_section_empty": "Nothing here yet. Add your first thought below.",
 
+  "checklists_search_hint": "Search checklists",
+  "checklists_empty": "No checklists yet",
+  "checklists_all_done": "All done! Nothing left to do",
+  "checklists_new_section": "New checklist",
+  "checklists_section_name": "Checklist name",
+  "checklists_rename_section": "Rename checklist",
+  "checklists_show_completed": "Show completed",
+  "checklists_delete_title": "{count, plural, =1{Delete checklist?} other{Delete checklists?}}",
+  "@checklists_delete_title": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "checklists_delete_body": "{count, plural, =1{This checklist and all its tasks will be permanently deleted.} other{{count} checklists and all their tasks will be permanently deleted.}}",
+  "@checklists_delete_body": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "checklists_new_item_hint": "Add a task…",
+  "checklists_add": "Add",
+  "checklists_load_failed": "Couldn't load this checklist",
+  "checklists_section_empty": "No tasks yet. Add your first task below.",
+  "checklists_no_tasks": "No tasks yet",
+  "checklists_edit_tasks": "Edit checklist"
 }

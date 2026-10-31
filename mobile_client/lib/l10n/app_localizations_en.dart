@@ -265,4 +265,67 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get thoughts_section_empty =>
       'Nothing here yet. Add your first thought below.';
+
+  @override
+  String get checklists_search_hint => 'Search checklists';
+
+  @override
+  String get checklists_empty => 'No checklists yet';
+
+  @override
+  String get checklists_all_done => 'All done! Nothing left to do';
+
+  @override
+  String get checklists_new_section => 'New checklist';
+
+  @override
+  String get checklists_section_name => 'Checklist name';
+
+  @override
+  String get checklists_rename_section => 'Rename checklist';
+
+  @override
+  String get checklists_show_completed => 'Show completed';
+
+  @override
+  String checklists_delete_title(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Delete checklists?',
+      one: 'Delete checklist?',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String checklists_delete_body(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other:
+          '$count checklists and all their tasks will be permanently deleted.',
+      one: 'This checklist and all its tasks will be permanently deleted.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get checklists_new_item_hint => 'Add a task…';
+
+  @override
+  String get checklists_add => 'Add';
+
+  @override
+  String get checklists_load_failed => 'Couldn\'t load this checklist';
+
+  @override
+  String get checklists_section_empty =>
+      'No tasks yet. Add your first task below.';
+
+  @override
+  String get checklists_no_tasks => 'No tasks yet';
+
+  @override
+  String get checklists_edit_tasks => 'Edit checklist';
 }

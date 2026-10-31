@@ -83,5 +83,35 @@
   "thoughts_grid_view": "عرض شبكي",
   "thoughts_list_view": "عرض قائمة",
   "thoughts_load_failed": "تعذّر تحميل هذا القسم",
-  "thoughts_section_empty": "لا شيء هنا بعد. أضف أول فكرة بالأسفل."
+  "thoughts_section_empty": "لا شيء هنا بعد. أضف أول فكرة بالأسفل.",
+
+  "checklists_search_hint": "ابحث في القوائم",
+  "checklists_empty": "لا توجد قوائم بعد",
+  "checklists_all_done": "تم كل شيء! لا يوجد ما تبقى",
+  "checklists_new_section": "قائمة جديدة",
+  "checklists_section_name": "اسم القائمة",
+  "checklists_rename_section": "إعادة تسمية القائمة",
+  "checklists_show_completed": "إظهار المكتمل",
+  "checklists_delete_title": "{count, plural, =1{حذف القائمة؟} other{حذف القوائم؟}}",
+  "@checklists_delete_title": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "checklists_delete_body": "{count, plural, =1{سيتم حذف هذه القائمة وجميع مهامها نهائيًا.} other{سيتم حذف {count} قوائم وجميع مهامها نهائيًا.}}",
+  "@checklists_delete_body": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "checklists_new_item_hint": "أضف مهمة…",
+  "checklists_add": "إضافة",
+  "checklists_load_failed": "تعذر تحميل هذه القائمة",
+  "checklists_section_empty": "لا توجد مهام بعد. أضف أول مهمة بالأسفل.",
+  "checklists_no_tasks": "لا توجد مهام بعد",
+  "checklists_edit_tasks": "تعديل القائمة"
 }

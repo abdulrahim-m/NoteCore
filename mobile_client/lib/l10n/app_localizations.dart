@@ -535,6 +535,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Nothing here yet. Add your first thought below.'**
   String get thoughts_section_empty;
+
+  /// No description provided for @checklists_search_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search checklists'**
+  String get checklists_search_hint;
+
+  /// No description provided for @checklists_empty.
+  ///
+  /// In en, this message translates to:
+  /// **'No checklists yet'**
+  String get checklists_empty;
+
+  /// No description provided for @checklists_all_done.
+  ///
+  /// In en, this message translates to:
+  /// **'All done! Nothing left to do'**
+  String get checklists_all_done;
+
+  /// No description provided for @checklists_new_section.
+  ///
+  /// In en, this message translates to:
+  /// **'New checklist'**
+  String get checklists_new_section;
+
+  /// No description provided for @checklists_section_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Checklist name'**
+  String get checklists_section_name;
+
+  /// No description provided for @checklists_rename_section.
+  ///
+  /// In en, this message translates to:
+  /// **'Rename checklist'**
+  String get checklists_rename_section;
+
+  /// No description provided for @checklists_show_completed.
+  ///
+  /// In en, this message translates to:
+  /// **'Show completed'**
+  String get checklists_show_completed;
+
+  /// No description provided for @checklists_delete_title.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Delete checklist?} other{Delete checklists?}}'**
+  String checklists_delete_title(int count);
+
+  /// No description provided for @checklists_delete_body.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{This checklist and all its tasks will be permanently deleted.} other{{count} checklists and all their tasks will be permanently deleted.}}'**
+  String checklists_delete_body(int count);
+
+  /// No description provided for @checklists_new_item_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a task…'**
+  String get checklists_new_item_hint;
+
+  /// No description provided for @checklists_add.
+  ///
+  /// In en, this message translates to:
+  /// **'Add'**
+  String get checklists_add;
+
+  /// No description provided for @checklists_load_failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load this checklist'**
+  String get checklists_load_failed;
+
+  /// No description provided for @checklists_section_empty.
+  ///
+  /// In en, this message translates to:
+  /// **'No tasks yet. Add your first task below.'**
+  String get checklists_section_empty;
+
+  /// No description provided for @checklists_no_tasks.
+  ///
+  /// In en, this message translates to:
+  /// **'No tasks yet'**
+  String get checklists_no_tasks;
+
+  /// No description provided for @checklists_edit_tasks.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit checklist'**
+  String get checklists_edit_tasks;
 }
 
 class _AppLocalizationsDelegate

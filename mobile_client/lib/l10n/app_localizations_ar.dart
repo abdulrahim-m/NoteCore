@@ -266,4 +266,66 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get thoughts_section_empty => 'لا شيء هنا بعد. أضف أول فكرة بالأسفل.';
+
+  @override
+  String get checklists_search_hint => 'ابحث في القوائم';
+
+  @override
+  String get checklists_empty => 'لا توجد قوائم بعد';
+
+  @override
+  String get checklists_all_done => 'تم كل شيء! لا يوجد ما تبقى';
+
+  @override
+  String get checklists_new_section => 'قائمة جديدة';
+
+  @override
+  String get checklists_section_name => 'اسم القائمة';
+
+  @override
+  String get checklists_rename_section => 'إعادة تسمية القائمة';
+
+  @override
+  String get checklists_show_completed => 'إظهار المكتمل';
+
+  @override
+  String checklists_delete_title(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'حذف القوائم؟',
+      one: 'حذف القائمة؟',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String checklists_delete_body(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'سيتم حذف $count قوائم وجميع مهامها نهائيًا.',
+      one: 'سيتم حذف هذه القائمة وجميع مهامها نهائيًا.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get checklists_new_item_hint => 'أضف مهمة…';
+
+  @override
+  String get checklists_add => 'إضافة';
+
+  @override
+  String get checklists_load_failed => 'تعذر تحميل هذه القائمة';
+
+  @override
+  String get checklists_section_empty =>
+      'لا توجد مهام بعد. أضف أول مهمة بالأسفل.';
+
+  @override
+  String get checklists_no_tasks => 'لا توجد مهام بعد';
+
+  @override
+  String get checklists_edit_tasks => 'تعديل القائمة';
 }
