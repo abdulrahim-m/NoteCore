@@ -35,6 +35,11 @@ abstract class ShortTasksApi implements RustOpaqueInterface {
 
   Future<ShortTaskSectionDto> getSection({required PlatformInt64 sectionId});
 
+  Future<List<ShortTaskSectionDto>> getSectionsByStatus({
+    ListRequestDto? req,
+    required bool finished,
+  });
+
   Future<List<ShortTaskSectionDto>> search({
     required SearchParamsDto params,
     required ListRequestDto req,

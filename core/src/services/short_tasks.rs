@@ -38,6 +38,19 @@ impl ShortTasksService {
         Ok(res)
     }
 
+    pub async fn get_sections_by_status(&self, req: Option<ListRequest>, finished: bool) -> Result<Vec<UIShortTaskSection>> {
+        let sections = ShortTaskSection::get_sections_by_status(&self.pool, req, finished).await?;
+        let mut res = Vec::new();
+
+        for section in sections {
+            let items = ShortTaskItem::get_by_section(&self.pool, section.id).await?;
+            let ui_section = self.map_ui_section(section, items).await?;
+            res.push(ui_section);
+        }
+
+        Ok(res)
+    }
+
     pub async fn search(&self, params: SearchParams, list: ListRequest) -> Result<Vec<UIShortTaskSection>> {
         let sections = ShortTaskSection::search(&self.pool, params, Some(list)).await?;
         let mut res = Vec::new();

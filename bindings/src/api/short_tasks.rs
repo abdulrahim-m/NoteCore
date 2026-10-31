@@ -32,6 +32,18 @@ impl ShortTasksApi {
         Ok(list.into_iter().map(Into::into).collect())
     }
 
+    pub async fn get_sections_by_status(
+        &self,
+        req: Option<ListRequestDto>,
+        finished: bool,
+    ) -> Result<Vec<ShortTaskSectionDto>, ApiError> {
+        let list = self
+            .service
+            .get_sections_by_status(list_request_opt(req)?, finished)
+            .await?;
+        Ok(list.into_iter().map(Into::into).collect())
+    }
+
     pub async fn search(
         &self,
         params: SearchParamsDto,

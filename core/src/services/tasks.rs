@@ -1,4 +1,5 @@
 use std::sync::Arc;
+use chrono::Utc;
 use sqlx::SqlitePool;
 
 use crate::{
@@ -32,6 +33,15 @@ impl TasksService {
 
     pub async fn get_list(&self, req: Option<ListRequest>) -> Result<Vec<UITask>> {
         let tasks = Task::get_all(&self.pool, req).await?;
+        let mut res = Vec::new();
+        for task in tasks {
+            res.push(self.map_ui_task(task).await?);
+        }
+        Ok(res)
+    }
+
+    pub async fn get_typed_list(&self, req: Option<ListRequest>, periodic: bool) -> Result<Vec<UITask>> {
+        let tasks = Task::get_typed_list(&self.pool, req, periodic, Utc::now()).await?;
         let mut res = Vec::new();
         for task in tasks {
             res.push(self.map_ui_task(task).await?);

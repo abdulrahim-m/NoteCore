@@ -24,6 +24,49 @@ impl ShortTaskSection {
             updated_at: Utc::now(),
         }
     }
+
+    pub async fn get_sections_by_status(
+        pool: &SqlitePool, 
+        list: Option<ListRequest>, 
+        finished: bool
+    ) -> Result<Vec<Self>, Error> {
+        let mut query_builder = sqlx::QueryBuilder::new("
+            SELECT 
+                sts.id, 
+                sts.title, 
+                (SELECT COUNT(*) FROM short_task_items sti WHERE sti.section_id = sts.id) AS listed_items,
+                sts.tags, 
+                sts.created_at, 
+                sts.updated_at 
+            FROM short_task_sections sts 
+            WHERE 
+        ");
+
+        if finished {
+            // Finished: Has at least one item, and NO items have done = 0
+            query_builder.push("EXISTS (SELECT 1 FROM short_task_items sti WHERE sti.section_id = sts.id) AND NOT EXISTS (SELECT 1 FROM short_task_items sti WHERE sti.section_id = sts.id AND sti.done = 0)");
+        } else {
+            // Unfinished: Either has no items, or has at least one uncompleted item
+            query_builder.push("NOT EXISTS (SELECT 1 FROM short_task_items sti WHERE sti.section_id = sts.id) OR EXISTS (SELECT 1 FROM short_task_items sti WHERE sti.section_id = sts.id AND sti.done = 0)");
+        }
+
+        query_builder.push(" ORDER BY sts.created_at DESC");
+
+        if let Some(l) = list {
+            let offset = (l.current_page - 1) * l.limit;
+            query_builder.push(" LIMIT ");
+            query_builder.push_bind(l.limit);
+            query_builder.push(" OFFSET ");
+            query_builder.push_bind(offset);
+        }
+
+        let rows: Vec<ShortTaskSection> = query_builder
+            .build_query_as()
+            .fetch_all(pool)
+            .await?;
+        
+        Ok(rows)
+    }
 }
 
 impl Model for ShortTaskSection {

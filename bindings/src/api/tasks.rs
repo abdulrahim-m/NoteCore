@@ -29,6 +29,18 @@ impl TasksApi {
         Ok(list.into_iter().map(Into::into).collect())
     }
 
+    pub async fn get_typed_list(
+        &self,
+        req: Option<ListRequestDto>,
+        periodic: bool,
+    ) -> Result<Vec<TaskDto>, ApiError> {
+        let list = self
+            .service
+            .get_typed_list(list_request_opt(req)?, periodic)
+            .await?;
+        Ok(list.into_iter().map(Into::into).collect())
+    }
+
     pub async fn search_tasks(&self, params: SearchParamsDto, req: ListRequestDto) -> Result<Vec<TaskDto>, ApiError> {
         let list = self.service.search_tasks(params.into(), ListRequest::try_from(req)?).await?;
         Ok(list.into_iter().map(Into::into).collect())
