@@ -3,14 +3,15 @@ import 'package:go_router/go_router.dart';
 import 'package:mobile_client/core/di/injection.dart';
 import 'package:mobile_client/core/rust/api.dart';
 import 'package:mobile_client/features/notes/presentation/controllers/notes_controller.dart';
-import 'package:mobile_client/shared/dialogs.dart';
 import 'package:mobile_client/features/notes/presentation/dialogs/group_management_sheet.dart';
 import 'package:mobile_client/features/notes/presentation/dialogs/group_picker_sheet.dart';
 import 'package:mobile_client/features/notes/presentation/dialogs/tag_picker_sheet.dart';
 import 'package:mobile_client/features/notes/presentation/widgets/group_slider.dart';
 import 'package:mobile_client/features/notes/presentation/widgets/note_card.dart';
-import 'package:mobile_client/shared/custom_search_bar.dart';
 import 'package:mobile_client/l10n/app_localizations.dart';
+import 'package:mobile_client/shared/custom_search_bar.dart';
+import 'package:mobile_client/shared/dialogs.dart';
+import 'package:mobile_client/shared/search_filters.dart';
 import 'package:mobile_client/shared/selection_bar.dart';
 import 'package:mobile_client/shared/tags_drawer.dart';
 
@@ -23,21 +24,17 @@ class NotesPage extends StatefulWidget {
 
 class _NotesPageState extends State<NotesPage> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-  final _searchController = TextEditingController();
   final _scrollController = ScrollController();
+  late final SearchFilters _filters;
   late final NotesController _c;
 
   @override
   void initState() {
     super.initState();
-    final core = getIt<NoteCore>();
-    _c = NotesController(notes: core.notes(), tags: core.tags());
-    _c.onError = (message) {
-      if (!mounted) return;
-      ScaffoldMessenger.of(context)
-        ..hideCurrentSnackBar()
-        ..showSnackBar(SnackBar(content: Text(message)));
-    };
+    _filters = getIt<SearchFilters>();
+    _c = NotesController(notes: getIt<NoteCore>().notes(), filters: _filters);
+    _c.onError = _showMessage;
+    _filters.onError = _showMessage;
     _scrollController.addListener(_onScroll);
     _c.loadInitial();
   }
@@ -45,9 +42,15 @@ class _NotesPageState extends State<NotesPage> {
   @override
   void dispose() {
     _scrollController.dispose();
-    _searchController.dispose();
     _c.dispose();
     super.dispose();
+  }
+
+  void _showMessage(String message) {
+    if (!mounted) return;
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(SnackBar(content: Text(message)));
   }
 
   void _onScroll() {
@@ -94,9 +97,9 @@ class _NotesPageState extends State<NotesPage> {
   Future<void> _addTags() async {
     final ids = await showTagPickerSheet(
       context,
-      listenable: _c,
-      tags: () => _c.tags,
-      onCreate: _c.createTag,
+      listenable: _filters,
+      tags: () => _filters.tags,
+      onCreate: _filters.createTag,
     );
     if (ids != null) await _c.addTagsToSelected(ids);
   }
@@ -107,7 +110,7 @@ class _NotesPageState extends State<NotesPage> {
     final l10n = AppLocalizations.of(context)!;
 
     return ListenableBuilder(
-      listenable: _c,
+      listenable: Listenable.merge([_c, _filters]),
       builder: (context, _) {
         return PopScope(
           canPop: !_c.selecting,
@@ -116,10 +119,11 @@ class _NotesPageState extends State<NotesPage> {
           },
           child: Scaffold(
             key: _scaffoldKey,
-            drawer: TagsDrawer(controller: _c),
+            drawer: TagsDrawer(controller: _filters),
             floatingActionButton: _c.selecting
                 ? null
                 : FloatingActionButton(
+                    heroTag: null,
                     tooltip: l10n.notes_new_note,
                     onPressed: _createNote,
                     child: const Icon(Icons.add),
@@ -147,7 +151,10 @@ class _NotesPageState extends State<NotesPage> {
                             IconButton(
                               tooltip: l10n.notes_delete,
                               onPressed: _deleteSelected,
-                              icon: Icon(Icons.delete_outline, color: Theme.of(context).colorScheme.error),
+                              icon: Icon(
+                                Icons.delete_outline,
+                                color: Theme.of(context).colorScheme.error,
+                              ),
                             ),
                           ],
                         )
@@ -156,11 +163,11 @@ class _NotesPageState extends State<NotesPage> {
                           children: [
                             CustomSearchBar(
                               hint: l10n.notes_search_hint,
-                              controller: _searchController,
-                              onChanged: _c.setSearchText,
+                              controller: _filters.textController,
+                              onChanged: (_) {},
                               onFilterTap: () =>
                                   _scaffoldKey.currentState?.openDrawer(),
-                              filterCount: _c.activeFilterCount,
+                              filterCount: _filters.activeFilterCount,
                             ),
                             GroupSlider(
                               groups: _c.groups,
@@ -199,7 +206,9 @@ class _NotesPageState extends State<NotesPage> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(
-                      _c.isSearching ? Icons.search_off : Icons.note_add_outlined,
+                      _c.isSearching
+                          ? Icons.search_off
+                          : Icons.note_add_outlined,
                       size: 48,
                       color: Theme.of(context).colorScheme.outline,
                     ),

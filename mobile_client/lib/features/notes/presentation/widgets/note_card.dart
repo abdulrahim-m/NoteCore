@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_client/core/rust/dto/note.dart';
 import 'package:mobile_client/l10n/app_localizations.dart';
+import 'package:mobile_client/shared/tag_pill.dart';
 
 class NoteCard extends StatelessWidget {
   const NoteCard({
@@ -89,8 +90,8 @@ class NoteCard extends StatelessWidget {
                             spacing: 6,
                             runSpacing: 4,
                             children: [
-                              for (final t in visibleTags) _TagPill(t.name),
-                              if (extraTags > 0) _TagPill('+$extraTags'),
+                              for (final t in visibleTags) TagPill(t.name),
+                              if (extraTags > 0) TagPill('+$extraTags'),
                             ],
                           ),
                         ),
@@ -104,27 +105,6 @@ class NoteCard extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _TagPill extends StatelessWidget {
-  const _TagPill(this.label);
-  final String label;
-
-  @override
-  Widget build(BuildContext context) {
-    final cs = Theme.of(context).colorScheme;
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-      decoration: BoxDecoration(
-        color: cs.secondaryContainer.withValues(alpha: 0.6),
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Text(
-        label,
-        style: TextStyle(fontSize: 11, color: cs.onSecondaryContainer),
       ),
     );
   }

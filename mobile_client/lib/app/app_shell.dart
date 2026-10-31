@@ -61,7 +61,17 @@ class AppShell extends StatelessWidget {
         ),
       ),
 
-      body: navigationShell,
+      body: GestureDetector(
+        behavior: HitTestBehavior.translucent,
+        onHorizontalDragEnd: (d) {
+          final v = d.primaryVelocity ?? 0;
+          if (v.abs() < 300) return;
+          final rtl = Directionality.of(context) == TextDirection.rtl;
+          final target = navigationShell.currentIndex + ((rtl ? v > 0 : v < 0) ? 1 : -1);
+          if (target >= 0 && target < 4) navigationShell.goBranch(target);
+        },
+        child: navigationShell,
+      ),
 
       // Integrated Bottom Bar matching the top style
       bottomNavigationBar: _buildIntegratedBottomBar(context),
