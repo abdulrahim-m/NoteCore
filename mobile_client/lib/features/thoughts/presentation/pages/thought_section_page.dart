@@ -4,11 +4,11 @@ import 'package:mobile_client/core/di/injection.dart';
 import 'package:mobile_client/core/rust/api/short_notes.dart';
 import 'package:mobile_client/features/notes/presentation/dialogs/tag_picker_sheet.dart';
 import 'package:mobile_client/features/thoughts/presentation/controllers/short_note_section_controller.dart';
-import 'package:mobile_client/shared/auto_save_text_field.dart';
+import 'package:mobile_client/shared/widgets/auto_save_text_field.dart';
 import 'package:mobile_client/l10n/app_localizations.dart';
-import 'package:mobile_client/shared/dialogs.dart';
-import 'package:mobile_client/shared/search_filters.dart';
-import 'package:mobile_client/shared/text_direction_utils.dart';
+import 'package:mobile_client/shared/dialogs/dialogs.dart';
+import 'package:mobile_client/shared/widgets/search_filters.dart';
+import 'package:mobile_client/shared/utils/text_direction_utils.dart';
 
 class ThoughtSectionPage extends StatefulWidget {
   const ThoughtSectionPage({super.key, required this.sectionId});

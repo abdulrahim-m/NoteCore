@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_client/core/rust/dto/note.dart';
 import 'package:mobile_client/l10n/app_localizations.dart';
-import 'package:mobile_client/shared/tag_pill.dart';
+import 'package:mobile_client/shared/widgets/tag_pill.dart';
 
 class NoteCard extends StatelessWidget {
   const NoteCard({

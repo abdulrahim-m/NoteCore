@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_client/shared/auto_save_text_field.dart';
+import 'package:mobile_client/shared/widgets/auto_save_text_field.dart';
 
 /// One editable line of a section: [leading] (bullet, checkbox, ...) + a text
 /// field that saves itself. Swipe either way to delete; clearing the text

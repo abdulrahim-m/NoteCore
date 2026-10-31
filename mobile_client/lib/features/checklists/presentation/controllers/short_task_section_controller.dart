@@ -1,9 +1,8 @@
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:mobile_client/core/rust/api/short_tasks.dart';
 import 'package:mobile_client/core/rust/dto/short_task.dart';
-import 'package:mobile_client/shared/section_editor_controller.dart';
+import 'package:mobile_client/shared/controllers/section_editor_controller.dart';
 
-/// One open checklist; the editing logic lives in the base class.
 class ShortTaskSectionController
     extends SectionEditorController<ShortTaskItemDto> {
   ShortTaskSectionController({
@@ -52,14 +51,12 @@ class ShortTaskSectionController
         done: done ?? i.done,
       );
 
-  /// Silent (no rebuild): the text field already shows the new text.
   Future<void> updateText(int id, String text) async {
     if (itemById(id) == null) return; // deleted meanwhile
     replaceItem(id, (i) => _copy(i, text: text), notify: false);
     await guard(() => _api.updateItemText(id: id, text: text));
   }
 
-  /// Ticks/unticks right away, then confirms with the core.
   Future<void> toggle(int id) async {
     final item = itemById(id);
     if (item == null) return;

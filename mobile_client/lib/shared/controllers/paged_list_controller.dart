@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:mobile_client/core/rust/dto/query.dart';
-import 'package:mobile_client/shared/api_guard.dart';
+import 'package:mobile_client/shared/utils/api_guard.dart';
 
 /// Pagination + multi-selection for any list page. Subclasses only say how to
 /// fetch one page ([fetchPage]) and how to read an item's id ([idOf]).

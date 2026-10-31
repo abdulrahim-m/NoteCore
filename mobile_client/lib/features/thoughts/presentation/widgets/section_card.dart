@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_client/core/rust/dto/short_note.dart';
 import 'package:mobile_client/l10n/app_localizations.dart';
-import 'package:mobile_client/shared/tag_pill.dart';
-import 'package:mobile_client/shared/text_direction_utils.dart';
+import 'package:mobile_client/shared/widgets/tag_pill.dart';
+import 'package:mobile_client/shared/utils/text_direction_utils.dart';
 
 class SectionCard extends StatelessWidget {
   const SectionCard({

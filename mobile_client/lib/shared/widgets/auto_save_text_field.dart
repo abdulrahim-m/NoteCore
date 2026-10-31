@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:mobile_client/shared/text_direction_utils.dart';
+import 'package:mobile_client/shared/utils/text_direction_utils.dart';
 
 /// Borderless text field that saves itself: [onSave] is called ~0.6s after
 /// typing stops, when focus is lost, and when the field is disposed.

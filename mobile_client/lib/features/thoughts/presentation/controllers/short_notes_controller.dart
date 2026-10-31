@@ -2,8 +2,8 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import 'package:mobile_client/core/rust/api/short_notes.dart';
 import 'package:mobile_client/core/rust/dto/query.dart';
 import 'package:mobile_client/core/rust/dto/short_note.dart';
-import 'package:mobile_client/shared/paged_list_controller.dart';
-import 'package:mobile_client/shared/search_filters.dart';
+import 'package:mobile_client/shared/controllers/paged_list_controller.dart';
+import 'package:mobile_client/shared/widgets/search_filters.dart';
 
 /// The list of thought sections, paging + selection come from the base class,
 /// search/filter values from the shared [SearchFilters].

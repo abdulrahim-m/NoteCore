@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_client/shared/filterable_controller.dart';
-import 'package:mobile_client/shared/dialogs.dart';
+import 'package:mobile_client/shared/controllers/filterable_controller.dart';
+import 'package:mobile_client/shared/dialogs/dialogs.dart';
 import 'package:mobile_client/l10n/app_localizations.dart';
 
 /// Left sliding panel: date filters + every tag. Works with any FilterableListController.

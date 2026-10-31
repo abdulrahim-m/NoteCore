@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:mobile_client/core/rust/dto/tag.dart';
-import 'package:mobile_client/shared/api_guard.dart';
+import 'package:mobile_client/shared/utils/api_guard.dart';
 
 typedef SectionData<I> = ({String name, List<TagDto> tags, List<I> items});
 

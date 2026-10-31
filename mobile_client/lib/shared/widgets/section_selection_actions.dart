@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_client/features/notes/presentation/dialogs/tag_picker_sheet.dart';
 import 'package:mobile_client/l10n/app_localizations.dart';
-import 'package:mobile_client/shared/dialogs.dart';
-import 'package:mobile_client/shared/section_list_controller.dart';
+import 'package:mobile_client/shared/dialogs/dialogs.dart';
+import 'package:mobile_client/shared/controllers/section_list_controller.dart';
 
 /// The actions of the selection bar for any section list: rename (only when
 /// exactly one is selected), add tag, delete.

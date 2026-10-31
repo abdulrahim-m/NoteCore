@@ -3,11 +3,11 @@ import 'package:go_router/go_router.dart';
 import 'package:mobile_client/core/di/injection.dart';
 import 'package:mobile_client/features/notes/presentation/dialogs/tag_picker_sheet.dart';
 import 'package:mobile_client/l10n/app_localizations.dart';
-import 'package:mobile_client/shared/dialogs.dart';
-import 'package:mobile_client/shared/item_composer.dart';
-import 'package:mobile_client/shared/search_filters.dart';
-import 'package:mobile_client/shared/section_editor_controller.dart';
-import 'package:mobile_client/shared/section_header.dart';
+import 'package:mobile_client/shared/dialogs/dialogs.dart';
+import 'package:mobile_client/shared/widgets/item_composer.dart';
+import 'package:mobile_client/shared/widgets/search_filters.dart';
+import 'package:mobile_client/shared/controllers/section_editor_controller.dart';
+import 'package:mobile_client/shared/widgets/section_header.dart';
 
 /// Full page for one open section, shared by Thoughts and Checklists: delete
 /// action, editable name + tags, the items (built by [itemBuilder]) and a

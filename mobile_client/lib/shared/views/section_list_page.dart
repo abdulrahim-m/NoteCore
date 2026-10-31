@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobile_client/core/di/injection.dart';
 import 'package:mobile_client/l10n/app_localizations.dart';
-import 'package:mobile_client/shared/custom_search_bar.dart';
-import 'package:mobile_client/shared/dialogs.dart';
-import 'package:mobile_client/shared/search_filters.dart';
-import 'package:mobile_client/shared/section_list_controller.dart';
-import 'package:mobile_client/shared/section_selection_actions.dart';
-import 'package:mobile_client/shared/selection_bar.dart';
-import 'package:mobile_client/shared/tags_drawer.dart';
+import 'package:mobile_client/shared/widgets/custom_search_bar.dart';
+import 'package:mobile_client/shared/dialogs/dialogs.dart';
+import 'package:mobile_client/shared/widgets/search_filters.dart';
+import 'package:mobile_client/shared/controllers/section_list_controller.dart';
+import 'package:mobile_client/shared/widgets/section_selection_actions.dart';
+import 'package:mobile_client/shared/widgets/selection_bar.dart';
+import 'package:mobile_client/shared/widgets/tags_drawer.dart';
 
 /// Tab page for a list of sections (Thoughts, Checklists): shared search bar +
 /// tag drawer, long-press selection bar, create FAB, pull to refresh, paging.

@@ -2,8 +2,8 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
 import 'package:mobile_client/core/rust/dto/query.dart';
 import 'package:mobile_client/core/rust/dto/tag.dart';
-import 'package:mobile_client/shared/paged_list_controller.dart';
-import 'package:mobile_client/shared/search_filters.dart';
+import 'package:mobile_client/shared/controllers/paged_list_controller.dart';
+import 'package:mobile_client/shared/widgets/search_filters.dart';
 
 /// A paged, searchable list of *sections* (thoughts, checklists, ...) with the
 /// same management actions: create, rename, delete, add tags. Subclasses only

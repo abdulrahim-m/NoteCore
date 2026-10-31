@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_client/core/rust/dto/short_task.dart';
 import 'package:mobile_client/l10n/app_localizations.dart';
-import 'package:mobile_client/shared/selectable_card.dart';
-import 'package:mobile_client/shared/tag_pill.dart';
-import 'package:mobile_client/shared/text_direction_utils.dart';
+import 'package:mobile_client/shared/widgets/selectable_card.dart';
+import 'package:mobile_client/shared/widgets/tag_pill.dart';
+import 'package:mobile_client/shared/utils/text_direction_utils.dart';
 
 /// A checklist as an expandable card: tap the header to open/close it, tick
 /// tasks right in the list, tap the pencil to edit the checklist itself.

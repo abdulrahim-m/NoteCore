@@ -5,8 +5,8 @@ import 'package:mobile_client/core/rust/api/short_tasks.dart';
 import 'package:mobile_client/core/rust/dto/query.dart';
 import 'package:mobile_client/core/rust/dto/short_task.dart';
 import 'package:mobile_client/core/rust/dto/tag.dart';
-import 'package:mobile_client/shared/search_filters.dart';
-import 'package:mobile_client/shared/section_list_controller.dart';
+import 'package:mobile_client/shared/widgets/search_filters.dart';
+import 'package:mobile_client/shared/controllers/section_list_controller.dart';
 
 /// The list of checklists. Sections come with their items, so ticking is
 /// applied locally right away (and written to the core in the background).
