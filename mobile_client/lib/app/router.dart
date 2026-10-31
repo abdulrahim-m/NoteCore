@@ -3,6 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:mobile_client/app/app_shell.dart';
 import 'package:mobile_client/core/context/app_context.dart';
 import 'package:mobile_client/core/di/injection.dart';
+import 'package:mobile_client/features/checklists/presentation/pages/checklist_section_page.dart';
+import 'package:mobile_client/features/checklists/presentation/pages/checklists_page.dart';
 import 'package:mobile_client/features/notes/presentation/pages/note_page.dart';
 import 'package:mobile_client/features/notes/presentation/pages/notes_page.dart';
 import 'package:mobile_client/features/thoughts/presentation/pages/thought_section_page.dart';
@@ -69,7 +71,17 @@ final appRouter = GoRouter(
           routes: [
             GoRoute(
               path: '/checklists',
-              builder: (_, _) => const Center(child: Text('Checklists')),
+              builder: (_, _) => const ChecklistsPage(),
+              routes: [
+                GoRoute(
+                  path: ':id',
+                  parentNavigatorKey: _rootNavigatorKey,
+                  builder: (_, state) => ChecklistSectionPage(
+                    sectionId:
+                        int.tryParse(state.pathParameters['id'] ?? '') ?? -1,
+                  ),
+                ),
+              ],
             ),
           ],
         ),
