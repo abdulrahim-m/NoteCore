@@ -14,6 +14,10 @@ void main() async {
   final core = await NoteCore.open(basePath: appDocDir.path);
   getIt.registerSingleton<NoteCore>(core);
 
+  getIt.registerSingleton<ShortNotesApi>(core.shortNotes());
+  getIt.registerSingleton<NotesApi>(core.notes());
+  getIt.registerSingleton<SearchFilters>(SearchFilters(core.tags()));
+
   setupLocator();
   runApp(const MyApp());
 }

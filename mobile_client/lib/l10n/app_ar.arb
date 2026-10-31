@@ -68,5 +68,20 @@
   "note_bullet_list": "قائمة نقطية",
   "note_checklist": "قائمة مهام",
   "note_indent": "زيادة المسافة البادئة",
-  "note_outdent": "تقليل المسافة البادئة"
+  "note_outdent": "تقليل المسافة البادئة",
+
+  "thoughts_search_hint": "ابحث في الأفكار",
+  "thoughts_empty": "لا توجد أفكار بعد",
+  "thoughts_new_section": "قسم جديد",
+  "thoughts_section_name": "اسم القسم",
+  "thoughts_rename_section": "إعادة تسمية القسم",
+  "thoughts_count": "{count, plural, =0{لا أفكار} =1{فكرة واحدة} =2{فكرتان} few{{count} أفكار} many{{count} فكرة} other{{count} فكرة}}",
+  "thoughts_delete_title": "{count, plural, =1{حذف القسم؟} other{حذف الأقسام؟}}",
+  "thoughts_delete_body": "{count, plural, =1{سيتم حذف هذا القسم وجميع أفكاره نهائيًا.} other{سيتم حذف {count} من الأقسام وجميع أفكارها نهائيًا.}}",
+  "thoughts_new_item_hint": "أضف فكرة…",
+  "thoughts_add": "إضافة",
+  "thoughts_grid_view": "عرض شبكي",
+  "thoughts_list_view": "عرض قائمة",
+  "thoughts_load_failed": "تعذّر تحميل هذا القسم",
+  "thoughts_section_empty": "لا شيء هنا بعد. أضف أول فكرة بالأسفل."
 }

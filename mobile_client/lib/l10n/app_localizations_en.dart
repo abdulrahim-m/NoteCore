@@ -196,4 +196,73 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get note_outdent => 'Outdent';
+
+  @override
+  String get thoughts_search_hint => 'Search thoughts';
+
+  @override
+  String get thoughts_empty => 'No thoughts yet';
+
+  @override
+  String get thoughts_new_section => 'New section';
+
+  @override
+  String get thoughts_section_name => 'Section name';
+
+  @override
+  String get thoughts_rename_section => 'Rename section';
+
+  @override
+  String thoughts_count(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count thoughts',
+      one: '1 thought',
+      zero: 'No thoughts',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String thoughts_delete_title(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Delete sections?',
+      one: 'Delete section?',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String thoughts_delete_body(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other:
+          '$count sections and all their thoughts will be permanently deleted.',
+      one: 'This section and all its thoughts will be permanently deleted.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get thoughts_new_item_hint => 'Add a thought…';
+
+  @override
+  String get thoughts_add => 'Add';
+
+  @override
+  String get thoughts_grid_view => 'Grid view';
+
+  @override
+  String get thoughts_list_view => 'List view';
+
+  @override
+  String get thoughts_load_failed => 'Couldn\'t load this section';
+
+  @override
+  String get thoughts_section_empty =>
+      'Nothing here yet. Add your first thought below.';
 }

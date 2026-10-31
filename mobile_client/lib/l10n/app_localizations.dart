@@ -451,6 +451,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Outdent'**
   String get note_outdent;
+
+  /// No description provided for @thoughts_search_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search thoughts'**
+  String get thoughts_search_hint;
+
+  /// No description provided for @thoughts_empty.
+  ///
+  /// In en, this message translates to:
+  /// **'No thoughts yet'**
+  String get thoughts_empty;
+
+  /// No description provided for @thoughts_new_section.
+  ///
+  /// In en, this message translates to:
+  /// **'New section'**
+  String get thoughts_new_section;
+
+  /// No description provided for @thoughts_section_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Section name'**
+  String get thoughts_section_name;
+
+  /// No description provided for @thoughts_rename_section.
+  ///
+  /// In en, this message translates to:
+  /// **'Rename section'**
+  String get thoughts_rename_section;
+
+  /// No description provided for @thoughts_count.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{No thoughts} =1{1 thought} other{{count} thoughts}}'**
+  String thoughts_count(int count);
+
+  /// No description provided for @thoughts_delete_title.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Delete section?} other{Delete sections?}}'**
+  String thoughts_delete_title(int count);
+
+  /// No description provided for @thoughts_delete_body.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{This section and all its thoughts will be permanently deleted.} other{{count} sections and all their thoughts will be permanently deleted.}}'**
+  String thoughts_delete_body(int count);
+
+  /// No description provided for @thoughts_new_item_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a thought…'**
+  String get thoughts_new_item_hint;
+
+  /// No description provided for @thoughts_add.
+  ///
+  /// In en, this message translates to:
+  /// **'Add'**
+  String get thoughts_add;
+
+  /// No description provided for @thoughts_grid_view.
+  ///
+  /// In en, this message translates to:
+  /// **'Grid view'**
+  String get thoughts_grid_view;
+
+  /// No description provided for @thoughts_list_view.
+  ///
+  /// In en, this message translates to:
+  /// **'List view'**
+  String get thoughts_list_view;
+
+  /// No description provided for @thoughts_load_failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load this section'**
+  String get thoughts_load_failed;
+
+  /// No description provided for @thoughts_section_empty.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing here yet. Add your first thought below.'**
+  String get thoughts_section_empty;
 }
 
 class _AppLocalizationsDelegate

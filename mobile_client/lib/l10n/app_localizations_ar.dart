@@ -196,4 +196,74 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get note_outdent => 'تقليل المسافة البادئة';
+
+  @override
+  String get thoughts_search_hint => 'ابحث في الأفكار';
+
+  @override
+  String get thoughts_empty => 'لا توجد أفكار بعد';
+
+  @override
+  String get thoughts_new_section => 'قسم جديد';
+
+  @override
+  String get thoughts_section_name => 'اسم القسم';
+
+  @override
+  String get thoughts_rename_section => 'إعادة تسمية القسم';
+
+  @override
+  String thoughts_count(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count فكرة',
+      many: '$count فكرة',
+      few: '$count أفكار',
+      two: 'فكرتان',
+      one: 'فكرة واحدة',
+      zero: 'لا أفكار',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String thoughts_delete_title(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'حذف الأقسام؟',
+      one: 'حذف القسم؟',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String thoughts_delete_body(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'سيتم حذف $count من الأقسام وجميع أفكارها نهائيًا.',
+      one: 'سيتم حذف هذا القسم وجميع أفكاره نهائيًا.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get thoughts_new_item_hint => 'أضف فكرة…';
+
+  @override
+  String get thoughts_add => 'إضافة';
+
+  @override
+  String get thoughts_grid_view => 'عرض شبكي';
+
+  @override
+  String get thoughts_list_view => 'عرض قائمة';
+
+  @override
+  String get thoughts_load_failed => 'تعذّر تحميل هذا القسم';
+
+  @override
+  String get thoughts_section_empty => 'لا شيء هنا بعد. أضف أول فكرة بالأسفل.';
 }

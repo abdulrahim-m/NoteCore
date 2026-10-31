@@ -73,5 +73,24 @@
   "note_bullet_list": "Bullet list",
   "note_checklist": "Checklist",
   "note_indent": "Indent",
-  "note_outdent": "Outdent"
+  "note_outdent": "Outdent",
+
+  "thoughts_search_hint": "Search thoughts",
+  "thoughts_empty": "No thoughts yet",
+  "thoughts_new_section": "New section",
+  "thoughts_section_name": "Section name",
+  "thoughts_rename_section": "Rename section",
+  "thoughts_count": "{count, plural, =0{No thoughts} =1{1 thought} other{{count} thoughts}}",
+  "@thoughts_count": { "placeholders": { "count": { "type": "int" } } },
+  "thoughts_delete_title": "{count, plural, =1{Delete section?} other{Delete sections?}}",
+  "@thoughts_delete_title": { "placeholders": { "count": { "type": "int" } } },
+  "thoughts_delete_body": "{count, plural, =1{This section and all its thoughts will be permanently deleted.} other{{count} sections and all their thoughts will be permanently deleted.}}",
+  "@thoughts_delete_body": { "placeholders": { "count": { "type": "int" } } },
+  "thoughts_new_item_hint": "Add a thought…",
+  "thoughts_add": "Add",
+  "thoughts_grid_view": "Grid view",
+  "thoughts_list_view": "List view",
+  "thoughts_load_failed": "Couldn't load this section",
+  "thoughts_section_empty": "Nothing here yet. Add your first thought below."
+
 }
