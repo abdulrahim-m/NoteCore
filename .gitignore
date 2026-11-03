@@ -1,1 +1,14 @@
+# Rust
 /target
+dist/
+**/*.rs.bk
+*.pdb
+*.exe
+rustc-ice-*.txt
+**/mutants.out*/
+
+# VS Code
+.vscode/*
+!.vscode/*.code-snippets
+!.vscode/*.code-workspace
+*.vsix
