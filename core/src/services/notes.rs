@@ -10,8 +10,14 @@ pub struct NotesService {
 }
 
 impl NotesService {
-    pub fn new(pool: Arc<SqlitePool>) -> Self {
-        NotesService { pool: pool }
+    pub async  fn new(pool: Arc<SqlitePool>) -> Result<Self> {
+        let service = NotesService { pool: pool };
+        service.refrech().await?;
+        Ok(service)
+    }
+
+    pub async fn refrech(&self) -> Result<()> {
+        Ok(())
     }
 
     // Get

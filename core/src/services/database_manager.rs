@@ -1,29 +1,40 @@
+use std::fs;
 use std::path::PathBuf;
 use sqlx::sqlite::{SqliteConnectOptions, SqlitePoolOptions};
-use sqlx::{SqlitePool, Error};
+use sqlx::SqlitePool;
 use std::str::FromStr;
+
+use crate::models::settings::Settings;
+use crate::utils::app_error::Result;
 
 pub struct DatabaseManager;
 
 impl DatabaseManager {
-    pub async fn init(base_path: String) -> Result<SqlitePool, Error> {
+    pub async fn init(base_path: String) -> Result<SqlitePool> {
         let mut db_path = PathBuf::from(base_path);
         db_path.push("notecore.db");
+
+        let db_exists = fs::metadata(&db_path).is_ok();
 
         let conn_options = SqliteConnectOptions::from_str(&format!("sqlite://{}", db_path.to_string_lossy()))?
             .create_if_missing(true)
             .foreign_keys(true);
 
         let pool = SqlitePoolOptions::new()
-            .connect_with(conn_options)
-            .await?;
+        .connect_with(conn_options)
+        .await?;
+
+        if !db_exists {
+            // brand new database so setup default settings
+            Settings::setup_defaults(&pool).await?;
+        }
 
         Self::init_tables(&pool).await?;
 
         Ok(pool)
     }
 
-    async fn init_tables(pool: &SqlitePool) -> Result<(), Error> {
+    async fn init_tables(pool: &SqlitePool) -> Result<()> {
         let schema = "
             CREATE TABLE IF NOT EXISTS app_settings (
                 key TEXT PRIMARY KEY,
