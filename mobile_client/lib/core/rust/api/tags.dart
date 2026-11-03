@@ -20,4 +20,6 @@ abstract class TagsApi implements RustOpaqueInterface {
 
   /// `req = None` returns every tag.
   Future<List<TagDto>> getList({ListRequestDto? req});
+
+  Future<void> refresh();
 }

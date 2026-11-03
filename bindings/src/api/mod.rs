@@ -4,6 +4,7 @@ pub mod short_tasks;
 pub mod tags;
 pub mod tasks;
 
+use std::collections::HashMap;
 use std::sync::Arc;
 
 use flutter_rust_bridge::frb;
@@ -41,14 +42,24 @@ impl NoteCore {
         let pool = Arc::new(DatabaseManager::init(base_path).await?);
 
         Ok(NoteCore {
-            notes: NotesService::new(pool.clone()),
-            short_notes: ShortNotesService::new(pool.clone()),
-            tasks: TasksService::new(pool.clone()),
-            short_tasks: ShortTasksService::new(pool.clone()),
-            tags: TagsService::new(pool.clone()),
+            notes: NotesService::new(pool.clone()).await?,
+            short_notes: ShortNotesService::new(pool.clone()).await?,
+            tasks: TasksService::new(pool.clone()).await?,
+            short_tasks: ShortTasksService::new(pool.clone()).await?,
+            tags: TagsService::new(pool.clone()).await?,
             pool,
         })
     }
+
+    // pub async fn refresh(&self) -> Result<(), ApiError> {
+    //     self.notes.refrech().await?;
+    //     self.short_notes.refrech().await?;
+    //     self.tasks.refrech().await?;
+    //     self.short_tasks.refrech().await?;
+    //     self.tags.refrech().await?;
+
+    //     Ok(())
+    // }
 
     pub async fn close(&self) {
         self.pool.close().await;
@@ -84,10 +95,18 @@ impl NoteCore {
     // --- Settings ---
 
     pub async fn get_setting(&self, key: String) -> Result<Option<String>, ApiError> {
-        Ok(Settings::get_setting(&self.pool, &key).await?)
+        Ok(Settings::get(&self.pool, &key).await?)
+    }
+
+    pub async fn get_settings(&self) -> Result<HashMap<String, String>, ApiError> {
+        Ok(Settings::get_all(&self.pool).await?)
     }
 
     pub async fn set_setting(&self, key: String, value: String) -> Result<(), ApiError> {
         Ok(Settings::set(&self.pool, &key, &value).await?)
+    }
+
+    pub async fn reset_settings(&self) -> Result<(), ApiError> {
+        Ok(Settings::setup_defaults(&self.pool).await?)
     }
 }

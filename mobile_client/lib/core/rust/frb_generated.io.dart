@@ -133,6 +133,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   DateTime dco_decode_Chrono_Utc(dynamic raw);
 
   @protected
+  Map<String, String> dco_decode_Map_String_String_None(dynamic raw);
+
+  @protected
   NoteCore
   dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNoteCore(
     dynamic raw,
@@ -184,6 +187,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   DateTime dco_decode_box_autoadd_Chrono_Utc(dynamic raw);
 
   @protected
+  bool dco_decode_box_autoadd_bool(dynamic raw);
+
+  @protected
   PlatformInt64 dco_decode_box_autoadd_i_64(dynamic raw);
 
   @protected
@@ -202,13 +208,15 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   TaskOptionsDto dco_decode_box_autoadd_task_options_dto(dynamic raw);
 
   @protected
+  TaskSearchParamsDto dco_decode_box_autoadd_task_search_params_dto(
+    dynamic raw,
+  );
+
+  @protected
   int dco_decode_i_32(dynamic raw);
 
   @protected
   PlatformInt64 dco_decode_i_64(dynamic raw);
-
-  @protected
-  List<String> dco_decode_list_String(dynamic raw);
 
   @protected
   List<NoteGroupDto> dco_decode_list_note_group_dto(dynamic raw);
@@ -221,6 +229,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   Uint8List dco_decode_list_prim_u_8_strict(dynamic raw);
+
+  @protected
+  List<(String, String)> dco_decode_list_record_string_string(dynamic raw);
 
   @protected
   ListRequestDto dco_decode_list_request_dto(dynamic raw);
@@ -237,6 +248,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   List<ShortTaskSectionDto> dco_decode_list_short_task_section_dto(dynamic raw);
+
+  @protected
+  List<SubTaskDto> dco_decode_list_sub_task_dto(dynamic raw);
 
   @protected
   List<TagDto> dco_decode_list_tag_dto(dynamic raw);
@@ -260,6 +274,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   DateTime? dco_decode_opt_box_autoadd_Chrono_Utc(dynamic raw);
 
   @protected
+  bool? dco_decode_opt_box_autoadd_bool(dynamic raw);
+
+  @protected
   PlatformInt64? dco_decode_opt_box_autoadd_i_64(dynamic raw);
 
   @protected
@@ -272,13 +289,16 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   ScheduleDto? dco_decode_opt_box_autoadd_schedule_dto(dynamic raw);
 
   @protected
-  List<String>? dco_decode_opt_list_String(dynamic raw);
-
-  @protected
   Int64List? dco_decode_opt_list_prim_i_64_strict(dynamic raw);
 
   @protected
+  List<SubTaskDto>? dco_decode_opt_list_sub_task_dto(dynamic raw);
+
+  @protected
   PriorityDto dco_decode_priority_dto(dynamic raw);
+
+  @protected
+  (String, String) dco_decode_record_string_string(dynamic raw);
 
   @protected
   ScheduleDto dco_decode_schedule_dto(dynamic raw);
@@ -304,6 +324,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   ShortTaskSectionDto dco_decode_short_task_section_dto(dynamic raw);
 
   @protected
+  SubTaskDto dco_decode_sub_task_dto(dynamic raw);
+
+  @protected
   TagDto dco_decode_tag_dto(dynamic raw);
 
   @protected
@@ -311,6 +334,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   TaskOptionsDto dco_decode_task_options_dto(dynamic raw);
+
+  @protected
+  TaskSearchParamsDto dco_decode_task_search_params_dto(dynamic raw);
 
   @protected
   TaskTypeDto dco_decode_task_type_dto(dynamic raw);
@@ -403,6 +429,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   DateTime sse_decode_Chrono_Utc(SseDeserializer deserializer);
 
   @protected
+  Map<String, String> sse_decode_Map_String_String_None(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   NoteCore
   sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNoteCore(
     SseDeserializer deserializer,
@@ -454,6 +485,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   DateTime sse_decode_box_autoadd_Chrono_Utc(SseDeserializer deserializer);
 
   @protected
+  bool sse_decode_box_autoadd_bool(SseDeserializer deserializer);
+
+  @protected
   PlatformInt64 sse_decode_box_autoadd_i_64(SseDeserializer deserializer);
 
   @protected
@@ -478,13 +512,15 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  TaskSearchParamsDto sse_decode_box_autoadd_task_search_params_dto(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   int sse_decode_i_32(SseDeserializer deserializer);
 
   @protected
   PlatformInt64 sse_decode_i_64(SseDeserializer deserializer);
-
-  @protected
-  List<String> sse_decode_list_String(SseDeserializer deserializer);
 
   @protected
   List<NoteGroupDto> sse_decode_list_note_group_dto(
@@ -501,6 +537,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   Uint8List sse_decode_list_prim_u_8_strict(SseDeserializer deserializer);
+
+  @protected
+  List<(String, String)> sse_decode_list_record_string_string(
+    SseDeserializer deserializer,
+  );
 
   @protected
   ListRequestDto sse_decode_list_request_dto(SseDeserializer deserializer);
@@ -527,6 +568,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  List<SubTaskDto> sse_decode_list_sub_task_dto(SseDeserializer deserializer);
+
+  @protected
   List<TagDto> sse_decode_list_tag_dto(SseDeserializer deserializer);
 
   @protected
@@ -548,6 +592,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   DateTime? sse_decode_opt_box_autoadd_Chrono_Utc(SseDeserializer deserializer);
 
   @protected
+  bool? sse_decode_opt_box_autoadd_bool(SseDeserializer deserializer);
+
+  @protected
   PlatformInt64? sse_decode_opt_box_autoadd_i_64(SseDeserializer deserializer);
 
   @protected
@@ -566,13 +613,20 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  List<String>? sse_decode_opt_list_String(SseDeserializer deserializer);
-
-  @protected
   Int64List? sse_decode_opt_list_prim_i_64_strict(SseDeserializer deserializer);
 
   @protected
+  List<SubTaskDto>? sse_decode_opt_list_sub_task_dto(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   PriorityDto sse_decode_priority_dto(SseDeserializer deserializer);
+
+  @protected
+  (String, String) sse_decode_record_string_string(
+    SseDeserializer deserializer,
+  );
 
   @protected
   ScheduleDto sse_decode_schedule_dto(SseDeserializer deserializer);
@@ -602,6 +656,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  SubTaskDto sse_decode_sub_task_dto(SseDeserializer deserializer);
+
+  @protected
   TagDto sse_decode_tag_dto(SseDeserializer deserializer);
 
   @protected
@@ -609,6 +666,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   TaskOptionsDto sse_decode_task_options_dto(SseDeserializer deserializer);
+
+  @protected
+  TaskSearchParamsDto sse_decode_task_search_params_dto(
+    SseDeserializer deserializer,
+  );
 
   @protected
   TaskTypeDto sse_decode_task_type_dto(SseDeserializer deserializer);
@@ -713,6 +775,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_Chrono_Utc(DateTime self, SseSerializer serializer);
 
   @protected
+  void sse_encode_Map_String_String_None(
+    Map<String, String> self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void
   sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNoteCore(
     NoteCore self,
@@ -773,6 +841,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_box_autoadd_bool(bool self, SseSerializer serializer);
+
+  @protected
   void sse_encode_box_autoadd_i_64(
     PlatformInt64 self,
     SseSerializer serializer,
@@ -809,13 +880,16 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_box_autoadd_task_search_params_dto(
+    TaskSearchParamsDto self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_i_32(int self, SseSerializer serializer);
 
   @protected
   void sse_encode_i_64(PlatformInt64 self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_list_String(List<String> self, SseSerializer serializer);
 
   @protected
   void sse_encode_list_note_group_dto(
@@ -838,6 +912,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_list_prim_u_8_strict(
     Uint8List self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_list_record_string_string(
+    List<(String, String)> self,
     SseSerializer serializer,
   );
 
@@ -872,6 +952,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_list_sub_task_dto(
+    List<SubTaskDto> self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_list_tag_dto(List<TagDto> self, SseSerializer serializer);
 
   @protected
@@ -899,6 +985,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_opt_box_autoadd_bool(bool? self, SseSerializer serializer);
+
+  @protected
   void sse_encode_opt_box_autoadd_i_64(
     PlatformInt64? self,
     SseSerializer serializer,
@@ -923,16 +1012,25 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  void sse_encode_opt_list_String(List<String>? self, SseSerializer serializer);
-
-  @protected
   void sse_encode_opt_list_prim_i_64_strict(
     Int64List? self,
     SseSerializer serializer,
   );
 
   @protected
+  void sse_encode_opt_list_sub_task_dto(
+    List<SubTaskDto>? self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_priority_dto(PriorityDto self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_record_string_string(
+    (String, String) self,
+    SseSerializer serializer,
+  );
 
   @protected
   void sse_encode_schedule_dto(ScheduleDto self, SseSerializer serializer);
@@ -974,6 +1072,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_sub_task_dto(SubTaskDto self, SseSerializer serializer);
+
+  @protected
   void sse_encode_tag_dto(TagDto self, SseSerializer serializer);
 
   @protected
@@ -982,6 +1083,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_task_options_dto(
     TaskOptionsDto self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_task_search_params_dto(
+    TaskSearchParamsDto self,
     SseSerializer serializer,
   );
 

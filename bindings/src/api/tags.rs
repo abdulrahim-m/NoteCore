@@ -16,6 +16,12 @@ impl TagsApi {
         Self { service }
     }
 
+    pub async fn refresh(&self) -> Result<(), ApiError> {
+        self.service.refrech().await?;
+
+        Ok(())
+    }
+
     /// `req = None` returns every tag.
     pub async fn get_list(&self, req: Option<ListRequestDto>) -> Result<Vec<TagDto>, ApiError> {
         let list = self.service.get_list(list_request_opt(req)?).await?;

@@ -3,7 +3,7 @@ use notecore::models::repo::ListRequest;
 use notecore::services::tasks::TasksService;
 
 use crate::dto::query::{list_request_opt, ListRequestDto, SearchParamsDto};
-use crate::dto::task::{TaskDto, TaskOptionsDto, TaskTypeDto};
+use crate::dto::task::{TaskDto, TaskOptionsDto, TaskSearchParamsDto, TaskTypeDto};
 use crate::error::ApiError;
 
 /// Full tasks (priority, due date, schedule, check list).
@@ -15,6 +15,12 @@ pub struct TasksApi {
 impl TasksApi {
     pub(crate) fn new(service: TasksService) -> Self {
         Self { service }
+    }
+
+    pub async fn refresh(&self) -> Result<(), ApiError> {
+        self.service.refrech().await?;
+
+        Ok(())
     }
 
     // --- Get ---
@@ -33,16 +39,30 @@ impl TasksApi {
         &self,
         req: Option<ListRequestDto>,
         periodic: bool,
+        status: Option<bool>
     ) -> Result<Vec<TaskDto>, ApiError> {
         let list = self
             .service
-            .get_typed_list(list_request_opt(req)?, periodic)
+            .get_typed_list(list_request_opt(req)?, periodic, status)
             .await?;
         Ok(list.into_iter().map(Into::into).collect())
     }
 
     pub async fn search_tasks(&self, params: SearchParamsDto, req: ListRequestDto) -> Result<Vec<TaskDto>, ApiError> {
         let list = self.service.search_tasks(params.into(), ListRequest::try_from(req)?).await?;
+        Ok(list.into_iter().map(Into::into).collect())
+    }
+
+    pub async fn search_tasks_with_params(
+        &self,
+        params: TaskSearchParamsDto,
+        req: Option<ListRequestDto>,
+        status: Option<bool>
+    ) -> Result<Vec<TaskDto>, ApiError> {
+        let list = self
+            .service
+            .search_tasks_with_params(params.into(), list_request_opt(req)?, status)
+            .await?;
         Ok(list.into_iter().map(Into::into).collect())
     }
 

@@ -1,5 +1,5 @@
 use chrono::{DateTime, Utc};
-use notecore::models::tasks::task::{Priority, Schedule, TaskOptions, Type};
+use notecore::models::tasks::task::{Priority, Schedule, SubTask, TaskOptions, Type};
 use notecore::models::tasks::ui_task::UITask;
 
 use super::tag::{map_tags, TagDto};
@@ -107,7 +107,7 @@ pub struct TaskOptionsDto {
     pub priority: Option<PriorityDto>,
     pub due_date: Option<String>,
     pub schedule: Option<ScheduleDto>,
-    pub check_list: Option<Vec<String>>,
+    pub check_list: Option<Vec<SubTaskDto>>,
 }
 
 impl From<TaskOptions> for TaskOptionsDto {
@@ -116,7 +116,7 @@ impl From<TaskOptions> for TaskOptionsDto {
             priority: o.priority.map(PriorityDto::from),
             due_date: o.due_date,
             schedule: o.schedule.map(ScheduleDto::from),
-            check_list: o.check_list,
+            check_list: o.check_list.map(|s| s.into_iter().map(Into::into).collect()),
         }
     }
 }
@@ -127,7 +127,50 @@ impl From<TaskOptionsDto> for TaskOptions {
             priority: o.priority.map(Priority::from),
             due_date: o.due_date,
             schedule: o.schedule.map(Schedule::from),
-            check_list: o.check_list,
+            check_list: o.check_list.map(|s| s.into_iter().map(Into::into).collect()),
+        }
+    }
+}
+
+#[derive(Debug, Clone, Default)]
+pub struct SubTaskDto {
+    pub text: String,
+    pub checked: bool
+}
+
+impl From<SubTask> for SubTaskDto {
+    fn from(s: SubTask) -> Self {
+        SubTaskDto { text: s.text, checked: s.checked }
+    }
+}
+
+impl From<SubTaskDto> for SubTask {
+    fn from(s: SubTaskDto) -> Self {
+        SubTask { text: s.text, checked: s.checked }
+    }
+}
+
+#[derive(Debug, Clone, Default)]
+pub struct TaskSearchParamsDto {
+    pub text: Option<String>,
+    pub tags: Option<Vec<i64>>,
+    pub created_before: Option<DateTime<Utc>>,
+    pub created_after: Option<DateTime<Utc>>,
+    pub priority: Option<PriorityDto>,
+    pub due_date_before: Option<DateTime<Utc>>,
+    pub due_date_after: Option<DateTime<Utc>>,
+}
+
+impl From<TaskSearchParamsDto> for notecore::models::tasks::task::TaskSearchParams {
+    fn from(p: TaskSearchParamsDto) -> Self {
+        Self {
+            text: p.text,
+            tags: p.tags,
+            created_before: p.created_before,
+            created_after: p.created_after,
+            priority: p.priority.map(Into::into),
+            due_date_before: p.due_date_before,
+            due_date_after: p.due_date_after,
         }
     }
 }

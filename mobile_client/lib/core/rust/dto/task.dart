@@ -35,6 +35,24 @@ sealed class ScheduleDto with _$ScheduleDto {
   }) = ScheduleDto_Yearly;
 }
 
+class SubTaskDto {
+  final String text;
+  final bool checked;
+
+  const SubTaskDto({required this.text, required this.checked});
+
+  @override
+  int get hashCode => text.hashCode ^ checked.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is SubTaskDto &&
+          runtimeType == other.runtimeType &&
+          text == other.text &&
+          checked == other.checked;
+}
+
 class TaskDto {
   final PlatformInt64 id;
   final String title;
@@ -90,7 +108,7 @@ class TaskOptionsDto {
   final PriorityDto? priority;
   final String? dueDate;
   final ScheduleDto? schedule;
-  final List<String>? checkList;
+  final List<SubTaskDto>? checkList;
 
   const TaskOptionsDto({
     this.priority,
@@ -115,6 +133,49 @@ class TaskOptionsDto {
           dueDate == other.dueDate &&
           schedule == other.schedule &&
           checkList == other.checkList;
+}
+
+class TaskSearchParamsDto {
+  final String? text;
+  final Int64List? tags;
+  final DateTime? createdBefore;
+  final DateTime? createdAfter;
+  final PriorityDto? priority;
+  final DateTime? dueDateBefore;
+  final DateTime? dueDateAfter;
+
+  const TaskSearchParamsDto({
+    this.text,
+    this.tags,
+    this.createdBefore,
+    this.createdAfter,
+    this.priority,
+    this.dueDateBefore,
+    this.dueDateAfter,
+  });
+
+  @override
+  int get hashCode =>
+      text.hashCode ^
+      tags.hashCode ^
+      createdBefore.hashCode ^
+      createdAfter.hashCode ^
+      priority.hashCode ^
+      dueDateBefore.hashCode ^
+      dueDateAfter.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is TaskSearchParamsDto &&
+          runtimeType == other.runtimeType &&
+          text == other.text &&
+          tags == other.tags &&
+          createdBefore == other.createdBefore &&
+          createdAfter == other.createdAfter &&
+          priority == other.priority &&
+          dueDateBefore == other.dueDateBefore &&
+          dueDateAfter == other.dueDateAfter;
 }
 
 enum TaskTypeDto { periodic, oneTime }

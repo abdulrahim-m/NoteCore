@@ -45,7 +45,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueMoi,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.13.0";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = -1966840058;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = -991940009;
 
 // Section: executor
 
@@ -167,6 +167,62 @@ fn wire__crate__api__NoteCore_get_setting_impl(
         },
     )
 }
+fn wire__crate__api__NoteCore_get_settings_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::SseCodec, _, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "NoteCore_get_settings",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<NoteCore>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| async move {
+                transform_result_sse::<_, crate::error::ApiError>(
+                    (move || async move {
+                        let mut api_that_guard = None;
+                        let decode_indices_ =
+                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
+                                vec![flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                    &api_that, 0, false,
+                                )],
+                            );
+                        for i in decode_indices_ {
+                            match i {
+                                0 => {
+                                    api_that_guard =
+                                        Some(api_that.lockable_decode_async_ref().await)
+                                }
+                                _ => unreachable!(),
+                            }
+                        }
+                        let api_that_guard = api_that_guard.unwrap();
+                        let output_ok =
+                            crate::api::NoteCore::get_settings(&*api_that_guard).await?;
+                        std::result::Result::Ok(output_ok)
+                    })()
+                    .await,
+                )
+            }
+        },
+    )
+}
 fn wire__crate__api__NoteCore_notes_impl(
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
     rust_vec_len_: i32,
@@ -241,6 +297,62 @@ fn wire__crate__api__NoteCore_open_impl(
                 transform_result_sse::<_, crate::error::ApiError>(
                     (move || async move {
                         let output_ok = crate::api::NoteCore::open(api_base_path).await?;
+                        std::result::Result::Ok(output_ok)
+                    })()
+                    .await,
+                )
+            }
+        },
+    )
+}
+fn wire__crate__api__NoteCore_reset_settings_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::SseCodec, _, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "NoteCore_reset_settings",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<NoteCore>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| async move {
+                transform_result_sse::<_, crate::error::ApiError>(
+                    (move || async move {
+                        let mut api_that_guard = None;
+                        let decode_indices_ =
+                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
+                                vec![flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                    &api_that, 0, false,
+                                )],
+                            );
+                        for i in decode_indices_ {
+                            match i {
+                                0 => {
+                                    api_that_guard =
+                                        Some(api_that.lockable_decode_async_ref().await)
+                                }
+                                _ => unreachable!(),
+                            }
+                        }
+                        let api_that_guard = api_that_guard.unwrap();
+                        let output_ok =
+                            crate::api::NoteCore::reset_settings(&*api_that_guard).await?;
                         std::result::Result::Ok(output_ok)
                     })()
                     .await,
@@ -1021,6 +1133,62 @@ fn wire__crate__api__notes__NotesApi_get_note_impl(
         },
     )
 }
+fn wire__crate__api__notes__NotesApi_refresh_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::SseCodec, _, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "NotesApi_refresh",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<NotesApi>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| async move {
+                transform_result_sse::<_, crate::error::ApiError>(
+                    (move || async move {
+                        let mut api_that_guard = None;
+                        let decode_indices_ =
+                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
+                                vec![flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                    &api_that, 0, false,
+                                )],
+                            );
+                        for i in decode_indices_ {
+                            match i {
+                                0 => {
+                                    api_that_guard =
+                                        Some(api_that.lockable_decode_async_ref().await)
+                                }
+                                _ => unreachable!(),
+                            }
+                        }
+                        let api_that_guard = api_that_guard.unwrap();
+                        let output_ok =
+                            crate::api::notes::NotesApi::refresh(&*api_that_guard).await?;
+                        std::result::Result::Ok(output_ok)
+                    })()
+                    .await,
+                )
+            }
+        },
+    )
+}
 fn wire__crate__api__notes__NotesApi_search_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
@@ -1630,6 +1798,63 @@ fn wire__crate__api__short_notes__ShortNotesApi_get_section_impl(
                             api_section_id,
                         )
                         .await?;
+                        std::result::Result::Ok(output_ok)
+                    })()
+                    .await,
+                )
+            }
+        },
+    )
+}
+fn wire__crate__api__short_notes__ShortNotesApi_refresh_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::SseCodec, _, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "ShortNotesApi_refresh",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ShortNotesApi>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| async move {
+                transform_result_sse::<_, crate::error::ApiError>(
+                    (move || async move {
+                        let mut api_that_guard = None;
+                        let decode_indices_ =
+                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
+                                vec![flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                    &api_that, 0, false,
+                                )],
+                            );
+                        for i in decode_indices_ {
+                            match i {
+                                0 => {
+                                    api_that_guard =
+                                        Some(api_that.lockable_decode_async_ref().await)
+                                }
+                                _ => unreachable!(),
+                            }
+                        }
+                        let api_that_guard = api_that_guard.unwrap();
+                        let output_ok =
+                            crate::api::short_notes::ShortNotesApi::refresh(&*api_that_guard)
+                                .await?;
                         std::result::Result::Ok(output_ok)
                     })()
                     .await,
@@ -2320,6 +2545,63 @@ fn wire__crate__api__short_tasks__ShortTasksApi_get_sections_by_status_impl(
         },
     )
 }
+fn wire__crate__api__short_tasks__ShortTasksApi_refresh_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::SseCodec, _, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "ShortTasksApi_refresh",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ShortTasksApi>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| async move {
+                transform_result_sse::<_, crate::error::ApiError>(
+                    (move || async move {
+                        let mut api_that_guard = None;
+                        let decode_indices_ =
+                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
+                                vec![flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                    &api_that, 0, false,
+                                )],
+                            );
+                        for i in decode_indices_ {
+                            match i {
+                                0 => {
+                                    api_that_guard =
+                                        Some(api_that.lockable_decode_async_ref().await)
+                                }
+                                _ => unreachable!(),
+                            }
+                        }
+                        let api_that_guard = api_that_guard.unwrap();
+                        let output_ok =
+                            crate::api::short_tasks::ShortTasksApi::refresh(&*api_that_guard)
+                                .await?;
+                        std::result::Result::Ok(output_ok)
+                    })()
+                    .await,
+                )
+            }
+        },
+    )
+}
 fn wire__crate__api__short_tasks__ShortTasksApi_search_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
@@ -2803,6 +3085,62 @@ fn wire__crate__api__tags__TagsApi_get_list_impl(
         },
     )
 }
+fn wire__crate__api__tags__TagsApi_refresh_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::SseCodec, _, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "TagsApi_refresh",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<TagsApi>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| async move {
+                transform_result_sse::<_, crate::error::ApiError>(
+                    (move || async move {
+                        let mut api_that_guard = None;
+                        let decode_indices_ =
+                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
+                                vec![flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                    &api_that, 0, false,
+                                )],
+                            );
+                        for i in decode_indices_ {
+                            match i {
+                                0 => {
+                                    api_that_guard =
+                                        Some(api_that.lockable_decode_async_ref().await)
+                                }
+                                _ => unreachable!(),
+                            }
+                        }
+                        let api_that_guard = api_that_guard.unwrap();
+                        let output_ok =
+                            crate::api::tags::TagsApi::refresh(&*api_that_guard).await?;
+                        std::result::Result::Ok(output_ok)
+                    })()
+                    .await,
+                )
+            }
+        },
+    )
+}
 fn wire__crate__api__tasks__TasksApi_create_task_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
@@ -3073,6 +3411,7 @@ fn wire__crate__api__tasks__TasksApi_get_typed_list_impl(
             let api_req =
                 <Option<crate::dto::query::ListRequestDto>>::sse_decode(&mut deserializer);
             let api_periodic = <bool>::sse_decode(&mut deserializer);
+            let api_status = <Option<bool>>::sse_decode(&mut deserializer);
             deserializer.end();
             move |context| async move {
                 transform_result_sse::<_, crate::error::ApiError>(
@@ -3098,8 +3437,65 @@ fn wire__crate__api__tasks__TasksApi_get_typed_list_impl(
                             &*api_that_guard,
                             api_req,
                             api_periodic,
+                            api_status,
                         )
                         .await?;
+                        std::result::Result::Ok(output_ok)
+                    })()
+                    .await,
+                )
+            }
+        },
+    )
+}
+fn wire__crate__api__tasks__TasksApi_refresh_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::SseCodec, _, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "TasksApi_refresh",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<TasksApi>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| async move {
+                transform_result_sse::<_, crate::error::ApiError>(
+                    (move || async move {
+                        let mut api_that_guard = None;
+                        let decode_indices_ =
+                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
+                                vec![flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                    &api_that, 0, false,
+                                )],
+                            );
+                        for i in decode_indices_ {
+                            match i {
+                                0 => {
+                                    api_that_guard =
+                                        Some(api_that.lockable_decode_async_ref().await)
+                                }
+                                _ => unreachable!(),
+                            }
+                        }
+                        let api_that_guard = api_that_guard.unwrap();
+                        let output_ok =
+                            crate::api::tasks::TasksApi::refresh(&*api_that_guard).await?;
                         std::result::Result::Ok(output_ok)
                     })()
                     .await,
@@ -3160,6 +3556,71 @@ fn wire__crate__api__tasks__TasksApi_search_tasks_impl(
                             &*api_that_guard,
                             api_params,
                             api_req,
+                        )
+                        .await?;
+                        std::result::Result::Ok(output_ok)
+                    })()
+                    .await,
+                )
+            }
+        },
+    )
+}
+fn wire__crate__api__tasks__TasksApi_search_tasks_with_params_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::SseCodec, _, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "TasksApi_search_tasks_with_params",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<TasksApi>,
+            >>::sse_decode(&mut deserializer);
+            let api_params = <crate::dto::task::TaskSearchParamsDto>::sse_decode(&mut deserializer);
+            let api_req =
+                <Option<crate::dto::query::ListRequestDto>>::sse_decode(&mut deserializer);
+            let api_status = <Option<bool>>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| async move {
+                transform_result_sse::<_, crate::error::ApiError>(
+                    (move || async move {
+                        let mut api_that_guard = None;
+                        let decode_indices_ =
+                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
+                                vec![flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                    &api_that, 0, false,
+                                )],
+                            );
+                        for i in decode_indices_ {
+                            match i {
+                                0 => {
+                                    api_that_guard =
+                                        Some(api_that.lockable_decode_async_ref().await)
+                                }
+                                _ => unreachable!(),
+                            }
+                        }
+                        let api_that_guard = api_that_guard.unwrap();
+                        let output_ok = crate::api::tasks::TasksApi::search_tasks_with_params(
+                            &*api_that_guard,
+                            api_params,
+                            api_req,
+                            api_status,
                         )
                         .await?;
                         std::result::Result::Ok(output_ok)
@@ -3549,6 +4010,14 @@ impl SseDecode for chrono::DateTime<chrono::Utc> {
     }
 }
 
+impl SseDecode for std::collections::HashMap<String, String> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <Vec<(String, String)>>::sse_decode(deserializer);
+        return inner.into_iter().collect();
+    }
+}
+
 impl SseDecode
     for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<NoteCore>>
 {
@@ -3661,18 +4130,6 @@ impl SseDecode for i64 {
     }
 }
 
-impl SseDecode for Vec<String> {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut len_ = <i32>::sse_decode(deserializer);
-        let mut ans_ = Vec::with_capacity(len_ as usize);
-        for idx_ in 0..len_ {
-            ans_.push(<String>::sse_decode(deserializer));
-        }
-        return ans_;
-    }
-}
-
 impl SseDecode for Vec<crate::dto::note::NoteGroupDto> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -3718,6 +4175,18 @@ impl SseDecode for Vec<u8> {
         let mut ans_ = Vec::with_capacity(len_ as usize);
         for idx_ in 0..len_ {
             ans_.push(<u8>::sse_decode(deserializer));
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<(String, String)> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(<(String, String)>::sse_decode(deserializer));
         }
         return ans_;
     }
@@ -3786,6 +4255,18 @@ impl SseDecode for Vec<crate::dto::short_task::ShortTaskSectionDto> {
             ans_.push(<crate::dto::short_task::ShortTaskSectionDto>::sse_decode(
                 deserializer,
             ));
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<crate::dto::task::SubTaskDto> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(<crate::dto::task::SubTaskDto>::sse_decode(deserializer));
         }
         return ans_;
     }
@@ -3897,6 +4378,17 @@ impl SseDecode for Option<chrono::DateTime<chrono::Utc>> {
     }
 }
 
+impl SseDecode for Option<bool> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<bool>::sse_decode(deserializer));
+        } else {
+            return None;
+        }
+    }
+}
+
 impl SseDecode for Option<i64> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -3943,22 +4435,24 @@ impl SseDecode for Option<crate::dto::task::ScheduleDto> {
     }
 }
 
-impl SseDecode for Option<Vec<String>> {
+impl SseDecode for Option<Vec<i64>> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         if (<bool>::sse_decode(deserializer)) {
-            return Some(<Vec<String>>::sse_decode(deserializer));
+            return Some(<Vec<i64>>::sse_decode(deserializer));
         } else {
             return None;
         }
     }
 }
 
-impl SseDecode for Option<Vec<i64>> {
+impl SseDecode for Option<Vec<crate::dto::task::SubTaskDto>> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         if (<bool>::sse_decode(deserializer)) {
-            return Some(<Vec<i64>>::sse_decode(deserializer));
+            return Some(<Vec<crate::dto::task::SubTaskDto>>::sse_decode(
+                deserializer,
+            ));
         } else {
             return None;
         }
@@ -3977,6 +4471,15 @@ impl SseDecode for crate::dto::task::PriorityDto {
             4 => crate::dto::task::PriorityDto::Highest,
             _ => unreachable!("Invalid variant for PriorityDto: {}", inner),
         };
+    }
+}
+
+impl SseDecode for (String, String) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_field0 = <String>::sse_decode(deserializer);
+        let mut var_field1 = <String>::sse_decode(deserializer);
+        return (var_field0, var_field1);
     }
 }
 
@@ -4144,6 +4647,18 @@ impl SseDecode for crate::dto::short_task::ShortTaskSectionDto {
     }
 }
 
+impl SseDecode for crate::dto::task::SubTaskDto {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_text = <String>::sse_decode(deserializer);
+        let mut var_checked = <bool>::sse_decode(deserializer);
+        return crate::dto::task::SubTaskDto {
+            text: var_text,
+            checked: var_checked,
+        };
+    }
+}
+
 impl SseDecode for crate::dto::tag::TagDto {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -4190,12 +4705,39 @@ impl SseDecode for crate::dto::task::TaskOptionsDto {
         let mut var_priority = <Option<crate::dto::task::PriorityDto>>::sse_decode(deserializer);
         let mut var_dueDate = <Option<String>>::sse_decode(deserializer);
         let mut var_schedule = <Option<crate::dto::task::ScheduleDto>>::sse_decode(deserializer);
-        let mut var_checkList = <Option<Vec<String>>>::sse_decode(deserializer);
+        let mut var_checkList =
+            <Option<Vec<crate::dto::task::SubTaskDto>>>::sse_decode(deserializer);
         return crate::dto::task::TaskOptionsDto {
             priority: var_priority,
             due_date: var_dueDate,
             schedule: var_schedule,
             check_list: var_checkList,
+        };
+    }
+}
+
+impl SseDecode for crate::dto::task::TaskSearchParamsDto {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_text = <Option<String>>::sse_decode(deserializer);
+        let mut var_tags = <Option<Vec<i64>>>::sse_decode(deserializer);
+        let mut var_createdBefore =
+            <Option<chrono::DateTime<chrono::Utc>>>::sse_decode(deserializer);
+        let mut var_createdAfter =
+            <Option<chrono::DateTime<chrono::Utc>>>::sse_decode(deserializer);
+        let mut var_priority = <Option<crate::dto::task::PriorityDto>>::sse_decode(deserializer);
+        let mut var_dueDateBefore =
+            <Option<chrono::DateTime<chrono::Utc>>>::sse_decode(deserializer);
+        let mut var_dueDateAfter =
+            <Option<chrono::DateTime<chrono::Utc>>>::sse_decode(deserializer);
+        return crate::dto::task::TaskSearchParamsDto {
+            text: var_text,
+            tags: var_tags,
+            created_before: var_createdBefore,
+            created_after: var_createdAfter,
+            priority: var_priority,
+            due_date_before: var_dueDateBefore,
+            due_date_after: var_dueDateAfter,
         };
     }
 }
@@ -4249,197 +4791,220 @@ fn pde_ffi_dispatcher_primary_impl(
     match func_id {
         1 => wire__crate__api__NoteCore_close_impl(port, ptr, rust_vec_len, data_len),
         2 => wire__crate__api__NoteCore_get_setting_impl(port, ptr, rust_vec_len, data_len),
-        4 => wire__crate__api__NoteCore_open_impl(port, ptr, rust_vec_len, data_len),
-        5 => wire__crate__api__NoteCore_set_setting_impl(port, ptr, rust_vec_len, data_len),
-        10 => {
+        3 => wire__crate__api__NoteCore_get_settings_impl(port, ptr, rust_vec_len, data_len),
+        5 => wire__crate__api__NoteCore_open_impl(port, ptr, rust_vec_len, data_len),
+        6 => wire__crate__api__NoteCore_reset_settings_impl(port, ptr, rust_vec_len, data_len),
+        7 => wire__crate__api__NoteCore_set_setting_impl(port, ptr, rust_vec_len, data_len),
+        12 => {
             wire__crate__api__notes__NotesApi_add_to_group_impl(port, ptr, rust_vec_len, data_len)
         }
-        11 => wire__crate__api__notes__NotesApi_create_note_impl(port, ptr, rust_vec_len, data_len),
-        12 => wire__crate__api__notes__NotesApi_create_note_group_impl(
+        13 => wire__crate__api__notes__NotesApi_create_note_impl(port, ptr, rust_vec_len, data_len),
+        14 => wire__crate__api__notes__NotesApi_create_note_group_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        13 => {
+        15 => {
             wire__crate__api__notes__NotesApi_delete_group_impl(port, ptr, rust_vec_len, data_len)
         }
-        14 => wire__crate__api__notes__NotesApi_delete_note_impl(port, ptr, rust_vec_len, data_len),
-        15 => wire__crate__api__notes__NotesApi_get_groups_impl(port, ptr, rust_vec_len, data_len),
-        16 => wire__crate__api__notes__NotesApi_get_list_impl(port, ptr, rust_vec_len, data_len),
-        17 => wire__crate__api__notes__NotesApi_get_list_in_group_impl(
+        16 => wire__crate__api__notes__NotesApi_delete_note_impl(port, ptr, rust_vec_len, data_len),
+        17 => wire__crate__api__notes__NotesApi_get_groups_impl(port, ptr, rust_vec_len, data_len),
+        18 => wire__crate__api__notes__NotesApi_get_list_impl(port, ptr, rust_vec_len, data_len),
+        19 => wire__crate__api__notes__NotesApi_get_list_in_group_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        18 => wire__crate__api__notes__NotesApi_get_note_impl(port, ptr, rust_vec_len, data_len),
-        19 => wire__crate__api__notes__NotesApi_search_impl(port, ptr, rust_vec_len, data_len),
-        20 => wire__crate__api__notes__NotesApi_update_note_impl(port, ptr, rust_vec_len, data_len),
-        21 => wire__crate__api__notes__NotesApi_update_note_group_impl(
+        20 => wire__crate__api__notes__NotesApi_get_note_impl(port, ptr, rust_vec_len, data_len),
+        21 => wire__crate__api__notes__NotesApi_refresh_impl(port, ptr, rust_vec_len, data_len),
+        22 => wire__crate__api__notes__NotesApi_search_impl(port, ptr, rust_vec_len, data_len),
+        23 => wire__crate__api__notes__NotesApi_update_note_impl(port, ptr, rust_vec_len, data_len),
+        24 => wire__crate__api__notes__NotesApi_update_note_group_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        22 => wire__crate__api__notes__NotesApi_update_tags_impl(port, ptr, rust_vec_len, data_len),
-        23 => wire__crate__api__short_notes__ShortNotesApi_create_item_impl(
+        25 => wire__crate__api__notes__NotesApi_update_tags_impl(port, ptr, rust_vec_len, data_len),
+        26 => wire__crate__api__short_notes__ShortNotesApi_create_item_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        24 => wire__crate__api__short_notes__ShortNotesApi_create_section_impl(
+        27 => wire__crate__api__short_notes__ShortNotesApi_create_section_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        25 => wire__crate__api__short_notes__ShortNotesApi_delete_item_impl(
+        28 => wire__crate__api__short_notes__ShortNotesApi_delete_item_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        26 => wire__crate__api__short_notes__ShortNotesApi_delete_section_impl(
+        29 => wire__crate__api__short_notes__ShortNotesApi_delete_section_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        27 => wire__crate__api__short_notes__ShortNotesApi_get_all_sections_impl(
+        30 => wire__crate__api__short_notes__ShortNotesApi_get_all_sections_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        28 => wire__crate__api__short_notes__ShortNotesApi_get_section_impl(
+        31 => wire__crate__api__short_notes__ShortNotesApi_get_section_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        29 => wire__crate__api__short_notes__ShortNotesApi_search_impl(
+        32 => wire__crate__api__short_notes__ShortNotesApi_refresh_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        30 => wire__crate__api__short_notes__ShortNotesApi_update_item_content_impl(
+        33 => wire__crate__api__short_notes__ShortNotesApi_search_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        31 => wire__crate__api__short_notes__ShortNotesApi_update_section_name_impl(
+        34 => wire__crate__api__short_notes__ShortNotesApi_update_item_content_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        32 => wire__crate__api__short_notes__ShortNotesApi_update_section_tags_impl(
+        35 => wire__crate__api__short_notes__ShortNotesApi_update_section_name_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        33 => wire__crate__api__short_tasks__ShortTasksApi_create_item_impl(
+        36 => wire__crate__api__short_notes__ShortNotesApi_update_section_tags_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        34 => wire__crate__api__short_tasks__ShortTasksApi_create_section_impl(
+        37 => wire__crate__api__short_tasks__ShortTasksApi_create_item_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        35 => wire__crate__api__short_tasks__ShortTasksApi_delete_item_impl(
+        38 => wire__crate__api__short_tasks__ShortTasksApi_create_section_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        36 => wire__crate__api__short_tasks__ShortTasksApi_delete_section_impl(
+        39 => wire__crate__api__short_tasks__ShortTasksApi_delete_item_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        37 => wire__crate__api__short_tasks__ShortTasksApi_get_all_sections_impl(
+        40 => wire__crate__api__short_tasks__ShortTasksApi_delete_section_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        38 => wire__crate__api__short_tasks__ShortTasksApi_get_section_impl(
+        41 => wire__crate__api__short_tasks__ShortTasksApi_get_all_sections_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        39 => wire__crate__api__short_tasks__ShortTasksApi_get_sections_by_status_impl(
+        42 => wire__crate__api__short_tasks__ShortTasksApi_get_section_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        40 => wire__crate__api__short_tasks__ShortTasksApi_search_impl(
+        43 => wire__crate__api__short_tasks__ShortTasksApi_get_sections_by_status_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        41 => wire__crate__api__short_tasks__ShortTasksApi_toggle_item_done_impl(
+        44 => wire__crate__api__short_tasks__ShortTasksApi_refresh_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        42 => wire__crate__api__short_tasks__ShortTasksApi_update_item_text_impl(
+        45 => wire__crate__api__short_tasks__ShortTasksApi_search_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        43 => wire__crate__api__short_tasks__ShortTasksApi_update_section_tags_impl(
+        46 => wire__crate__api__short_tasks__ShortTasksApi_toggle_item_done_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        44 => wire__crate__api__short_tasks__ShortTasksApi_update_section_title_impl(
+        47 => wire__crate__api__short_tasks__ShortTasksApi_update_item_text_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        45 => wire__crate__api__tags__TagsApi_create_tag_impl(port, ptr, rust_vec_len, data_len),
-        46 => wire__crate__api__tags__TagsApi_delete_tag_impl(port, ptr, rust_vec_len, data_len),
-        47 => wire__crate__api__tags__TagsApi_get_list_impl(port, ptr, rust_vec_len, data_len),
-        48 => wire__crate__api__tasks__TasksApi_create_task_impl(port, ptr, rust_vec_len, data_len),
-        49 => wire__crate__api__tasks__TasksApi_delete_task_impl(port, ptr, rust_vec_len, data_len),
-        50 => wire__crate__api__tasks__TasksApi_get_list_impl(port, ptr, rust_vec_len, data_len),
-        51 => wire__crate__api__tasks__TasksApi_get_task_impl(port, ptr, rust_vec_len, data_len),
-        52 => {
+        48 => wire__crate__api__short_tasks__ShortTasksApi_update_section_tags_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        49 => wire__crate__api__short_tasks__ShortTasksApi_update_section_title_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        50 => wire__crate__api__tags__TagsApi_create_tag_impl(port, ptr, rust_vec_len, data_len),
+        51 => wire__crate__api__tags__TagsApi_delete_tag_impl(port, ptr, rust_vec_len, data_len),
+        52 => wire__crate__api__tags__TagsApi_get_list_impl(port, ptr, rust_vec_len, data_len),
+        53 => wire__crate__api__tags__TagsApi_refresh_impl(port, ptr, rust_vec_len, data_len),
+        54 => wire__crate__api__tasks__TasksApi_create_task_impl(port, ptr, rust_vec_len, data_len),
+        55 => wire__crate__api__tasks__TasksApi_delete_task_impl(port, ptr, rust_vec_len, data_len),
+        56 => wire__crate__api__tasks__TasksApi_get_list_impl(port, ptr, rust_vec_len, data_len),
+        57 => wire__crate__api__tasks__TasksApi_get_task_impl(port, ptr, rust_vec_len, data_len),
+        58 => {
             wire__crate__api__tasks__TasksApi_get_typed_list_impl(port, ptr, rust_vec_len, data_len)
         }
-        53 => {
+        59 => wire__crate__api__tasks__TasksApi_refresh_impl(port, ptr, rust_vec_len, data_len),
+        60 => {
             wire__crate__api__tasks__TasksApi_search_tasks_impl(port, ptr, rust_vec_len, data_len)
         }
-        54 => wire__crate__api__tasks__TasksApi_toggle_done_impl(port, ptr, rust_vec_len, data_len),
-        55 => {
-            wire__crate__api__tasks__TasksApi_update_options_impl(port, ptr, rust_vec_len, data_len)
-        }
-        56 => wire__crate__api__tasks__TasksApi_update_tags_impl(port, ptr, rust_vec_len, data_len),
-        57 => wire__crate__api__tasks__TasksApi_update_task_details_impl(
+        61 => wire__crate__api__tasks__TasksApi_search_tasks_with_params_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        58 => wire__crate__api__init_app_impl(port, ptr, rust_vec_len, data_len),
+        62 => wire__crate__api__tasks__TasksApi_toggle_done_impl(port, ptr, rust_vec_len, data_len),
+        63 => {
+            wire__crate__api__tasks__TasksApi_update_options_impl(port, ptr, rust_vec_len, data_len)
+        }
+        64 => wire__crate__api__tasks__TasksApi_update_tags_impl(port, ptr, rust_vec_len, data_len),
+        65 => wire__crate__api__tasks__TasksApi_update_task_details_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        66 => wire__crate__api__init_app_impl(port, ptr, rust_vec_len, data_len),
         _ => unreachable!(),
     }
 }
@@ -4452,11 +5017,11 @@ fn pde_ffi_dispatcher_sync_impl(
 ) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
     // Codec=Pde (Serialization + dispatch), see doc to use other codecs
     match func_id {
-        3 => wire__crate__api__NoteCore_notes_impl(ptr, rust_vec_len, data_len),
-        6 => wire__crate__api__NoteCore_short_notes_impl(ptr, rust_vec_len, data_len),
-        7 => wire__crate__api__NoteCore_short_tasks_impl(ptr, rust_vec_len, data_len),
-        8 => wire__crate__api__NoteCore_tags_impl(ptr, rust_vec_len, data_len),
-        9 => wire__crate__api__NoteCore_tasks_impl(ptr, rust_vec_len, data_len),
+        4 => wire__crate__api__NoteCore_notes_impl(ptr, rust_vec_len, data_len),
+        8 => wire__crate__api__NoteCore_short_notes_impl(ptr, rust_vec_len, data_len),
+        9 => wire__crate__api__NoteCore_short_tasks_impl(ptr, rust_vec_len, data_len),
+        10 => wire__crate__api__NoteCore_tags_impl(ptr, rust_vec_len, data_len),
+        11 => wire__crate__api__NoteCore_tasks_impl(ptr, rust_vec_len, data_len),
         _ => unreachable!(),
     }
 }
@@ -4894,6 +5459,24 @@ impl flutter_rust_bridge::IntoIntoDart<crate::dto::short_task::ShortTaskSectionD
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::dto::task::SubTaskDto {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.text.into_into_dart().into_dart(),
+            self.checked.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for crate::dto::task::SubTaskDto {}
+impl flutter_rust_bridge::IntoIntoDart<crate::dto::task::SubTaskDto>
+    for crate::dto::task::SubTaskDto
+{
+    fn into_into_dart(self) -> crate::dto::task::SubTaskDto {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart for crate::dto::tag::TagDto {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
@@ -4953,6 +5536,32 @@ impl flutter_rust_bridge::IntoIntoDart<crate::dto::task::TaskOptionsDto>
     for crate::dto::task::TaskOptionsDto
 {
     fn into_into_dart(self) -> crate::dto::task::TaskOptionsDto {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::dto::task::TaskSearchParamsDto {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.text.into_into_dart().into_dart(),
+            self.tags.into_into_dart().into_dart(),
+            self.created_before.into_into_dart().into_dart(),
+            self.created_after.into_into_dart().into_dart(),
+            self.priority.into_into_dart().into_dart(),
+            self.due_date_before.into_into_dart().into_dart(),
+            self.due_date_after.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::dto::task::TaskSearchParamsDto
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::dto::task::TaskSearchParamsDto>
+    for crate::dto::task::TaskSearchParamsDto
+{
+    fn into_into_dart(self) -> crate::dto::task::TaskSearchParamsDto {
         self
     }
 }
@@ -5021,6 +5630,13 @@ impl SseEncode for chrono::DateTime<chrono::Utc> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <i64>::sse_encode(self.timestamp_micros(), serializer);
+    }
+}
+
+impl SseEncode for std::collections::HashMap<String, String> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Vec<(String, String)>>::sse_encode(self.into_iter().collect(), serializer);
     }
 }
 
@@ -5141,16 +5757,6 @@ impl SseEncode for i64 {
     }
 }
 
-impl SseEncode for Vec<String> {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <i32>::sse_encode(self.len() as _, serializer);
-        for item in self {
-            <String>::sse_encode(item, serializer);
-        }
-    }
-}
-
 impl SseEncode for Vec<crate::dto::note::NoteGroupDto> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -5187,6 +5793,16 @@ impl SseEncode for Vec<u8> {
         <i32>::sse_encode(self.len() as _, serializer);
         for item in self {
             <u8>::sse_encode(item, serializer);
+        }
+    }
+}
+
+impl SseEncode for Vec<(String, String)> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <(String, String)>::sse_encode(item, serializer);
         }
     }
 }
@@ -5235,6 +5851,16 @@ impl SseEncode for Vec<crate::dto::short_task::ShortTaskSectionDto> {
         <i32>::sse_encode(self.len() as _, serializer);
         for item in self {
             <crate::dto::short_task::ShortTaskSectionDto>::sse_encode(item, serializer);
+        }
+    }
+}
+
+impl SseEncode for Vec<crate::dto::task::SubTaskDto> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <crate::dto::task::SubTaskDto>::sse_encode(item, serializer);
         }
     }
 }
@@ -5315,6 +5941,16 @@ impl SseEncode for Option<chrono::DateTime<chrono::Utc>> {
     }
 }
 
+impl SseEncode for Option<bool> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <bool>::sse_encode(value, serializer);
+        }
+    }
+}
+
 impl SseEncode for Option<i64> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -5355,22 +5991,22 @@ impl SseEncode for Option<crate::dto::task::ScheduleDto> {
     }
 }
 
-impl SseEncode for Option<Vec<String>> {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <bool>::sse_encode(self.is_some(), serializer);
-        if let Some(value) = self {
-            <Vec<String>>::sse_encode(value, serializer);
-        }
-    }
-}
-
 impl SseEncode for Option<Vec<i64>> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <bool>::sse_encode(self.is_some(), serializer);
         if let Some(value) = self {
             <Vec<i64>>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<Vec<crate::dto::task::SubTaskDto>> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <Vec<crate::dto::task::SubTaskDto>>::sse_encode(value, serializer);
         }
     }
 }
@@ -5391,6 +6027,14 @@ impl SseEncode for crate::dto::task::PriorityDto {
             },
             serializer,
         );
+    }
+}
+
+impl SseEncode for (String, String) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <String>::sse_encode(self.0, serializer);
+        <String>::sse_encode(self.1, serializer);
     }
 }
 
@@ -5501,6 +6145,14 @@ impl SseEncode for crate::dto::short_task::ShortTaskSectionDto {
     }
 }
 
+impl SseEncode for crate::dto::task::SubTaskDto {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <String>::sse_encode(self.text, serializer);
+        <bool>::sse_encode(self.checked, serializer);
+    }
+}
+
 impl SseEncode for crate::dto::tag::TagDto {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -5531,7 +6183,20 @@ impl SseEncode for crate::dto::task::TaskOptionsDto {
         <Option<crate::dto::task::PriorityDto>>::sse_encode(self.priority, serializer);
         <Option<String>>::sse_encode(self.due_date, serializer);
         <Option<crate::dto::task::ScheduleDto>>::sse_encode(self.schedule, serializer);
-        <Option<Vec<String>>>::sse_encode(self.check_list, serializer);
+        <Option<Vec<crate::dto::task::SubTaskDto>>>::sse_encode(self.check_list, serializer);
+    }
+}
+
+impl SseEncode for crate::dto::task::TaskSearchParamsDto {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Option<String>>::sse_encode(self.text, serializer);
+        <Option<Vec<i64>>>::sse_encode(self.tags, serializer);
+        <Option<chrono::DateTime<chrono::Utc>>>::sse_encode(self.created_before, serializer);
+        <Option<chrono::DateTime<chrono::Utc>>>::sse_encode(self.created_after, serializer);
+        <Option<crate::dto::task::PriorityDto>>::sse_encode(self.priority, serializer);
+        <Option<chrono::DateTime<chrono::Utc>>>::sse_encode(self.due_date_before, serializer);
+        <Option<chrono::DateTime<chrono::Utc>>>::sse_encode(self.due_date_after, serializer);
     }
 }
 

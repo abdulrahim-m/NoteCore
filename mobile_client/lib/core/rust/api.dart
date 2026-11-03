@@ -19,10 +19,14 @@ abstract class NoteCore implements RustOpaqueInterface {
 
   Future<String?> getSetting({required String key});
 
+  Future<Map<String, String>> getSettings();
+
   NotesApi notes();
 
   static Future<NoteCore> open({required String basePath}) =>
       RustLib.instance.api.crateApiNoteCoreOpen(basePath: basePath);
+
+  Future<void> resetSettings();
 
   Future<void> setSetting({required String key, required String value});
 
