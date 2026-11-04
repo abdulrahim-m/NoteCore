@@ -4,11 +4,37 @@ use sqlx::{Error, SqlitePool, prelude::FromRow, types::Json};
 
 use crate::models::{repo::{ListRequest, Model, SearchParams}, settings::Settings};
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+
+#[derive(PartialEq, Debug, Clone, Serialize, Deserialize)]
+pub enum Weekday {
+    Sunday,
+    Monday,
+    Tuesday,
+    Wednesday,
+    Thursday,
+    Friday,
+    Saturday
+}
+
+impl Weekday {
+    fn num_days_from_monday(&self) -> u8 {
+        match self {
+            Weekday::Sunday => 6,
+            Weekday::Monday => 0,
+            Weekday::Tuesday => 1,
+            Weekday::Wednesday => 2,
+            Weekday::Thursday => 3,
+            Weekday::Friday => 4,
+            Weekday::Saturday => 5,
+        }
+    }
+}
+
+#[derive(PartialEq, Debug, Clone, Serialize, Deserialize)]
 pub enum Schedule {
     Daily { hour: u8 },
     EveryNDays { days: u32, hour: u8 },
-    Weekly { day_of_week: u8, hour: u8 },
+    Weekly { days_of_week: Vec<Weekday>, hour: u8 }, 
     Monthly { day_of_month: u8, hour: u8 },
     Yearly { month: u8, day_of_month: u8, hour: u8 },
 }
@@ -47,20 +73,38 @@ impl Schedule {
                 let target_naive = target_date.and_hms_opt(*hour as u32, 0, 0).unwrap();
                 target_naive.and_utc() - base
             }
-            Schedule::Weekly { day_of_week, hour } => {
-                let current_dow = base.date_naive().weekday().number_from_monday() as u8 - 1;
-                let target_dow = *day_of_week;
-                let days_ahead = (target_dow as i32 - current_dow as i32).rem_euclid(7);
-                let mut target_date = base.date_naive() + chrono::Duration::days(days_ahead as i64);
-                let target_naive = target_date.and_hms_opt(*hour as u32, 0, 0).unwrap();
-                let target_utc = target_naive.and_utc();
-                if target_utc >= base {
-                    target_utc - base
-                } else {
-                    target_date = target_date + chrono::Duration::weeks(1);
-                    let target_naive2 = target_date.and_hms_opt(*hour as u32, 0, 0).unwrap();
-                    target_naive2.and_utc() - base
+            Schedule::Weekly { days_of_week, hour } => {
+                if days_of_week.is_empty() {
+                    return chrono::Duration::MAX;
                 }
+
+                let current_wd = base.date_naive().weekday();
+                let mut min_duration: Option<chrono::Duration> = None;
+
+                for target_wd in days_of_week {
+                    let days_ahead = (target_wd.num_days_from_monday() as i32 - current_wd.num_days_from_monday() as i32).rem_euclid(7);
+                    let mut target_date = base.date_naive() + chrono::Duration::days(days_ahead as i64);
+                    let mut candidate_naive = target_date.and_hms_opt(*hour as u32, 0, 0).unwrap();
+                    let mut candidate_utc = candidate_naive.and_utc();
+
+                    if candidate_utc < base {
+                        target_date = target_date + chrono::Duration::weeks(1);
+                        candidate_naive = target_date.and_hms_opt(*hour as u32, 0, 0).unwrap();
+                        candidate_utc = candidate_naive.and_utc();
+                    }
+
+                    let duration = candidate_utc - base;
+                    match min_duration {
+                        None => min_duration = Some(duration),
+                        Some(current_min) => {
+                            if duration < current_min {
+                                min_duration = Some(duration);
+                            }
+                        }
+                    }
+                }
+
+                min_duration.unwrap_or_else(|| chrono::Duration::MAX)
             }
             Schedule::Monthly { day_of_month, hour } => {
                 let mut year = base.date_naive().year();
@@ -103,21 +147,63 @@ impl Schedule {
     }
 }
 
-#[derive(Debug, Clone, sqlx::Type, Serialize, Deserialize)]
+#[derive(PartialEq, Debug, Clone, sqlx::Type, Serialize, Deserialize)]
 #[sqlx(rename_all = "lowercase")]
 pub enum Type {
     Periodic,
     OneTime,
 }
 
-#[derive(Debug, Clone, sqlx::Type, Serialize, Deserialize, PartialEq, Eq)]
+#[derive(Debug, Clone, sqlx::Type, PartialEq, Eq)]
 #[sqlx(rename_all = "lowercase")]
 pub enum Priority {
     Lowest,
     Low,
     Medium,
     High,
-    Highest
+    Highest,
+}
+
+impl Priority {
+    pub fn as_str(&self) -> &'static str {
+        match self {
+            Priority::Lowest => "lowest",
+            Priority::Low => "low",
+            Priority::Medium => "medium",
+            Priority::High => "high",
+            Priority::Highest => "highest",
+        }
+    }
+
+    pub fn from_str(s: &str) -> Option<Self> {
+        match s {
+            "lowest" => Some(Priority::Lowest),
+            "low" => Some(Priority::Low),
+            "medium" => Some(Priority::Medium),
+            "high" => Some(Priority::High),
+            "highest" => Some(Priority::Highest),
+            _ => None,
+        }
+    }
+}
+
+impl Serialize for Priority {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        serializer.serialize_str(self.as_str())
+    }
+}
+
+impl<'de> Deserialize<'de> for Priority {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        let s = String::deserialize(deserializer)?;
+        Priority::from_str(&s).ok_or_else(|| serde::de::Error::custom(format!("unknown priority: {}", s)))
+    }
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -244,7 +330,7 @@ impl Task {
 
         if let Some(priority) = &params.priority {
             query_builder.push(" AND json_extract(options, '$.priority') = ");
-            query_builder.push_bind(priority);
+            query_builder.push_bind(priority.as_str());
         }
 
         if let Some(after) = &params.due_date_after {
@@ -503,5 +589,267 @@ impl Model for Task {
             .await?;
 
         Ok(())
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use chrono::{TimeZone, Duration};
+
+    async fn setup_test_pool() -> SqlitePool {
+        let pool = SqlitePool::connect("sqlite::memory:").await.unwrap();
+        
+        sqlx::query(
+            "CREATE TABLE IF NOT EXISTS app_settings (
+                key TEXT PRIMARY KEY,
+                value TEXT NOT NULL
+            );"
+        )
+        .execute(&pool)
+        .await
+        .unwrap();
+
+        sqlx::query(
+            "CREATE TABLE IF NOT EXISTS tasks (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                title TEXT NOT NULL,
+                description TEXT NOT NULL,
+                task_type TEXT NOT NULL,
+                done BOOLEAN NOT NULL,
+                created_at DATETIME NOT NULL,
+                updated_at DATETIME NOT NULL,
+                options TEXT NOT NULL,
+                tags TEXT NOT NULL
+            );"
+        )
+        .execute(&pool)
+        .await
+        .unwrap();
+
+        pool
+    }
+
+    #[tokio::test]
+    async fn test_schedule_time_until_next() {
+        let base = Utc.with_ymd_and_hms(2026, 6, 1, 10, 0, 0).unwrap();
+        let created = base;
+
+        let daily = Schedule::Daily { hour: 14 };
+        let duration = daily.time_until_next(base, created);
+        assert_eq!(duration, Duration::hours(4));
+
+        let daily_tomorrow = Schedule::Daily { hour: 8 };
+        let duration_t = daily_tomorrow.time_until_next(base, created);
+        assert_eq!(duration_t, Duration::hours(22));
+
+        let every_n = Schedule::EveryNDays { days: 2, hour: 10 };
+        let duration_n = every_n.time_until_next(base, created);
+        assert_eq!(duration_n, Duration::zero());
+
+        let weekly = Schedule::Weekly { days_of_week: vec![Weekday::Tuesday], hour: 12 };
+        let duration_w = weekly.time_until_next(base, created);
+        assert_eq!(duration_w, Duration::hours(26));
+
+        let monthly = Schedule::Monthly { day_of_month: 15, hour: 10 };
+        let duration_m = monthly.time_until_next(base, created);
+        assert_eq!(duration_m, Duration::days(14));
+
+        let yearly = Schedule::Yearly { month: 6, day_of_month: 1, hour: 12 };
+        let duration_y = yearly.time_until_next(base, created);
+        assert_eq!(duration_y, Duration::hours(2));
+    }
+
+    #[tokio::test]
+    async fn test_task_new_and_model_crud() {
+        let pool = setup_test_pool().await;
+
+        let options = TaskOptions {
+            priority: Some(Priority::High),
+            due_date: Some("2026-06-10T12:00:00Z".to_string()),
+            schedule: None,
+            check_list: Some(vec![SubTask { text: "Sub 1".to_string(), checked: false }]),
+        };
+
+        let mut task = Task::new("Test Title", "Test Desc", Type::OneTime, options, vec![1, 2]);
+        assert_eq!(task.id, 0);
+        assert!(!task.done);
+
+        task.create(&pool).await.unwrap();
+        assert!(task.id > 0);
+
+        let count = Task::get_count(&pool).await.unwrap();
+        assert_eq!(count, 1);
+
+        let fetched = Task::get_by_id(&pool, task.id).await.unwrap();
+        assert_eq!(fetched.title, "Test Title");
+        assert_eq!(fetched.description, "Test Desc");
+        assert_eq!(fetched.task_type, Type::OneTime);
+
+        let mut fetched_task = fetched;
+        fetched_task.title = "Updated Title".to_string();
+        fetched_task.done = true;
+        fetched_task.update(&pool).await.unwrap();
+
+        let updated_check = Task::get_by_id(&pool, task.id).await.unwrap();
+        assert_eq!(updated_check.title, "Updated Title");
+        assert!(updated_check.done);
+
+        let all_tasks = Task::get_all(&pool, None).await.unwrap();
+        assert_eq!(all_tasks.len(), 1);
+
+        let list_req = ListRequest { current_page: 1, pages_count: 0, limit: 10 };
+        let paged_tasks = Task::get_all(&pool, Some(list_req)).await.unwrap();
+        assert_eq!(paged_tasks.len(), 1);
+
+        let search_params = SearchParams {
+            text: Some("Updated".to_string()),
+            tags: Some(vec![1]),
+            created_after: None,
+            created_before: None,
+        };
+        let search_results = Task::search(&pool, search_params, None).await.unwrap();
+        assert_eq!(search_results.len(), 1);
+
+        Task::delete(&pool, task.id).await.unwrap();
+        let count_after = Task::get_count(&pool).await.unwrap();
+        assert_eq!(count_after, 0);
+    }
+
+    #[tokio::test]
+    async fn test_custom_search_variations() {
+        let pool = setup_test_pool().await;
+
+        let options1 = TaskOptions {
+            priority: Some(Priority::Highest),
+            due_date: Some("2026-06-05".to_string()),
+            schedule: None,
+            check_list: None,
+        };
+        let mut t1 = Task::new("Alpha Task", "Description one", Type::OneTime, options1, vec![10]);
+        t1.done = true;
+        t1.create(&pool).await.unwrap();
+
+        let options2 = TaskOptions {
+            priority: Some(Priority::Low),
+            due_date: Some("2026-06-20".to_string()),
+            schedule: None,
+            check_list: None,
+        };
+        let mut t2 = Task::new("Beta Task", "Description two", Type::OneTime, options2, vec![20]);
+        t2.done = false;
+        t2.create(&pool).await.unwrap();
+
+        let params_text = TaskSearchParams {
+            text: Some("Alpha".to_string()),
+            ..Default::default()
+        };
+        let res_text = Task::custom_search(&pool, params_text, None, None).await.unwrap();
+        assert_eq!(res_text.len(), 1);
+        assert_eq!(res_text[0].title, "Alpha Task");
+
+        let params_prio = TaskSearchParams {
+            priority: Some(Priority::Low),
+            ..Default::default()
+        };
+        let res_prio = Task::custom_search(&pool, params_prio, None, None).await.unwrap();
+        assert_eq!(res_prio.len(), 1);
+        assert_eq!(res_prio[0].title, "Beta Task");
+
+        let params_due = TaskSearchParams {
+            due_date_after: Some(Utc.with_ymd_and_hms(2026, 6, 1, 0, 0, 0).unwrap()),
+            due_date_before: Some(Utc.with_ymd_and_hms(2026, 6, 10, 0, 0, 0).unwrap()),
+            ..Default::default()
+        };
+        let res_due = Task::custom_search(&pool, params_due, None, None).await.unwrap();
+        assert_eq!(res_due.len(), 1);
+        assert_eq!(res_due[0].title, "Alpha Task");
+
+        let params_tags = TaskSearchParams {
+            tags: Some(vec![20]),
+            ..Default::default()
+        };
+        let res_tags = Task::custom_search(&pool, params_tags, None, None).await.unwrap();
+        assert_eq!(res_tags.len(), 1);
+        assert_eq!(res_tags[0].title, "Beta Task");
+
+        let res_status = Task::custom_search(&pool, Default::default(), None, Some(true)).await.unwrap();
+        assert_eq!(res_status.len(), 1);
+        assert_eq!(res_status[0].title, "Alpha Task");
+
+        let params_mixed = TaskSearchParams {
+            text: Some("Task".to_string()),
+            priority: Some(Priority::Highest),
+            ..Default::default()
+        };
+        let list_req = ListRequest { current_page: 1, pages_count: 0, limit: 1 };
+        let res_mixed = Task::custom_search(&pool, params_mixed, Some(list_req), Some(true)).await.unwrap();
+        assert_eq!(res_mixed.len(), 1);
+        assert_eq!(res_mixed[0].title, "Alpha Task");
+    }
+
+    #[tokio::test]
+    async fn test_get_typed_list() {
+        let pool = setup_test_pool().await;
+
+        let options_periodic = TaskOptions {
+            priority: None,
+            due_date: None,
+            schedule: Some(Schedule::Daily { hour: 8 }),
+            check_list: None,
+        };
+        let mut t_periodic = Task::new("Periodic Task", "Desc", Type::Periodic, options_periodic, vec![]);
+        t_periodic.create(&pool).await.unwrap();
+
+        let options_onetime = TaskOptions {
+            priority: None,
+            due_date: None,
+            schedule: None,
+            check_list: None,
+        };
+        let mut t_onetime = Task::new("OneTime Task", "Desc", Type::OneTime, options_onetime, vec![]);
+        t_onetime.create(&pool).await.unwrap();
+
+        let base_time = Utc.with_ymd_and_hms(2026, 6, 1, 10, 0, 0).unwrap();
+
+        let periodic_list = Task::get_typed_list(&pool, None, true, base_time, None).await.unwrap();
+        assert_eq!(periodic_list.len(), 1);
+        assert_eq!(periodic_list[0].title, "Periodic Task");
+
+        let onetime_list = Task::get_typed_list(&pool, Some(ListRequest { current_page: 1, pages_count: 0, limit: 5 }), false, base_time, Some(false)).await.unwrap();
+        assert_eq!(onetime_list.len(), 1);
+        assert_eq!(onetime_list[0].title, "OneTime Task");
+    }
+
+    #[tokio::test]
+    async fn test_update_periodic_status() {
+        let pool = setup_test_pool().await;
+
+        Settings::set(&pool, "reset_time", "2").await.unwrap();
+
+        let options = TaskOptions {
+            priority: None,
+            due_date: None,
+            schedule: Some(Schedule::Daily { hour: 5 }),
+            check_list: Some(vec![SubTask { text: "Sub".to_string(), checked: true }]),
+        };
+
+        let mut task = Task::new("Old Periodic", "Desc", Type::Periodic, options, vec![]);
+        task.done = true;
+        task.create(&pool).await.unwrap();
+
+        let past_time = Utc::now() - Duration::days(2);
+        sqlx::query("UPDATE tasks SET updated_at = ? WHERE id = ?")
+            .bind(past_time)
+            .bind(task.id)
+            .execute(&pool)
+            .await
+            .unwrap();
+
+        Task::update_periodic_status(&pool).await.unwrap();
+
+        let refreshed = Task::get_by_id(&pool, task.id).await.unwrap();
+        assert!(!refreshed.done);
+        assert!(!refreshed.options.check_list.clone().unwrap()[0].checked);
     }
 }

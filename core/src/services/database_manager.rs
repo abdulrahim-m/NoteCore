@@ -24,12 +24,12 @@ impl DatabaseManager {
         .connect_with(conn_options)
         .await?;
 
+        Self::init_tables(&pool).await?;
+    
         if !db_exists {
             // brand new database so setup default settings
             Settings::setup_defaults(&pool).await?;
         }
-
-        Self::init_tables(&pool).await?;
 
         Ok(pool)
     }
