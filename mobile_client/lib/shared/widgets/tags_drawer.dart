@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_client/l10n/app_localizations.dart';
 import 'package:mobile_client/shared/controllers/filterable_controller.dart';
 import 'package:mobile_client/shared/dialogs/dialogs.dart';
-import 'package:mobile_client/l10n/app_localizations.dart';
 
-/// Left sliding panel: date filters + every tag. Works with any FilterableListController.
 class TagsDrawer extends StatefulWidget {
-  const TagsDrawer({super.key, required this.controller});
+  const TagsDrawer({super.key, required this.controller, this.customFilters});
+
   final FilterableListController controller;
+
+  final WidgetBuilder? customFilters;
 
   @override
   State<TagsDrawer> createState() => _TagsDrawerState();
@@ -86,7 +88,7 @@ class _TagsDrawerState extends State<TagsDrawer> {
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Column(
                     children: [
-                      _DateTile(
+                      FilterDateTile(
                         label: l10n.notes_created_after,
                         value: c.createdAfter == null
                             ? null
@@ -95,7 +97,7 @@ class _TagsDrawerState extends State<TagsDrawer> {
                         onClear: () => c.setCreatedAfter(null),
                       ),
                       const SizedBox(height: 8),
-                      _DateTile(
+                      FilterDateTile(
                         label: l10n.notes_created_before,
                         value: c.createdBefore == null
                             ? null
@@ -106,6 +108,11 @@ class _TagsDrawerState extends State<TagsDrawer> {
                     ],
                   ),
                 ),
+                if (widget.customFilters != null)
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+                    child: widget.customFilters!(context),
+                  ),
                 const Divider(height: 28),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -154,17 +161,24 @@ class _TagsDrawerState extends State<TagsDrawer> {
                 const Divider(height: 1),
                 Padding(
                   padding: const EdgeInsets.all(12),
-                  child: TextField(
-                    controller: _tagField,
-                    onSubmitted: (_) => _addTag(),
-                    decoration: InputDecoration(
-                      hintText: l10n.notes_new_tag,
-                      isDense: true,
-                      suffixIcon: IconButton(
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          controller: _tagField,
+                          onSubmitted: (_) => _addTag(),
+                          decoration: InputDecoration(
+                            hintText: l10n.notes_new_tag,
+                            isDense: true,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      IconButton(
                         icon: const Icon(Icons.add),
                         onPressed: _addTag,
                       ),
-                    ),
+                    ],
                   ),
                 ),
               ],
@@ -176,8 +190,9 @@ class _TagsDrawerState extends State<TagsDrawer> {
   }
 }
 
-class _DateTile extends StatelessWidget {
-  const _DateTile({
+class FilterDateTile extends StatelessWidget {
+  const FilterDateTile({
+    super.key,
     required this.label,
     required this.value,
     required this.onTap,

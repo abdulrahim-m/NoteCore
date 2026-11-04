@@ -250,5 +250,12 @@
 
   "tasks_discard_title": "تجاهل التغييرات؟",
   "tasks_discard_body": "لديك تغييرات غير محفوظة. إذا غادرت الآن فستفقدها.",
-  "tasks_discard": "تجاهل"
+  "tasks_discard": "تجاهل",
+
+  "tasks_status_unfinished": "غير المنتهية",
+  "tasks_status_finished": "المنتهية",
+  "tasks_all_types": "كل الأنواع",
+  "tasks_empty_finished": "لا توجد مهام منتهية بعد",
+  "tasks_due_after": "الاستحقاق بعد",
+  "tasks_due_before": "الاستحقاق قبل"
 }

@@ -931,6 +931,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Discard'**
   String get tasks_discard;
+
+  /// No description provided for @tasks_status_unfinished.
+  ///
+  /// In en, this message translates to:
+  /// **'Unfinished'**
+  String get tasks_status_unfinished;
+
+  /// No description provided for @tasks_status_finished.
+  ///
+  /// In en, this message translates to:
+  /// **'Finished'**
+  String get tasks_status_finished;
+
+  /// No description provided for @tasks_all_types.
+  ///
+  /// In en, this message translates to:
+  /// **'All types'**
+  String get tasks_all_types;
+
+  /// No description provided for @tasks_empty_finished.
+  ///
+  /// In en, this message translates to:
+  /// **'No finished tasks yet'**
+  String get tasks_empty_finished;
+
+  /// No description provided for @tasks_due_after.
+  ///
+  /// In en, this message translates to:
+  /// **'Due after'**
+  String get tasks_due_after;
+
+  /// No description provided for @tasks_due_before.
+  ///
+  /// In en, this message translates to:
+  /// **'Due before'**
+  String get tasks_due_before;
 }
 
 class _AppLocalizationsDelegate

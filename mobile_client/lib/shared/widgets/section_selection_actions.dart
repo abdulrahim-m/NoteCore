@@ -5,8 +5,6 @@ import 'package:mobile_client/shared/controllers/searchable_list_controller.dart
 import 'package:mobile_client/shared/controllers/section_list_controller.dart';
 import 'package:mobile_client/shared/dialogs/dialogs.dart';
 
-/// Selection-bar actions for any searchable list: add tag, delete. Extra
-/// buttons (e.g. rename) go first via [leading].
 List<Widget> buildSelectionActions<T>(
   BuildContext context, {
   required SearchableListController<T> controller,
@@ -55,7 +53,6 @@ List<Widget> buildSelectionActions<T>(
   ];
 }
 
-/// The actions for a list of sections.
 List<Widget> buildSectionSelectionActions<T>(
   BuildContext context, {
   required SectionListController<T> controller,

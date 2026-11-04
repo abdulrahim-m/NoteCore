@@ -21,9 +21,13 @@ bool isOverdue(TaskDto t, DateTime now) {
   if (d == null) return false;
   final end = dueHasTime(t.options.dueDate)
       ? d
-      : DateTime(d.year, d.month, d.day + 1); // a date is due until its end
+      : DateTime(d.year, d.month, d.day + 1);
   return end.isBefore(now);
 }
+
+int weekdayNumber(WeekdayDto d) => WeekdayDto.values.indexOf(d) + 1;
+
+WeekdayDto weekdayOf(int number) => WeekdayDto.values[number - 1];
 
 int _daysIn(int year, int month) => DateTime(year, month + 1, 0).day;
 
@@ -60,13 +64,17 @@ DateTime? nextOccurrence(TaskDto t, DateTime now) {
       }
       return cand;
     },
-    weekly: (dow, h) {
-      final target = dow == 0 ? 7 : dow;
-      final delta = (target - now.weekday) % 7;
-      final cand = DateTime(now.year, now.month, now.day + delta, h);
-      return cand.isAfter(now)
-          ? cand
-          : DateTime(now.year, now.month, now.day + delta + 7, h);
+    weekly: (days, h) {
+      DateTime? best;
+      for (final d in days) {
+        final delta = (weekdayNumber(d) - now.weekday) % 7;
+        var cand = DateTime(now.year, now.month, now.day + delta, h);
+        if (!cand.isAfter(now)) {
+          cand = DateTime(now.year, now.month, now.day + delta + 7, h);
+        }
+        if (best == null || cand.isBefore(best)) best = cand;
+      }
+      return best;
     },
     monthly: (dom, h) {
       final cand = _at(now.year, now.month, dom, h);

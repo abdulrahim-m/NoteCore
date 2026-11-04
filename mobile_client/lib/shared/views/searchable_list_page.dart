@@ -8,9 +8,6 @@ import 'package:mobile_client/shared/widgets/search_filters.dart';
 import 'package:mobile_client/shared/widgets/selection_bar.dart';
 import 'package:mobile_client/shared/widgets/tags_drawer.dart';
 
-/// Tab page for any searchable list: shared search bar + tag drawer, long-press 
-/// selection bar, create FAB, pull to refresh, paging.
-/// Pages provide the controller and how the content looks ([slivers]).
 class SearchableListPage<C extends SearchableListController<T>, T>
     extends StatefulWidget {
   const SearchableListPage({
@@ -26,14 +23,13 @@ class SearchableListPage<C extends SearchableListController<T>, T>
     required this.onCreate,
     required this.selectionActions,
     this.toolbar,
+    this.customFilters,
   });
 
   final C Function(SearchFilters filters) create;
 
-  /// Route of an item's page, e.g. `/thoughts/7`.
   final String Function(int id) routeOf;
 
-  /// The content slivers, [open] opens an item's page (and refreshes after).
   final List<Widget> Function(
     BuildContext context,
     C controller,
@@ -43,11 +39,9 @@ class SearchableListPage<C extends SearchableListController<T>, T>
 
   final int Function(C controller) visibleCount;
 
-  /// Text of the empty state when not searching.
   final String Function(C controller) emptyText;
   final IconData emptyIcon;
 
-  /// What the create button does: [open] can open the page of a new item.
   final Future<void> Function(
     BuildContext context,
     C controller,
@@ -56,11 +50,11 @@ class SearchableListPage<C extends SearchableListController<T>, T>
   onCreate;
   final String createTooltip;
 
-  /// Buttons of the selection bar.
   final List<Widget> Function(BuildContext context, C controller)
   selectionActions;
 
-  /// Optional row under the search bar (view toggles, filters, ...).
+  final Widget Function(BuildContext context, C controller)? customFilters;
+
   final Widget Function(BuildContext context, C controller)? toolbar;
 
   final String searchHint;
@@ -86,7 +80,7 @@ class _SearchableListPageState<C extends SearchableListController<T>, T>
     _filters.onError = _showMessage;
     _scroll.addListener(_onScroll);
     _filters.loadTags();
-    _c.reload(); // uses whatever search is already typed on another page
+    _c.reload();
   }
 
   @override
@@ -109,9 +103,6 @@ class _SearchableListPageState<C extends SearchableListController<T>, T>
     if (pos.pixels >= pos.maxScrollExtent - 300) _c.loadMore();
   }
 
-  /// A short page may not be scrollable, or may show nothing because the rest
-  /// is hidden.
-  /// Keep loading until it is.
   void _fillViewportIfNeeded() {
     if (!mounted || !_c.hasMore || _c.loading || _c.loadingMore) return;
     if (widget.visibleCount(_c) == 0) {
@@ -144,7 +135,12 @@ class _SearchableListPageState<C extends SearchableListController<T>, T>
           },
           child: Scaffold(
             key: _scaffoldKey,
-            drawer: TagsDrawer(controller: _filters),
+            drawer: TagsDrawer(
+              controller: _c.filterController,
+              customFilters: widget.customFilters == null
+                  ? null
+                  : (context) => widget.customFilters!(context, _c),
+            ),
             floatingActionButton: _c.selecting
                 ? null
                 : FloatingActionButton(
@@ -173,7 +169,7 @@ class _SearchableListPageState<C extends SearchableListController<T>, T>
                               onChanged: (_) {},
                               onFilterTap: () =>
                                   _scaffoldKey.currentState?.openDrawer(),
-                              filterCount: _filters.activeFilterCount,
+                              filterCount: _c.filterController.activeFilterCount,
                             ),
                             if (widget.toolbar != null)
                               widget.toolbar!(context, _c),
@@ -197,9 +193,9 @@ class _SearchableListPageState<C extends SearchableListController<T>, T>
     WidgetsBinding.instance.addPostFrameCallback((_) => _fillViewportIfNeeded());
 
     if (widget.visibleCount(_c) == 0) {
-      final searching = _filters.isSearching;
+      final searching = _c.isFiltering;
       return RefreshIndicator(
-        onRefresh: _c.reload,
+        onRefresh: _c.refresh,
         child: ListView(
           physics: const AlwaysScrollableScrollPhysics(),
           children: [
@@ -229,7 +225,7 @@ class _SearchableListPageState<C extends SearchableListController<T>, T>
     }
 
     return RefreshIndicator(
-      onRefresh: _c.reload,
+      onRefresh: _c.refresh,
       child: CustomScrollView(
         controller: _scroll,
         physics: const AlwaysScrollableScrollPhysics(),

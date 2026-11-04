@@ -4,6 +4,8 @@ import 'package:mobile_client/core/rust/api/tasks.dart';
 import 'package:mobile_client/core/rust/dto/task.dart';
 import 'package:mobile_client/features/tasks/presentation/controllers/tasks_controller.dart';
 import 'package:mobile_client/features/tasks/presentation/widgets/task_card.dart';
+import 'package:mobile_client/features/tasks/presentation/widgets/task_filters_panel.dart';
+import 'package:mobile_client/features/tasks/presentation/widgets/tasks_view_bar.dart';
 import 'package:mobile_client/features/tasks/presentation/widgets/upcoming_strip.dart';
 import 'package:mobile_client/l10n/app_localizations.dart';
 import 'package:mobile_client/shared/views/searchable_list_page.dart';
@@ -23,11 +25,14 @@ class TasksPage extends StatelessWidget {
       routeOf: (id) => id < 0 ? '/tasks/new' : '/tasks/$id',
       onCreate: (context, c, open) => open(-1),
       createTooltip: l10n.tasks_new,
-      visibleCount: (c) => c.items.length,
-      emptyText: (c) => switch (c.view) {
-        TaskView.overview => l10n.tasks_empty,
-        TaskView.simple => l10n.tasks_empty_simple,
-        TaskView.periodic => l10n.tasks_empty_periodic,
+      visibleCount: (c) => c.shown.length,
+      emptyText: (c) {
+        if (c.status == TaskStatus.finished) return l10n.tasks_empty_finished;
+        return switch (c.kind) {
+          TaskKind.all => l10n.tasks_empty,
+          TaskKind.oneTime => l10n.tasks_empty_simple,
+          TaskKind.periodic => l10n.tasks_empty_periodic,
+        };
       },
       emptyIcon: Icons.task_alt,
       searchHint: l10n.tasks_search_hint,
@@ -37,34 +42,12 @@ class TasksPage extends StatelessWidget {
         deleteTitle: l10n.tasks_delete_title,
         deleteBody: l10n.tasks_delete_body,
       ),
-      toolbar: (context, c) => Padding(
-        padding: const EdgeInsets.fromLTRB(12, 8, 12, 0),
-        child: Row(
-          children: [
-            ChoiceChip(
-              avatar: const Icon(Icons.task_alt, size: 18),
-              label: Text(l10n.tasks_view_simple),
-              selected: c.view == TaskView.simple,
-              onSelected: (_) => c.setView(TaskView.simple),
-            ),
-            const SizedBox(width: 8),
-            ChoiceChip(
-              avatar: const Icon(Icons.repeat, size: 18),
-              label: Text(l10n.tasks_view_periodic),
-              selected: c.view == TaskView.periodic,
-              onSelected: (_) => c.setView(TaskView.periodic),
-            ),
-          ],
-        ),
-      ),
+      toolbar: (context, c) => TasksViewBar(controller: c),
+      customFilters: (context, c) => TaskFiltersPanel(controller: c),
       slivers: (context, c, open) {
-        final showUpcoming =
-            c.view == TaskView.overview &&
-            !c.filters.isSearching &&
-            c.upcoming.isNotEmpty;
-
+        final tasks = c.shown;
         return [
-          if (showUpcoming) ...[
+          if (c.showsUpcoming) ...[
             SliverToBoxAdapter(
               child: UpcomingStrip(
                 entries: c.upcoming,
@@ -75,16 +58,19 @@ class TasksPage extends StatelessWidget {
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(16, 12, 16, 4),
-                child: Text(l10n.tasks_all, style: theme.textTheme.titleSmall),
+                child: Text(
+                  l10n.tasks_status_unfinished,
+                  style: theme.textTheme.titleSmall,
+                ),
               ),
             ),
           ],
           SliverPadding(
             padding: const EdgeInsets.only(top: 4, bottom: 88),
             sliver: SliverList.builder(
-              itemCount: c.items.length,
+              itemCount: tasks.length,
               itemBuilder: (_, i) {
-                final t = c.items[i];
+                final t = tasks[i];
                 return TaskCard(
                   key: ValueKey(t.id),
                   task: t,

@@ -14,9 +14,8 @@ class SubTaskDraft {
 }
 
 class TaskEditorController extends ChangeNotifier with ApiGuard {
-  TaskEditorController({required this.taskId, required TasksApi api})
-    : _api = api,
-      _loading = taskId != null {
+  TaskEditorController({required this.taskId, required this._api})
+    : _loading = taskId != null {
     titleCtl.addListener(notifyListeners);
     descriptionCtl.addListener(notifyListeners);
     if (taskId == null) _baseline = _signature();

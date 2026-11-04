@@ -522,4 +522,22 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get tasks_discard => 'تجاهل';
+
+  @override
+  String get tasks_status_unfinished => 'غير المنتهية';
+
+  @override
+  String get tasks_status_finished => 'المنتهية';
+
+  @override
+  String get tasks_all_types => 'كل الأنواع';
+
+  @override
+  String get tasks_empty_finished => 'لا توجد مهام منتهية بعد';
+
+  @override
+  String get tasks_due_after => 'الاستحقاق بعد';
+
+  @override
+  String get tasks_due_before => 'الاستحقاق قبل';
 }

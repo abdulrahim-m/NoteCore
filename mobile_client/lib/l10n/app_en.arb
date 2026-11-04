@@ -254,5 +254,12 @@
 
   "tasks_discard_title": "Discard changes?",
   "tasks_discard_body": "You have unsaved changes. If you leave now, they will be lost.",
-  "tasks_discard": "Discard"
+  "tasks_discard": "Discard",
+
+  "tasks_status_unfinished": "Unfinished",
+  "tasks_status_finished": "Finished",
+  "tasks_all_types": "All types",
+  "tasks_empty_finished": "No finished tasks yet",
+  "tasks_due_after": "Due after",
+  "tasks_due_before": "Due before"
 }

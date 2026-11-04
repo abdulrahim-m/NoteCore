@@ -6,8 +6,6 @@ import 'package:mobile_client/shared/views/searchable_list_page.dart';
 import 'package:mobile_client/shared/widgets/search_filters.dart';
 import 'package:mobile_client/shared/widgets/section_selection_actions.dart';
 
-/// [SearchableListPage] for sections. Creating asks for
-/// a name then opens the new section, selection adds rename.
 class SectionListPage<C extends SectionListController<T>, T>
     extends StatelessWidget {
   const SectionListPage({

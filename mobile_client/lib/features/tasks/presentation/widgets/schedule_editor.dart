@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mobile_client/core/rust/dto/task.dart';
+import 'package:mobile_client/features/tasks/domain/task_schedule.dart';
 import 'package:mobile_client/features/tasks/presentation/widgets/task_labels.dart';
 import 'package:mobile_client/l10n/app_localizations.dart';
 
@@ -17,7 +18,10 @@ class ScheduleEditor extends StatelessWidget {
   static ScheduleDto _make(int kind, int hour) => switch (kind) {
     0 => ScheduleDto.daily(hour: hour),
     1 => ScheduleDto.everyNDays(days: 2, hour: hour),
-    2 => ScheduleDto.weekly(dayOfWeek: 1, hour: hour),
+    2 => ScheduleDto.weekly(
+      daysOfWeek: [weekdayOf(DateTime.now().weekday)],
+      hour: hour,
+    ),
     3 => ScheduleDto.monthly(dayOfMonth: 1, hour: hour),
     _ => ScheduleDto.yearly(month: 1, dayOfMonth: 1, hour: hour),
   };
@@ -64,17 +68,7 @@ class ScheduleEditor extends StatelessWidget {
                 onChanged(ScheduleDto.everyNDays(days: d, hour: h)),
           ),
         ],
-        weekly: (dow, h) => [
-          _IntField(
-            label: l10n.tasks_field_day_of_week,
-            value: dow,
-            options: List.generate(7, (i) => i + 1),
-            text: (d) => DateFormat.EEEE(loc).format(DateTime(2024, 1, d)),
-            onChanged: (d) =>
-                onChanged(ScheduleDto.weekly(dayOfWeek: d, hour: h)),
-            width: 160,
-          ),
-        ],
+        weekly: (_, _) => const <Widget>[],
         monthly: (dom, h) => [
           _IntField(
             label: l10n.tasks_field_day_of_month,
@@ -117,7 +111,46 @@ class ScheduleEditor extends StatelessWidget {
       ),
     ];
 
-    return Wrap(spacing: 12, runSpacing: 12, children: fields);
+    final days = s.mapOrNull(weekly: (w) => w.daysOfWeek);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Wrap(spacing: 12, runSpacing: 12, children: fields),
+        if (days != null) ...[
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 6,
+            children: [
+              for (final d in WeekdayDto.values)
+                FilterChip(
+                  visualDensity: VisualDensity.compact,
+                  label: Text(weekdayName(loc, d, short: true)),
+                  selected: days.contains(d),
+                  onSelected: (on) {
+                    final next = {...days};
+                    if (on) {
+                      next.add(d);
+                    } else if (next.length > 1) {
+                      next.remove(d);
+                    } else {
+                      return;
+                    }
+                    onChanged(
+                      ScheduleDto.weekly(
+                        daysOfWeek: WeekdayDto.values
+                            .where(next.contains)
+                            .toList(),
+                        hour: s.hour,
+                      ),
+                    );
+                  },
+                ),
+            ],
+          ),
+        ],
+      ],
+    );
   }
 }
 

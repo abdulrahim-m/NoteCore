@@ -1,11 +1,11 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:mobile_client/core/rust/dto/query.dart';
 import 'package:mobile_client/core/rust/dto/tag.dart';
+import 'package:mobile_client/shared/controllers/filterable_controller.dart';
 import 'package:mobile_client/shared/controllers/paged_list_controller.dart';
 import 'package:mobile_client/shared/widgets/search_filters.dart';
 
-/// A paged list driven by the app-wide [SearchFilters],
+/// A paged list driven by the app-wide [SearchFilters] (text / tag / date),
 /// with the bulk actions every list shares: delete and add tags to the
 /// selection. Subclasses only map them onto their Rust API.
 abstract class SearchableListController<T> extends PagedListController<T> {
@@ -23,14 +23,21 @@ abstract class SearchableListController<T> extends PagedListController<T> {
 
   Future<void> setTagsRemote(int id, Int64List tagIds);
 
+  bool get isFiltering => filters.isSearching;
+
+  /// What the filter drawer and the filter badge edit. Override to wrap
+  /// [filters] with extra, list-specific filters.
+  FilterableListController get filterController => filters;
+
   @protected
   void onQueryChanged() => reload();
 
   @override
-  Future<List<T>> fetchPage(ListRequestDto req) => filters.isSearching
+  Future<List<T>> fetchPage(ListRequestDto req) => isFiltering
       ? searchRemote(filters.toParams(), req)
       : listRemote(req);
 
+  /// Deletes the selected items.
   Future<void> deleteSelected() async {
     final ids = selectedIds.toList();
     await guard(() async {

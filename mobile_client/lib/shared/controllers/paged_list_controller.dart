@@ -26,6 +26,16 @@ abstract class PagedListController<T> extends ChangeNotifier with ApiGuard {
   @protected
   List<T> filterPage(List<T> raw) => raw;
 
+  /// Repairs the database through the core's `refresh()`
+  @protected
+  Future<void> refreshRemote() async {}
+
+  /// Full refetch: repair first, then start over.
+  Future<void> refresh() async {
+    await guard(refreshRemote);
+    await reload();
+  }
+
   List<T> get items => _items;
   bool get loading => _loading;
   bool get loadingMore => _loadingMore;

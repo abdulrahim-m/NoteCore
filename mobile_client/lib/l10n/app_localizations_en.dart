@@ -522,4 +522,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tasks_discard => 'Discard';
+
+  @override
+  String get tasks_status_unfinished => 'Unfinished';
+
+  @override
+  String get tasks_status_finished => 'Finished';
+
+  @override
+  String get tasks_all_types => 'All types';
+
+  @override
+  String get tasks_empty_finished => 'No finished tasks yet';
+
+  @override
+  String get tasks_due_after => 'Due after';
+
+  @override
+  String get tasks_due_before => 'Due before';
 }

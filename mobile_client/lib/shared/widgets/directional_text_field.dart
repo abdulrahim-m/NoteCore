@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_client/shared/utils/text_direction_utils.dart';
 
-/// A [TextField] whose direction follows how its text starts.
 class DirectionalTextField extends StatelessWidget {
   const DirectionalTextField({
     super.key,
