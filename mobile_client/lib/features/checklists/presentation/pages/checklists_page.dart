@@ -5,7 +5,7 @@ import 'package:mobile_client/core/rust/dto/short_task.dart';
 import 'package:mobile_client/features/checklists/presentation/controllers/short_tasks_controller.dart';
 import 'package:mobile_client/features/checklists/presentation/widgets/checklist_card.dart';
 import 'package:mobile_client/l10n/app_localizations.dart';
-import 'package:mobile_client/shared/section_list_page.dart';
+import 'package:mobile_client/shared/views/section_list_page.dart';
 
 /// "Checklists" tab: expandable sections of tickable short tasks. Finished
 /// items/sections are hidden unless "Show completed" is on.

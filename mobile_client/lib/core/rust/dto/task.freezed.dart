@@ -165,12 +165,12 @@ return yearly(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int hour)?  daily,TResult Function( int days,  int hour)?  everyNDays,TResult Function( int dayOfWeek,  int hour)?  weekly,TResult Function( int dayOfMonth,  int hour)?  monthly,TResult Function( int month,  int dayOfMonth,  int hour)?  yearly,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int hour)?  daily,TResult Function( int days,  int hour)?  everyNDays,TResult Function( List<WeekdayDto> daysOfWeek,  int hour)?  weekly,TResult Function( int dayOfMonth,  int hour)?  monthly,TResult Function( int month,  int dayOfMonth,  int hour)?  yearly,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case ScheduleDto_Daily() when daily != null:
 return daily(_that.hour);case ScheduleDto_EveryNDays() when everyNDays != null:
 return everyNDays(_that.days,_that.hour);case ScheduleDto_Weekly() when weekly != null:
-return weekly(_that.dayOfWeek,_that.hour);case ScheduleDto_Monthly() when monthly != null:
+return weekly(_that.daysOfWeek,_that.hour);case ScheduleDto_Monthly() when monthly != null:
 return monthly(_that.dayOfMonth,_that.hour);case ScheduleDto_Yearly() when yearly != null:
 return yearly(_that.month,_that.dayOfMonth,_that.hour);case _:
   return orElse();
@@ -190,12 +190,12 @@ return yearly(_that.month,_that.dayOfMonth,_that.hour);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int hour)  daily,required TResult Function( int days,  int hour)  everyNDays,required TResult Function( int dayOfWeek,  int hour)  weekly,required TResult Function( int dayOfMonth,  int hour)  monthly,required TResult Function( int month,  int dayOfMonth,  int hour)  yearly,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int hour)  daily,required TResult Function( int days,  int hour)  everyNDays,required TResult Function( List<WeekdayDto> daysOfWeek,  int hour)  weekly,required TResult Function( int dayOfMonth,  int hour)  monthly,required TResult Function( int month,  int dayOfMonth,  int hour)  yearly,}) {final _that = this;
 switch (_that) {
 case ScheduleDto_Daily():
 return daily(_that.hour);case ScheduleDto_EveryNDays():
 return everyNDays(_that.days,_that.hour);case ScheduleDto_Weekly():
-return weekly(_that.dayOfWeek,_that.hour);case ScheduleDto_Monthly():
+return weekly(_that.daysOfWeek,_that.hour);case ScheduleDto_Monthly():
 return monthly(_that.dayOfMonth,_that.hour);case ScheduleDto_Yearly():
 return yearly(_that.month,_that.dayOfMonth,_that.hour);}
 }
@@ -211,12 +211,12 @@ return yearly(_that.month,_that.dayOfMonth,_that.hour);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int hour)?  daily,TResult? Function( int days,  int hour)?  everyNDays,TResult? Function( int dayOfWeek,  int hour)?  weekly,TResult? Function( int dayOfMonth,  int hour)?  monthly,TResult? Function( int month,  int dayOfMonth,  int hour)?  yearly,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int hour)?  daily,TResult? Function( int days,  int hour)?  everyNDays,TResult? Function( List<WeekdayDto> daysOfWeek,  int hour)?  weekly,TResult? Function( int dayOfMonth,  int hour)?  monthly,TResult? Function( int month,  int dayOfMonth,  int hour)?  yearly,}) {final _that = this;
 switch (_that) {
 case ScheduleDto_Daily() when daily != null:
 return daily(_that.hour);case ScheduleDto_EveryNDays() when everyNDays != null:
 return everyNDays(_that.days,_that.hour);case ScheduleDto_Weekly() when weekly != null:
-return weekly(_that.dayOfWeek,_that.hour);case ScheduleDto_Monthly() when monthly != null:
+return weekly(_that.daysOfWeek,_that.hour);case ScheduleDto_Monthly() when monthly != null:
 return monthly(_that.dayOfMonth,_that.hour);case ScheduleDto_Yearly() when yearly != null:
 return yearly(_that.month,_that.dayOfMonth,_that.hour);case _:
   return null;
@@ -368,10 +368,16 @@ as int,
 
 
 class ScheduleDto_Weekly extends ScheduleDto {
-  const ScheduleDto_Weekly({required this.dayOfWeek, required this.hour}): super._();
+  const ScheduleDto_Weekly({required  List<WeekdayDto> daysOfWeek, required this.hour}): _daysOfWeek = daysOfWeek,super._();
   
 
- final  int dayOfWeek;
+ final  List<WeekdayDto> _daysOfWeek;
+ List<WeekdayDto> get daysOfWeek {
+  if (_daysOfWeek is EqualUnmodifiableListView) return _daysOfWeek;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_daysOfWeek);
+}
+
 @override final  int hour;
 
 /// Create a copy of ScheduleDto
@@ -384,18 +390,18 @@ $ScheduleDto_WeeklyCopyWith<ScheduleDto_Weekly> get copyWith => _$ScheduleDto_We
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is ScheduleDto_Weekly&&(identical(other.dayOfWeek, dayOfWeek) || other.dayOfWeek == dayOfWeek)&&(identical(other.hour, hour) || other.hour == hour));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is ScheduleDto_Weekly&&const DeepCollectionEquality().equals(other.daysOfWeek, _daysOfWeek)&&(identical(other.hour, hour) || other.hour == hour));
 }
 
 
 @override
 int get hashCode {
-    return Object.hash(runtimeType,dayOfWeek,hour);
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_daysOfWeek),hour);
 }
 
 @override
 String toString() {
-    return 'ScheduleDto.weekly(dayOfWeek: $dayOfWeek, hour: $hour)';
+    return 'ScheduleDto.weekly(daysOfWeek: $daysOfWeek, hour: $hour)';
 }
 
 
@@ -406,7 +412,7 @@ abstract mixin class $ScheduleDto_WeeklyCopyWith<$Res> implements $ScheduleDtoCo
   factory $ScheduleDto_WeeklyCopyWith(ScheduleDto_Weekly value, $Res Function(ScheduleDto_Weekly) _then) = _$ScheduleDto_WeeklyCopyWithImpl;
 @override @useResult
 $Res call({
- int dayOfWeek, int hour
+ List<WeekdayDto> daysOfWeek, int hour
 });
 
 
@@ -423,10 +429,10 @@ class _$ScheduleDto_WeeklyCopyWithImpl<$Res>
 
 /// Create a copy of ScheduleDto
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? dayOfWeek = null,Object? hour = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? daysOfWeek = null,Object? hour = null,}) {
   return _then(ScheduleDto_Weekly(
-dayOfWeek: null == dayOfWeek ? _self.dayOfWeek : dayOfWeek // ignore: cast_nullable_to_non_nullable
-as int,hour: null == hour ? _self.hour : hour // ignore: cast_nullable_to_non_nullable
+daysOfWeek: null == daysOfWeek ? _self._daysOfWeek : daysOfWeek // ignore: cast_nullable_to_non_nullable
+as List<WeekdayDto>,hour: null == hour ? _self.hour : hour // ignore: cast_nullable_to_non_nullable
 as int,
   ));
 }

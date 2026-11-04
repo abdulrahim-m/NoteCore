@@ -2,8 +2,8 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import 'package:mobile_client/core/rust/api/notes.dart';
 import 'package:mobile_client/core/rust/dto/note.dart';
 import 'package:mobile_client/core/rust/dto/query.dart';
-import 'package:mobile_client/shared/paged_list_controller.dart';
-import 'package:mobile_client/shared/search_filters.dart';
+import 'package:mobile_client/shared/controllers/paged_list_controller.dart';
+import 'package:mobile_client/shared/widgets/search_filters.dart';
 
 /// The notes list, groups + actions. Paging and selection come from
 /// [PagedListController], search / tag / date filters from the app-wide
@@ -57,6 +57,7 @@ class NotesController extends PagedListController<NoteListItemDto> {
 
   /// Like [loadInitial] but keeps as many pages loaded as before, so the
   /// scroll position survives (used when coming back from the note view).
+  @override
   Future<void> refresh() async {
     await Future.wait([
       loadGroups(),

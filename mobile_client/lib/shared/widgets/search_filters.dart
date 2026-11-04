@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:mobile_client/core/rust/api/tags.dart';
 import 'package:mobile_client/core/rust/dto/query.dart';
 import 'package:mobile_client/core/rust/dto/tag.dart';
-import 'package:mobile_client/shared/api_guard.dart';
-import 'package:mobile_client/shared/filterable_controller.dart';
+import 'package:mobile_client/shared/utils/api_guard.dart';
+import 'package:mobile_client/shared/controllers/filterable_controller.dart';
 
 /// The search/filter state of the app.
 ///

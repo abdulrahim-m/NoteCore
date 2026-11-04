@@ -37,6 +37,8 @@ abstract class ShortNotesApi implements RustOpaqueInterface {
 
   Future<ShortNoteSectionDto> getSection({required PlatformInt64 sectionId});
 
+  Future<void> refresh();
+
   Future<List<ShortNoteSectionListItemDto>> search({
     required SearchParamsDto params,
     required ListRequestDto req,

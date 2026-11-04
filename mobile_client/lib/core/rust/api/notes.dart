@@ -42,6 +42,8 @@ abstract class NotesApi implements RustOpaqueInterface {
 
   Future<NoteDto> getNote({required PlatformInt64 id});
 
+  Future<void> refresh();
+
   Future<List<NoteListItemDto>> search({
     required SearchParamsDto params,
     required ListRequestDto list,

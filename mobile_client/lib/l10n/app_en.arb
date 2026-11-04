@@ -9,6 +9,10 @@
 
   "general_filters": "Filters",
 
+
+
+
+
   "notes_all": "All",
   "notes_delete": "Delete",
   "notes_change_group": "Change Group",
@@ -75,6 +79,10 @@
   "note_indent": "Indent",
   "note_outdent": "Outdent",
 
+
+
+
+
   "thoughts_search_hint": "Search thoughts",
   "thoughts_empty": "No thoughts yet",
   "thoughts_new_section": "New section",
@@ -121,5 +129,137 @@
   "checklists_load_failed": "Couldn't load this checklist",
   "checklists_section_empty": "No tasks yet. Add your first task below.",
   "checklists_no_tasks": "No tasks yet",
-  "checklists_edit_tasks": "Edit checklist"
+  "checklists_edit_tasks": "Edit checklist",
+
+
+
+
+
+  "tasks_search_hint": "Search tasks",
+  "tasks_new": "New task",
+  "tasks_edit": "Edit task",
+  "tasks_empty": "No tasks yet",
+  "tasks_empty_simple": "No one-time tasks",
+  "tasks_empty_periodic": "No periodic tasks",
+  "tasks_upcoming": "Upcoming",
+  "tasks_all": "All tasks",
+  "tasks_view_simple": "Tasks",
+  "tasks_view_periodic": "Periodic",
+  "tasks_delete_title": "{count, plural, =1{Delete task?} other{Delete tasks?}}",
+  "@tasks_delete_title": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "tasks_delete_body": "{count, plural, =1{This task will be permanently deleted.} other{{count} tasks will be permanently deleted.}}",
+  "@tasks_delete_body": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "tasks_title_hint": "Title",
+  "tasks_description_hint": "Description",
+  "tasks_title_required": "Give the task a title",
+  "tasks_load_failed": "Couldn't load this task",
+  "tasks_type": "Type",
+  "tasks_type_one_time": "One-time",
+  "tasks_type_periodic": "Periodic",
+  "tasks_priority": "Priority",
+  "tasks_priority_none": "None",
+  "tasks_priority_lowest": "Lowest",
+  "tasks_priority_low": "Low",
+  "tasks_priority_medium": "Medium",
+  "tasks_priority_high": "High",
+  "tasks_priority_highest": "Highest",
+  "tasks_due_date": "Due date",
+  "tasks_no_due_date": "No due date",
+  "tasks_schedule": "Repeats",
+  "tasks_kind_daily": "Every day",
+  "tasks_kind_every_n_days": "Every N days",
+  "tasks_kind_weekly": "Every week",
+  "tasks_kind_monthly": "Every month",
+  "tasks_kind_yearly": "Every year",
+  "tasks_field_repeats": "Repeats",
+  "tasks_field_days": "Days",
+  "tasks_field_day_of_week": "Day",
+  "tasks_field_day_of_month": "Day of month",
+  "tasks_field_month": "Month",
+  "tasks_field_hour": "Time",
+  "tasks_sched_daily": "Every day at {time}",
+  "@tasks_sched_daily": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "tasks_sched_every_n_days": "{count, plural, =1{Every day at {time}} other{Every {count} days at {time}}}",
+  "@tasks_sched_every_n_days": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "tasks_sched_weekly": "Every {day} at {time}",
+  "@tasks_sched_weekly": {
+    "placeholders": {
+      "day": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "tasks_sched_monthly": "Day {day} of every month at {time}",
+  "@tasks_sched_monthly": {
+    "placeholders": {
+      "day": {
+        "type": "int"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "tasks_sched_yearly": "Every {date} at {time}",
+  "@tasks_sched_yearly": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "tasks_checklist": "Checklist",
+  "tasks_checklist_add": "Add item",
+  "tasks_checklist_count": "{count, plural, =1{1 item} other{{count} items}}",
+  "@tasks_checklist_count": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+
+  "tasks_discard_title": "Discard changes?",
+  "tasks_discard_body": "You have unsaved changes. If you leave now, they will be lost.",
+  "tasks_discard": "Discard",
+
+  "tasks_status_unfinished": "Unfinished",
+  "tasks_status_finished": "Finished",
+  "tasks_all_types": "All types",
+  "tasks_empty_finished": "No finished tasks yet",
+  "tasks_due_after": "Due after",
+  "tasks_due_before": "Due before"
 }

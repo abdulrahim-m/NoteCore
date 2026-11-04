@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_client/core/rust/dto/tag.dart';
 import 'package:mobile_client/l10n/app_localizations.dart';
-import 'package:mobile_client/shared/auto_save_text_field.dart';
+import 'package:mobile_client/shared/widgets/auto_save_text_field.dart';
 
 /// Top of an open section: editable name, tag chips and an optional hint
 /// shown while the section has no items.

@@ -16,8 +16,14 @@ pub struct TagsService {
 }
 
 impl TagsService {
-    pub fn new(pool: Arc<SqlitePool>) -> Self {
-        TagsService { pool }
+    pub async fn new(pool: Arc<SqlitePool>) -> Result<Self> {
+        let service = TagsService { pool };
+        service.refrech().await?;
+        Ok(service)
+    }
+
+    pub async fn refrech(&self) -> Result<()> {
+        Ok(())
     }
 
     // --- Getters ---

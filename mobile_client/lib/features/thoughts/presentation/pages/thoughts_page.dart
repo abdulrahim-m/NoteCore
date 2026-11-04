@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobile_client/core/di/injection.dart';
 import 'package:mobile_client/core/rust/api/short_notes.dart';
-import 'package:mobile_client/features/notes/presentation/dialogs/tag_picker_sheet.dart';
+import 'package:mobile_client/shared/widgets/tag_picker_sheet.dart';
 import 'package:mobile_client/features/thoughts/presentation/controllers/short_notes_controller.dart';
 import 'package:mobile_client/features/thoughts/presentation/widgets/section_card.dart';
 import 'package:mobile_client/l10n/app_localizations.dart';
-import 'package:mobile_client/shared/custom_search_bar.dart';
-import 'package:mobile_client/shared/dialogs.dart';
-import 'package:mobile_client/shared/search_filters.dart';
-import 'package:mobile_client/shared/selection_bar.dart';
-import 'package:mobile_client/shared/tags_drawer.dart';
+import 'package:mobile_client/shared/widgets/custom_search_bar.dart';
+import 'package:mobile_client/shared/dialogs/dialogs.dart';
+import 'package:mobile_client/shared/widgets/search_filters.dart';
+import 'package:mobile_client/shared/widgets/selection_bar.dart';
+import 'package:mobile_client/shared/widgets/tags_drawer.dart';
 
 class ThoughtsPage extends StatefulWidget {
   const ThoughtsPage({super.key});

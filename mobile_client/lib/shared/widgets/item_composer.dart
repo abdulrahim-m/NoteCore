@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_client/shared/text_direction_utils.dart';
+import 'package:mobile_client/shared/utils/text_direction_utils.dart';
 
 /// Bottom bar to add one-line items. Stays focused after adding so several
 /// items can be entered in a row.

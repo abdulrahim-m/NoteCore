@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:mobile_client/core/rust/dto/query.dart';
-import 'package:mobile_client/shared/api_guard.dart';
+import 'package:mobile_client/shared/utils/api_guard.dart';
 
 /// Pagination + multi-selection for any list page. Subclasses only say how to
 /// fetch one page ([fetchPage]) and how to read an item's id ([idOf]).
@@ -25,6 +25,16 @@ abstract class PagedListController<T> extends ChangeNotifier with ApiGuard {
   /// top of a search). "Has more" is still decided by the *raw* page size.
   @protected
   List<T> filterPage(List<T> raw) => raw;
+
+  /// Repairs the database through the core's `refresh()`
+  @protected
+  Future<void> refreshRemote() async {}
+
+  /// Full refetch: repair first, then start over.
+  Future<void> refresh() async {
+    await guard(refreshRemote);
+    await reload();
+  }
 
   List<T> get items => _items;
   bool get loading => _loading;

@@ -2,6 +2,7 @@ use chrono::{DateTime, Utc};
 
 use crate::models::tags::tags::Tag;
 
+#[derive(Debug, Clone)]
 pub struct UITag {
     pub id: i64,
     pub name: String,

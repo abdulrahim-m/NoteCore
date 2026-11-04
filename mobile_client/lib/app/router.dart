@@ -7,6 +7,8 @@ import 'package:mobile_client/features/checklists/presentation/pages/checklist_s
 import 'package:mobile_client/features/checklists/presentation/pages/checklists_page.dart';
 import 'package:mobile_client/features/notes/presentation/pages/note_page.dart';
 import 'package:mobile_client/features/notes/presentation/pages/notes_page.dart';
+import 'package:mobile_client/features/tasks/presentation/pages/task_page.dart';
+import 'package:mobile_client/features/tasks/presentation/pages/tasks_page.dart';
 import 'package:mobile_client/features/thoughts/presentation/pages/thought_section_page.dart';
 import 'package:mobile_client/features/thoughts/presentation/pages/thoughts_page.dart';
 
@@ -63,7 +65,23 @@ final appRouter = GoRouter(
           routes: [
             GoRoute(
               path: '/tasks',
-              builder: (_, _) => const Center(child: Text('Tasks')),
+              builder: (_, _) => const TasksPage(),
+              routes: [
+                // `new` must come before `:id`
+                GoRoute(
+                  path: 'new',
+                  parentNavigatorKey: _rootNavigatorKey,
+                  builder: (_, _) => const TaskPage(),
+                ),
+                GoRoute(
+                  path: ':id',
+                  parentNavigatorKey: _rootNavigatorKey,
+                  builder: (_, state) => TaskPage(
+                    taskId:
+                        int.tryParse(state.pathParameters['id'] ?? '') ?? -1,
+                  ),
+                ),
+              ],
             ),
           ],
         ),

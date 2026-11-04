@@ -4,14 +4,11 @@ use sqlx::SqlitePool;
 
 use crate::{
     models::{
-        tasks::{
-            task::{Task, TaskOptions, Type},
-            ui_task::UITask,
+        repo::{ListRequest, Model, SearchParams}, tags::{tags::Tag, ui_tags::UITag}, tasks::{
+            task::{Task, TaskOptions, TaskSearchParams, Type},
+            ui_task::UITask
         },
-        repo::{ListRequest, Model, SearchParams},
-        tags::{tags::Tag, ui_tags::UITag},
-    },
-    utils::app_error::Result,
+    }, utils::app_error::Result,
 };
 
 #[derive(Debug, Clone)]
@@ -20,8 +17,15 @@ pub struct TasksService {
 }
 
 impl TasksService {
-    pub fn new(pool: Arc<SqlitePool>) -> Self {
-        TasksService { pool }
+    pub async fn new(pool: Arc<SqlitePool>) -> Result<Self> {
+        let service = TasksService { pool };
+        service.refrech().await?;
+        Ok(service)
+    }
+
+    pub async fn refrech(&self) -> Result<()> {
+        Task::update_periodic_status(&self.pool).await?;
+        Ok(())
     }
 
     // --- Getters ---
@@ -40,8 +44,8 @@ impl TasksService {
         Ok(res)
     }
 
-    pub async fn get_typed_list(&self, req: Option<ListRequest>, periodic: bool) -> Result<Vec<UITask>> {
-        let tasks = Task::get_typed_list(&self.pool, req, periodic, Utc::now()).await?;
+    pub async fn get_typed_list(&self, req: Option<ListRequest>, periodic: bool, status: Option<bool>) -> Result<Vec<UITask>> {
+        let tasks = Task::get_typed_list(&self.pool, req, periodic, Utc::now(), status).await?;
         let mut res = Vec::new();
         for task in tasks {
             res.push(self.map_ui_task(task).await?);
@@ -54,6 +58,15 @@ impl TasksService {
         let mut res = Vec::new();
         for task in tasks {
             res.push(self.map_ui_task(task).await?);
+        }
+        Ok(res)
+    }
+
+    pub async fn search_tasks_with_params(&self, params: TaskSearchParams, req: Option<ListRequest>, status: Option<bool>) -> Result<Vec<UITask>> {
+        let list = Task::custom_search(&self.pool, params, req, status).await?;
+        let mut res = Vec::new();
+        for item in list {
+            res.push(self.map_ui_task(item).await?);
         }
         Ok(res)
     }

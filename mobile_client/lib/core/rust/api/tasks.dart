@@ -33,11 +33,20 @@ abstract class TasksApi implements RustOpaqueInterface {
   Future<List<TaskDto>> getTypedList({
     ListRequestDto? req,
     required bool periodic,
+    bool? status,
   });
+
+  Future<void> refresh();
 
   Future<List<TaskDto>> searchTasks({
     required SearchParamsDto params,
     required ListRequestDto req,
+  });
+
+  Future<List<TaskDto>> searchTasksWithParams({
+    required TaskSearchParamsDto params,
+    ListRequestDto? req,
+    bool? status,
   });
 
   /// Flips the task's `done` flag and returns the new value.

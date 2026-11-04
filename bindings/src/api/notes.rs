@@ -17,6 +17,12 @@ impl NotesApi {
         Self { service }
     }
 
+    pub async fn refresh(&self) -> Result<(), ApiError> {
+        self.service.refrech().await?;
+
+        Ok(())
+    }
+
     // --- Get ---
 
     pub async fn get_note(&self, id: i64) -> Result<NoteDto, ApiError> {

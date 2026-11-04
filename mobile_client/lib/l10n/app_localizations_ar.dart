@@ -328,4 +328,216 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get checklists_edit_tasks => 'تعديل القائمة';
+
+  @override
+  String get tasks_search_hint => 'ابحث في المهام';
+
+  @override
+  String get tasks_new => 'مهمة جديدة';
+
+  @override
+  String get tasks_edit => 'تعديل المهمة';
+
+  @override
+  String get tasks_empty => 'لا توجد مهام بعد';
+
+  @override
+  String get tasks_empty_simple => 'لا توجد مهام لمرة واحدة';
+
+  @override
+  String get tasks_empty_periodic => 'لا توجد مهام دورية';
+
+  @override
+  String get tasks_upcoming => 'القادم';
+
+  @override
+  String get tasks_all => 'كل المهام';
+
+  @override
+  String get tasks_view_simple => 'المهام';
+
+  @override
+  String get tasks_view_periodic => 'الدورية';
+
+  @override
+  String tasks_delete_title(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'حذف المهام؟',
+      one: 'حذف المهمة؟',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tasks_delete_body(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'سيتم حذف $count مهام نهائيًا.',
+      one: 'سيتم حذف هذه المهمة نهائيًا.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get tasks_title_hint => 'العنوان';
+
+  @override
+  String get tasks_description_hint => 'الوصف';
+
+  @override
+  String get tasks_title_required => 'أضف عنوانًا للمهمة';
+
+  @override
+  String get tasks_load_failed => 'تعذر تحميل هذه المهمة';
+
+  @override
+  String get tasks_type => 'النوع';
+
+  @override
+  String get tasks_type_one_time => 'لمرة واحدة';
+
+  @override
+  String get tasks_type_periodic => 'دورية';
+
+  @override
+  String get tasks_priority => 'الأولوية';
+
+  @override
+  String get tasks_priority_none => 'بدون';
+
+  @override
+  String get tasks_priority_lowest => 'الأدنى';
+
+  @override
+  String get tasks_priority_low => 'منخفضة';
+
+  @override
+  String get tasks_priority_medium => 'متوسطة';
+
+  @override
+  String get tasks_priority_high => 'عالية';
+
+  @override
+  String get tasks_priority_highest => 'الأعلى';
+
+  @override
+  String get tasks_due_date => 'تاريخ الاستحقاق';
+
+  @override
+  String get tasks_no_due_date => 'بدون تاريخ';
+
+  @override
+  String get tasks_schedule => 'التكرار';
+
+  @override
+  String get tasks_kind_daily => 'كل يوم';
+
+  @override
+  String get tasks_kind_every_n_days => 'كل عدد من الأيام';
+
+  @override
+  String get tasks_kind_weekly => 'كل أسبوع';
+
+  @override
+  String get tasks_kind_monthly => 'كل شهر';
+
+  @override
+  String get tasks_kind_yearly => 'كل سنة';
+
+  @override
+  String get tasks_field_repeats => 'التكرار';
+
+  @override
+  String get tasks_field_days => 'الأيام';
+
+  @override
+  String get tasks_field_day_of_week => 'اليوم';
+
+  @override
+  String get tasks_field_day_of_month => 'يوم الشهر';
+
+  @override
+  String get tasks_field_month => 'الشهر';
+
+  @override
+  String get tasks_field_hour => 'الوقت';
+
+  @override
+  String tasks_sched_daily(String time) {
+    return 'كل يوم عند $time';
+  }
+
+  @override
+  String tasks_sched_every_n_days(int count, String time) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'كل $count أيام عند $time',
+      one: 'كل يوم عند $time',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tasks_sched_weekly(String day, String time) {
+    return 'كل $day عند $time';
+  }
+
+  @override
+  String tasks_sched_monthly(int day, String time) {
+    return 'اليوم $day من كل شهر عند $time';
+  }
+
+  @override
+  String tasks_sched_yearly(String date, String time) {
+    return 'كل سنة في $date عند $time';
+  }
+
+  @override
+  String get tasks_checklist => 'قائمة التحقق';
+
+  @override
+  String get tasks_checklist_add => 'إضافة عنصر';
+
+  @override
+  String tasks_checklist_count(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count عناصر',
+      one: 'عنصر واحد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get tasks_discard_title => 'تجاهل التغييرات؟';
+
+  @override
+  String get tasks_discard_body =>
+      'لديك تغييرات غير محفوظة. إذا غادرت الآن فستفقدها.';
+
+  @override
+  String get tasks_discard => 'تجاهل';
+
+  @override
+  String get tasks_status_unfinished => 'غير المنتهية';
+
+  @override
+  String get tasks_status_finished => 'المنتهية';
+
+  @override
+  String get tasks_all_types => 'كل الأنواع';
+
+  @override
+  String get tasks_empty_finished => 'لا توجد مهام منتهية بعد';
+
+  @override
+  String get tasks_due_after => 'الاستحقاق بعد';
+
+  @override
+  String get tasks_due_before => 'الاستحقاق قبل';
 }

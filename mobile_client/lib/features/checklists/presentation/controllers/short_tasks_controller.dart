@@ -5,8 +5,8 @@ import 'package:mobile_client/core/rust/api/short_tasks.dart';
 import 'package:mobile_client/core/rust/dto/query.dart';
 import 'package:mobile_client/core/rust/dto/short_task.dart';
 import 'package:mobile_client/core/rust/dto/tag.dart';
-import 'package:mobile_client/shared/search_filters.dart';
-import 'package:mobile_client/shared/section_list_controller.dart';
+import 'package:mobile_client/shared/widgets/search_filters.dart';
+import 'package:mobile_client/shared/controllers/section_list_controller.dart';
 
 /// The list of checklists. Sections come with their items, so ticking is
 /// applied locally right away (and written to the core in the background).
@@ -16,10 +16,9 @@ import 'package:mobile_client/shared/section_list_controller.dart';
 /// [showCompleted] reveals everything.
 class ShortTasksController extends SectionListController<ShortTaskSectionDto> {
   ShortTasksController({
-    required ShortTasksApi api,
+    required this._api,
     required SearchFilters filters,
-  }) : _api = api,
-       super(filters);
+  }) : super(filters);
 
   static const _itemLinger = Duration(milliseconds: 700);
   static const _collapseAfter = Duration(milliseconds: 700);

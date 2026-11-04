@@ -3,13 +3,12 @@ import 'package:flutter/foundation.dart';
 import 'package:mobile_client/core/rust/api/short_notes.dart';
 import 'package:mobile_client/core/rust/dto/short_note.dart';
 import 'package:mobile_client/core/rust/dto/tag.dart';
-import 'package:mobile_client/shared/api_guard.dart';
+import 'package:mobile_client/shared/utils/api_guard.dart';
 
 /// One open section, its name, tags and thought items. Edits are applied
 /// locally first, then written to the core.
 class ShortNoteSectionController extends ChangeNotifier with ApiGuard {
-  ShortNoteSectionController({required this.sectionId, required ShortNotesApi api})
-    : _api = api;
+  ShortNoteSectionController({required this.sectionId, required this._api});
 
   final int sectionId;
   final ShortNotesApi _api;

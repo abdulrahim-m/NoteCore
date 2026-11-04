@@ -12,8 +12,14 @@ pub struct ShortTasksService {
 }
 
 impl ShortTasksService {
-    pub fn new(pool: Arc<SqlitePool>) -> Self {
-        ShortTasksService { pool }
+    pub async fn new(pool: Arc<SqlitePool>) -> Result<Self> {
+        let service = ShortTasksService { pool };
+        service.refrech().await?;
+        Ok(service)
+    }
+
+    pub async fn refrech(&self) -> Result<()> {
+        Ok(())
     }
 
     // --- Getters ---

@@ -4,8 +4,8 @@ import 'package:mobile_client/core/rust/api/short_tasks.dart';
 import 'package:mobile_client/core/rust/dto/short_task.dart';
 import 'package:mobile_client/features/checklists/presentation/controllers/short_task_section_controller.dart';
 import 'package:mobile_client/l10n/app_localizations.dart';
-import 'package:mobile_client/shared/editable_item_tile.dart';
-import 'package:mobile_client/shared/section_editor_view.dart';
+import 'package:mobile_client/shared/widgets/editable_item_tile.dart';
+import 'package:mobile_client/shared/views/section_editor_view.dart';
 
 /// One checklist: name + tags, tasks (tick, edit in place, swipe to delete)
 /// and a composer. All behaviour is in [SectionEditorView].
