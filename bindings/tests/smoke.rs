@@ -4,7 +4,7 @@
 
 use notecore_bindings::api::NoteCore;
 use notecore_bindings::dto::query::{ListRequestDto, SearchParamsDto};
-use notecore_bindings::dto::task::{PriorityDto, ScheduleDto, TaskOptionsDto, TaskTypeDto};
+use notecore_bindings::dto::task::{PriorityDto, ScheduleDto, SubTaskDto, TaskOptionsDto, TaskTypeDto, WeekdayDto};
 use notecore_bindings::error::ApiErrorKind;
 
 async fn open() -> (NoteCore, tempfile::TempDir) {
@@ -89,8 +89,11 @@ async fn tasks_roundtrip_options() {
     let options = TaskOptionsDto {
         priority: Some(PriorityDto::High),
         due_date: Some("2026-12-31".into()),
-        schedule: Some(ScheduleDto::Weekly { day_of_week: 2, hour: 9 }),
-        check_list: Some(vec!["a".into(), "b".into()]),
+        schedule: Some(ScheduleDto::Weekly { days_of_week: vec![WeekdayDto::Saturday.into()], hour: 9 }),
+        check_list: Some(vec![
+            SubTaskDto{ text: "a".to_string(), checked: false }.into(),
+            SubTaskDto{ text: "b".to_string(), checked: false }.into()
+        ]),
     };
     let task = tasks
         .create_task(
@@ -108,11 +111,14 @@ async fn tasks_roundtrip_options() {
     assert_eq!(got.options.priority, Some(PriorityDto::High));
     assert_eq!(
         got.options.schedule,
-        Some(ScheduleDto::Weekly { day_of_week: 2, hour: 9 })
+        Some(ScheduleDto::Weekly { days_of_week: vec![WeekdayDto::Saturday.into()], hour: 9 })
     );
     assert_eq!(
         got.options.check_list,
-        Some(vec!["a".to_string(), "b".to_string()])
+        Some(vec![
+            SubTaskDto{ text: "a".to_string(), checked: false }.into(),
+            SubTaskDto{ text: "b".to_string(), checked: false }.into()
+        ])
     );
 
     assert!(tasks.toggle_done(task.id).await.unwrap());

@@ -179,7 +179,7 @@ impl From<TaskOptionsDto> for TaskOptions {
     }
 }
 
-#[derive(Debug, Clone, Default)]
+#[derive(PartialEq, Debug, Clone, Default)]
 pub struct SubTaskDto {
     pub text: String,
     pub checked: bool
