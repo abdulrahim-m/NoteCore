@@ -261,6 +261,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<TaskDto> dco_decode_list_task_dto(dynamic raw);
 
   @protected
+  List<WeekdayDto> dco_decode_list_weekday_dto(dynamic raw);
+
+  @protected
   NoteDto dco_decode_note_dto(dynamic raw);
 
   @protected
@@ -354,6 +357,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   BigInt dco_decode_usize(dynamic raw);
+
+  @protected
+  WeekdayDto dco_decode_weekday_dto(dynamic raw);
 
   @protected
   NoteCore
@@ -579,6 +585,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<TaskDto> sse_decode_list_task_dto(SseDeserializer deserializer);
 
   @protected
+  List<WeekdayDto> sse_decode_list_weekday_dto(SseDeserializer deserializer);
+
+  @protected
   NoteDto sse_decode_note_dto(SseDeserializer deserializer);
 
   @protected
@@ -688,6 +697,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   BigInt sse_decode_usize(SseDeserializer deserializer);
+
+  @protected
+  WeekdayDto sse_decode_weekday_dto(SseDeserializer deserializer);
 
   @protected
   void
@@ -966,6 +978,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_list_task_dto(List<TaskDto> self, SseSerializer serializer);
 
   @protected
+  void sse_encode_list_weekday_dto(
+    List<WeekdayDto> self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_note_dto(NoteDto self, SseSerializer serializer);
 
   @protected
@@ -1108,6 +1126,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_usize(BigInt self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_weekday_dto(WeekdayDto self, SseSerializer serializer);
 }
 
 // Section: wire_class

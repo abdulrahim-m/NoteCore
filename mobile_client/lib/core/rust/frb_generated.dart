@@ -3374,6 +3374,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  List<WeekdayDto> dco_decode_list_weekday_dto(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_weekday_dto).toList();
+  }
+
+  @protected
   NoteDto dco_decode_note_dto(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
@@ -3504,7 +3510,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         );
       case 2:
         return ScheduleDto_Weekly(
-          dayOfWeek: dco_decode_u_8(raw[1]),
+          daysOfWeek: dco_decode_list_weekday_dto(raw[1]),
           hour: dco_decode_u_8(raw[2]),
         );
       case 3:
@@ -3719,6 +3725,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   BigInt dco_decode_usize(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dcoDecodeU64(raw);
+  }
+
+  @protected
+  WeekdayDto dco_decode_weekday_dto(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return WeekdayDto.values[raw as int];
   }
 
   @protected
@@ -4217,6 +4229,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  List<WeekdayDto> sse_decode_list_weekday_dto(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <WeekdayDto>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_weekday_dto(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
   NoteDto sse_decode_note_dto(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_id = sse_decode_i_64(deserializer);
@@ -4415,9 +4439,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         var var_hour = sse_decode_u_8(deserializer);
         return ScheduleDto_EveryNDays(days: var_days, hour: var_hour);
       case 2:
-        var var_dayOfWeek = sse_decode_u_8(deserializer);
+        var var_daysOfWeek = sse_decode_list_weekday_dto(deserializer);
         var var_hour = sse_decode_u_8(deserializer);
-        return ScheduleDto_Weekly(dayOfWeek: var_dayOfWeek, hour: var_hour);
+        return ScheduleDto_Weekly(daysOfWeek: var_daysOfWeek, hour: var_hour);
       case 3:
         var var_dayOfMonth = sse_decode_u_8(deserializer);
         var var_hour = sse_decode_u_8(deserializer);
@@ -4658,6 +4682,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   BigInt sse_decode_usize(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return deserializer.buffer.getBigUint64();
+  }
+
+  @protected
+  WeekdayDto sse_decode_weekday_dto(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_i_32(deserializer);
+    return WeekdayDto.values[inner];
   }
 
   @protected
@@ -5175,6 +5206,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_list_weekday_dto(
+    List<WeekdayDto> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_weekday_dto(item, serializer);
+    }
+  }
+
+  @protected
   void sse_encode_note_dto(NoteDto self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_64(self.id, serializer);
@@ -5348,9 +5391,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         sse_encode_i_32(1, serializer);
         sse_encode_u_32(days, serializer);
         sse_encode_u_8(hour, serializer);
-      case ScheduleDto_Weekly(dayOfWeek: final dayOfWeek, hour: final hour):
+      case ScheduleDto_Weekly(daysOfWeek: final daysOfWeek, hour: final hour):
         sse_encode_i_32(2, serializer);
-        sse_encode_u_8(dayOfWeek, serializer);
+        sse_encode_list_weekday_dto(daysOfWeek, serializer);
         sse_encode_u_8(hour, serializer);
       case ScheduleDto_Monthly(dayOfMonth: final dayOfMonth, hour: final hour):
         sse_encode_i_32(3, serializer);
@@ -5530,6 +5573,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   void sse_encode_usize(BigInt self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     serializer.buffer.putBigUint64(self);
+  }
+
+  @protected
+  void sse_encode_weekday_dto(WeekdayDto self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.index, serializer);
   }
 }
 

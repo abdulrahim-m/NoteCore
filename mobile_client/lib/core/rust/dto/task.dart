@@ -21,7 +21,7 @@ sealed class ScheduleDto with _$ScheduleDto {
   const factory ScheduleDto.everyNDays({required int days, required int hour}) =
       ScheduleDto_EveryNDays;
   const factory ScheduleDto.weekly({
-    required int dayOfWeek,
+    required List<WeekdayDto> daysOfWeek,
     required int hour,
   }) = ScheduleDto_Weekly;
   const factory ScheduleDto.monthly({
@@ -179,3 +179,13 @@ class TaskSearchParamsDto {
 }
 
 enum TaskTypeDto { periodic, oneTime }
+
+enum WeekdayDto {
+  sunday,
+  monday,
+  tuesday,
+  wednesday,
+  thursday,
+  friday,
+  saturday,
+}

@@ -4296,6 +4296,18 @@ impl SseDecode for Vec<crate::dto::task::TaskDto> {
     }
 }
 
+impl SseDecode for Vec<crate::dto::task::WeekdayDto> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(<crate::dto::task::WeekdayDto>::sse_decode(deserializer));
+        }
+        return ans_;
+    }
+}
+
 impl SseDecode for crate::dto::note::NoteDto {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -4501,10 +4513,11 @@ impl SseDecode for crate::dto::task::ScheduleDto {
                 };
             }
             2 => {
-                let mut var_dayOfWeek = <u8>::sse_decode(deserializer);
+                let mut var_daysOfWeek =
+                    <Vec<crate::dto::task::WeekdayDto>>::sse_decode(deserializer);
                 let mut var_hour = <u8>::sse_decode(deserializer);
                 return crate::dto::task::ScheduleDto::Weekly {
-                    day_of_week: var_dayOfWeek,
+                    days_of_week: var_daysOfWeek,
                     hour: var_hour,
                 };
             }
@@ -4777,6 +4790,23 @@ impl SseDecode for usize {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         deserializer.cursor.read_u64::<NativeEndian>().unwrap() as _
+    }
+}
+
+impl SseDecode for crate::dto::task::WeekdayDto {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <i32>::sse_decode(deserializer);
+        return match inner {
+            0 => crate::dto::task::WeekdayDto::Sunday,
+            1 => crate::dto::task::WeekdayDto::Monday,
+            2 => crate::dto::task::WeekdayDto::Tuesday,
+            3 => crate::dto::task::WeekdayDto::Wednesday,
+            4 => crate::dto::task::WeekdayDto::Thursday,
+            5 => crate::dto::task::WeekdayDto::Friday,
+            6 => crate::dto::task::WeekdayDto::Saturday,
+            _ => unreachable!("Invalid variant for WeekdayDto: {}", inner),
+        };
     }
 }
 
@@ -5276,9 +5306,9 @@ impl flutter_rust_bridge::IntoDart for crate::dto::task::ScheduleDto {
                 hour.into_into_dart().into_dart(),
             ]
             .into_dart(),
-            crate::dto::task::ScheduleDto::Weekly { day_of_week, hour } => [
+            crate::dto::task::ScheduleDto::Weekly { days_of_week, hour } => [
                 2.into_dart(),
-                day_of_week.into_into_dart().into_dart(),
+                days_of_week.into_into_dart().into_dart(),
                 hour.into_into_dart().into_dart(),
             ]
             .into_dart(),
@@ -5580,6 +5610,29 @@ impl flutter_rust_bridge::IntoIntoDart<crate::dto::task::TaskTypeDto>
     for crate::dto::task::TaskTypeDto
 {
     fn into_into_dart(self) -> crate::dto::task::TaskTypeDto {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::dto::task::WeekdayDto {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            Self::Sunday => 0.into_dart(),
+            Self::Monday => 1.into_dart(),
+            Self::Tuesday => 2.into_dart(),
+            Self::Wednesday => 3.into_dart(),
+            Self::Thursday => 4.into_dart(),
+            Self::Friday => 5.into_dart(),
+            Self::Saturday => 6.into_dart(),
+            _ => unreachable!(),
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for crate::dto::task::WeekdayDto {}
+impl flutter_rust_bridge::IntoIntoDart<crate::dto::task::WeekdayDto>
+    for crate::dto::task::WeekdayDto
+{
+    fn into_into_dart(self) -> crate::dto::task::WeekdayDto {
         self
     }
 }
@@ -5885,6 +5938,16 @@ impl SseEncode for Vec<crate::dto::task::TaskDto> {
     }
 }
 
+impl SseEncode for Vec<crate::dto::task::WeekdayDto> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <crate::dto::task::WeekdayDto>::sse_encode(item, serializer);
+        }
+    }
+}
+
 impl SseEncode for crate::dto::note::NoteDto {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -6051,9 +6114,9 @@ impl SseEncode for crate::dto::task::ScheduleDto {
                 <u32>::sse_encode(days, serializer);
                 <u8>::sse_encode(hour, serializer);
             }
-            crate::dto::task::ScheduleDto::Weekly { day_of_week, hour } => {
+            crate::dto::task::ScheduleDto::Weekly { days_of_week, hour } => {
                 <i32>::sse_encode(2, serializer);
-                <u8>::sse_encode(day_of_week, serializer);
+                <Vec<crate::dto::task::WeekdayDto>>::sse_encode(days_of_week, serializer);
                 <u8>::sse_encode(hour, serializer);
             }
             crate::dto::task::ScheduleDto::Monthly { day_of_month, hour } => {
@@ -6242,6 +6305,27 @@ impl SseEncode for usize {
             .cursor
             .write_u64::<NativeEndian>(self as _)
             .unwrap();
+    }
+}
+
+impl SseEncode for crate::dto::task::WeekdayDto {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(
+            match self {
+                crate::dto::task::WeekdayDto::Sunday => 0,
+                crate::dto::task::WeekdayDto::Monday => 1,
+                crate::dto::task::WeekdayDto::Tuesday => 2,
+                crate::dto::task::WeekdayDto::Wednesday => 3,
+                crate::dto::task::WeekdayDto::Thursday => 4,
+                crate::dto::task::WeekdayDto::Friday => 5,
+                crate::dto::task::WeekdayDto::Saturday => 6,
+                _ => {
+                    unimplemented!("");
+                }
+            },
+            serializer,
+        );
     }
 }
 
