@@ -45,6 +45,12 @@ class AppShell extends StatelessWidget {
                   onPressed: () {
                     // TODO: Options?
                   },
+                  icon: const Icon(Icons.question_mark),
+                ),
+                IconButton(
+                  onPressed: () {
+                    // TODO: Options?
+                  },
                   icon: const Icon(Icons.more_vert),
                 ),
               ],

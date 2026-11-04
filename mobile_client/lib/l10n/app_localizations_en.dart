@@ -328,4 +328,198 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get checklists_edit_tasks => 'Edit checklist';
+
+  @override
+  String get tasks_search_hint => 'Search tasks';
+
+  @override
+  String get tasks_new => 'New task';
+
+  @override
+  String get tasks_edit => 'Edit task';
+
+  @override
+  String get tasks_empty => 'No tasks yet';
+
+  @override
+  String get tasks_empty_simple => 'No one-time tasks';
+
+  @override
+  String get tasks_empty_periodic => 'No periodic tasks';
+
+  @override
+  String get tasks_upcoming => 'Upcoming';
+
+  @override
+  String get tasks_all => 'All tasks';
+
+  @override
+  String get tasks_view_simple => 'Tasks';
+
+  @override
+  String get tasks_view_periodic => 'Periodic';
+
+  @override
+  String tasks_delete_title(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Delete tasks?',
+      one: 'Delete task?',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tasks_delete_body(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count tasks will be permanently deleted.',
+      one: 'This task will be permanently deleted.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get tasks_title_hint => 'Title';
+
+  @override
+  String get tasks_description_hint => 'Description';
+
+  @override
+  String get tasks_title_required => 'Give the task a title';
+
+  @override
+  String get tasks_load_failed => 'Couldn\'t load this task';
+
+  @override
+  String get tasks_type => 'Type';
+
+  @override
+  String get tasks_type_one_time => 'One-time';
+
+  @override
+  String get tasks_type_periodic => 'Periodic';
+
+  @override
+  String get tasks_priority => 'Priority';
+
+  @override
+  String get tasks_priority_none => 'None';
+
+  @override
+  String get tasks_priority_lowest => 'Lowest';
+
+  @override
+  String get tasks_priority_low => 'Low';
+
+  @override
+  String get tasks_priority_medium => 'Medium';
+
+  @override
+  String get tasks_priority_high => 'High';
+
+  @override
+  String get tasks_priority_highest => 'Highest';
+
+  @override
+  String get tasks_due_date => 'Due date';
+
+  @override
+  String get tasks_no_due_date => 'No due date';
+
+  @override
+  String get tasks_schedule => 'Repeats';
+
+  @override
+  String get tasks_kind_daily => 'Every day';
+
+  @override
+  String get tasks_kind_every_n_days => 'Every N days';
+
+  @override
+  String get tasks_kind_weekly => 'Every week';
+
+  @override
+  String get tasks_kind_monthly => 'Every month';
+
+  @override
+  String get tasks_kind_yearly => 'Every year';
+
+  @override
+  String get tasks_field_repeats => 'Repeats';
+
+  @override
+  String get tasks_field_days => 'Days';
+
+  @override
+  String get tasks_field_day_of_week => 'Day';
+
+  @override
+  String get tasks_field_day_of_month => 'Day of month';
+
+  @override
+  String get tasks_field_month => 'Month';
+
+  @override
+  String get tasks_field_hour => 'Time';
+
+  @override
+  String tasks_sched_daily(String time) {
+    return 'Every day at $time';
+  }
+
+  @override
+  String tasks_sched_every_n_days(int count, String time) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Every $count days at $time',
+      one: 'Every day at $time',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tasks_sched_weekly(String day, String time) {
+    return 'Every $day at $time';
+  }
+
+  @override
+  String tasks_sched_monthly(int day, String time) {
+    return 'Day $day of every month at $time';
+  }
+
+  @override
+  String tasks_sched_yearly(String date, String time) {
+    return 'Every $date at $time';
+  }
+
+  @override
+  String get tasks_checklist => 'Checklist';
+
+  @override
+  String get tasks_checklist_add => 'Add item';
+
+  @override
+  String tasks_checklist_count(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count items',
+      one: '1 item',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get tasks_discard_title => 'Discard changes?';
+
+  @override
+  String get tasks_discard_body =>
+      'You have unsaved changes. If you leave now, they will be lost.';
+
+  @override
+  String get tasks_discard => 'Discard';
 }

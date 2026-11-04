@@ -625,6 +625,312 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Edit checklist'**
   String get checklists_edit_tasks;
+
+  /// No description provided for @tasks_search_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search tasks'**
+  String get tasks_search_hint;
+
+  /// No description provided for @tasks_new.
+  ///
+  /// In en, this message translates to:
+  /// **'New task'**
+  String get tasks_new;
+
+  /// No description provided for @tasks_edit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit task'**
+  String get tasks_edit;
+
+  /// No description provided for @tasks_empty.
+  ///
+  /// In en, this message translates to:
+  /// **'No tasks yet'**
+  String get tasks_empty;
+
+  /// No description provided for @tasks_empty_simple.
+  ///
+  /// In en, this message translates to:
+  /// **'No one-time tasks'**
+  String get tasks_empty_simple;
+
+  /// No description provided for @tasks_empty_periodic.
+  ///
+  /// In en, this message translates to:
+  /// **'No periodic tasks'**
+  String get tasks_empty_periodic;
+
+  /// No description provided for @tasks_upcoming.
+  ///
+  /// In en, this message translates to:
+  /// **'Upcoming'**
+  String get tasks_upcoming;
+
+  /// No description provided for @tasks_all.
+  ///
+  /// In en, this message translates to:
+  /// **'All tasks'**
+  String get tasks_all;
+
+  /// No description provided for @tasks_view_simple.
+  ///
+  /// In en, this message translates to:
+  /// **'Tasks'**
+  String get tasks_view_simple;
+
+  /// No description provided for @tasks_view_periodic.
+  ///
+  /// In en, this message translates to:
+  /// **'Periodic'**
+  String get tasks_view_periodic;
+
+  /// No description provided for @tasks_delete_title.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Delete task?} other{Delete tasks?}}'**
+  String tasks_delete_title(int count);
+
+  /// No description provided for @tasks_delete_body.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{This task will be permanently deleted.} other{{count} tasks will be permanently deleted.}}'**
+  String tasks_delete_body(int count);
+
+  /// No description provided for @tasks_title_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Title'**
+  String get tasks_title_hint;
+
+  /// No description provided for @tasks_description_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get tasks_description_hint;
+
+  /// No description provided for @tasks_title_required.
+  ///
+  /// In en, this message translates to:
+  /// **'Give the task a title'**
+  String get tasks_title_required;
+
+  /// No description provided for @tasks_load_failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load this task'**
+  String get tasks_load_failed;
+
+  /// No description provided for @tasks_type.
+  ///
+  /// In en, this message translates to:
+  /// **'Type'**
+  String get tasks_type;
+
+  /// No description provided for @tasks_type_one_time.
+  ///
+  /// In en, this message translates to:
+  /// **'One-time'**
+  String get tasks_type_one_time;
+
+  /// No description provided for @tasks_type_periodic.
+  ///
+  /// In en, this message translates to:
+  /// **'Periodic'**
+  String get tasks_type_periodic;
+
+  /// No description provided for @tasks_priority.
+  ///
+  /// In en, this message translates to:
+  /// **'Priority'**
+  String get tasks_priority;
+
+  /// No description provided for @tasks_priority_none.
+  ///
+  /// In en, this message translates to:
+  /// **'None'**
+  String get tasks_priority_none;
+
+  /// No description provided for @tasks_priority_lowest.
+  ///
+  /// In en, this message translates to:
+  /// **'Lowest'**
+  String get tasks_priority_lowest;
+
+  /// No description provided for @tasks_priority_low.
+  ///
+  /// In en, this message translates to:
+  /// **'Low'**
+  String get tasks_priority_low;
+
+  /// No description provided for @tasks_priority_medium.
+  ///
+  /// In en, this message translates to:
+  /// **'Medium'**
+  String get tasks_priority_medium;
+
+  /// No description provided for @tasks_priority_high.
+  ///
+  /// In en, this message translates to:
+  /// **'High'**
+  String get tasks_priority_high;
+
+  /// No description provided for @tasks_priority_highest.
+  ///
+  /// In en, this message translates to:
+  /// **'Highest'**
+  String get tasks_priority_highest;
+
+  /// No description provided for @tasks_due_date.
+  ///
+  /// In en, this message translates to:
+  /// **'Due date'**
+  String get tasks_due_date;
+
+  /// No description provided for @tasks_no_due_date.
+  ///
+  /// In en, this message translates to:
+  /// **'No due date'**
+  String get tasks_no_due_date;
+
+  /// No description provided for @tasks_schedule.
+  ///
+  /// In en, this message translates to:
+  /// **'Repeats'**
+  String get tasks_schedule;
+
+  /// No description provided for @tasks_kind_daily.
+  ///
+  /// In en, this message translates to:
+  /// **'Every day'**
+  String get tasks_kind_daily;
+
+  /// No description provided for @tasks_kind_every_n_days.
+  ///
+  /// In en, this message translates to:
+  /// **'Every N days'**
+  String get tasks_kind_every_n_days;
+
+  /// No description provided for @tasks_kind_weekly.
+  ///
+  /// In en, this message translates to:
+  /// **'Every week'**
+  String get tasks_kind_weekly;
+
+  /// No description provided for @tasks_kind_monthly.
+  ///
+  /// In en, this message translates to:
+  /// **'Every month'**
+  String get tasks_kind_monthly;
+
+  /// No description provided for @tasks_kind_yearly.
+  ///
+  /// In en, this message translates to:
+  /// **'Every year'**
+  String get tasks_kind_yearly;
+
+  /// No description provided for @tasks_field_repeats.
+  ///
+  /// In en, this message translates to:
+  /// **'Repeats'**
+  String get tasks_field_repeats;
+
+  /// No description provided for @tasks_field_days.
+  ///
+  /// In en, this message translates to:
+  /// **'Days'**
+  String get tasks_field_days;
+
+  /// No description provided for @tasks_field_day_of_week.
+  ///
+  /// In en, this message translates to:
+  /// **'Day'**
+  String get tasks_field_day_of_week;
+
+  /// No description provided for @tasks_field_day_of_month.
+  ///
+  /// In en, this message translates to:
+  /// **'Day of month'**
+  String get tasks_field_day_of_month;
+
+  /// No description provided for @tasks_field_month.
+  ///
+  /// In en, this message translates to:
+  /// **'Month'**
+  String get tasks_field_month;
+
+  /// No description provided for @tasks_field_hour.
+  ///
+  /// In en, this message translates to:
+  /// **'Time'**
+  String get tasks_field_hour;
+
+  /// No description provided for @tasks_sched_daily.
+  ///
+  /// In en, this message translates to:
+  /// **'Every day at {time}'**
+  String tasks_sched_daily(String time);
+
+  /// No description provided for @tasks_sched_every_n_days.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Every day at {time}} other{Every {count} days at {time}}}'**
+  String tasks_sched_every_n_days(int count, String time);
+
+  /// No description provided for @tasks_sched_weekly.
+  ///
+  /// In en, this message translates to:
+  /// **'Every {day} at {time}'**
+  String tasks_sched_weekly(String day, String time);
+
+  /// No description provided for @tasks_sched_monthly.
+  ///
+  /// In en, this message translates to:
+  /// **'Day {day} of every month at {time}'**
+  String tasks_sched_monthly(int day, String time);
+
+  /// No description provided for @tasks_sched_yearly.
+  ///
+  /// In en, this message translates to:
+  /// **'Every {date} at {time}'**
+  String tasks_sched_yearly(String date, String time);
+
+  /// No description provided for @tasks_checklist.
+  ///
+  /// In en, this message translates to:
+  /// **'Checklist'**
+  String get tasks_checklist;
+
+  /// No description provided for @tasks_checklist_add.
+  ///
+  /// In en, this message translates to:
+  /// **'Add item'**
+  String get tasks_checklist_add;
+
+  /// No description provided for @tasks_checklist_count.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 item} other{{count} items}}'**
+  String tasks_checklist_count(int count);
+
+  /// No description provided for @tasks_discard_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Discard changes?'**
+  String get tasks_discard_title;
+
+  /// No description provided for @tasks_discard_body.
+  ///
+  /// In en, this message translates to:
+  /// **'You have unsaved changes. If you leave now, they will be lost.'**
+  String get tasks_discard_body;
+
+  /// No description provided for @tasks_discard.
+  ///
+  /// In en, this message translates to:
+  /// **'Discard'**
+  String get tasks_discard;
 }
 
 class _AppLocalizationsDelegate

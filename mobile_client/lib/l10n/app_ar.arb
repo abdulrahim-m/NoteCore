@@ -8,7 +8,11 @@
   "shell_navBar_checklist_view": "القوائم",
 
   "general_filters": "التصفية",
-  
+
+
+
+
+
   "notes_all": "الكل",
   "notes_delete": "حذف",
   "notes_change_group": "تغيير المجموعة",
@@ -70,6 +74,10 @@
   "note_indent": "زيادة المسافة البادئة",
   "note_outdent": "تقليل المسافة البادئة",
 
+
+
+
+
   "thoughts_search_hint": "ابحث في الأفكار",
   "thoughts_empty": "لا توجد أفكار بعد",
   "thoughts_new_section": "قسم جديد",
@@ -84,6 +92,10 @@
   "thoughts_list_view": "عرض قائمة",
   "thoughts_load_failed": "تعذّر تحميل هذا القسم",
   "thoughts_section_empty": "لا شيء هنا بعد. أضف أول فكرة بالأسفل.",
+
+
+
+
 
   "checklists_search_hint": "ابحث في القوائم",
   "checklists_empty": "لا توجد قوائم بعد",
@@ -113,5 +125,130 @@
   "checklists_load_failed": "تعذر تحميل هذه القائمة",
   "checklists_section_empty": "لا توجد مهام بعد. أضف أول مهمة بالأسفل.",
   "checklists_no_tasks": "لا توجد مهام بعد",
-  "checklists_edit_tasks": "تعديل القائمة"
+  "checklists_edit_tasks": "تعديل القائمة",
+
+
+
+
+
+  "tasks_search_hint": "ابحث في المهام",
+  "tasks_new": "مهمة جديدة",
+  "tasks_edit": "تعديل المهمة",
+  "tasks_empty": "لا توجد مهام بعد",
+  "tasks_empty_simple": "لا توجد مهام لمرة واحدة",
+  "tasks_empty_periodic": "لا توجد مهام دورية",
+  "tasks_upcoming": "القادم",
+  "tasks_all": "كل المهام",
+  "tasks_view_simple": "المهام",
+  "tasks_view_periodic": "الدورية",
+  "tasks_delete_title": "{count, plural, =1{حذف المهمة؟} other{حذف المهام؟}}",
+  "@tasks_delete_title": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "tasks_delete_body": "{count, plural, =1{سيتم حذف هذه المهمة نهائيًا.} other{سيتم حذف {count} مهام نهائيًا.}}",
+  "@tasks_delete_body": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "tasks_title_hint": "العنوان",
+  "tasks_description_hint": "الوصف",
+  "tasks_title_required": "أضف عنوانًا للمهمة",
+  "tasks_load_failed": "تعذر تحميل هذه المهمة",
+  "tasks_type": "النوع",
+  "tasks_type_one_time": "لمرة واحدة",
+  "tasks_type_periodic": "دورية",
+  "tasks_priority": "الأولوية",
+  "tasks_priority_none": "بدون",
+  "tasks_priority_lowest": "الأدنى",
+  "tasks_priority_low": "منخفضة",
+  "tasks_priority_medium": "متوسطة",
+  "tasks_priority_high": "عالية",
+  "tasks_priority_highest": "الأعلى",
+  "tasks_due_date": "تاريخ الاستحقاق",
+  "tasks_no_due_date": "بدون تاريخ",
+  "tasks_schedule": "التكرار",
+  "tasks_kind_daily": "كل يوم",
+  "tasks_kind_every_n_days": "كل عدد من الأيام",
+  "tasks_kind_weekly": "كل أسبوع",
+  "tasks_kind_monthly": "كل شهر",
+  "tasks_kind_yearly": "كل سنة",
+  "tasks_field_repeats": "التكرار",
+  "tasks_field_days": "الأيام",
+  "tasks_field_day_of_week": "اليوم",
+  "tasks_field_day_of_month": "يوم الشهر",
+  "tasks_field_month": "الشهر",
+  "tasks_field_hour": "الوقت",
+  "tasks_sched_daily": "كل يوم عند {time}",
+  "@tasks_sched_daily": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "tasks_sched_every_n_days": "{count, plural, =1{كل يوم عند {time}} other{كل {count} أيام عند {time}}}",
+  "@tasks_sched_every_n_days": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "tasks_sched_weekly": "كل {day} عند {time}",
+  "@tasks_sched_weekly": {
+    "placeholders": {
+      "day": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "tasks_sched_monthly": "اليوم {day} من كل شهر عند {time}",
+  "@tasks_sched_monthly": {
+    "placeholders": {
+      "day": {
+        "type": "int"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "tasks_sched_yearly": "كل سنة في {date} عند {time}",
+  "@tasks_sched_yearly": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "tasks_checklist": "قائمة التحقق",
+  "tasks_checklist_add": "إضافة عنصر",
+  "tasks_checklist_count": "{count, plural, =1{عنصر واحد} other{{count} عناصر}}",
+  "@tasks_checklist_count": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+
+  "tasks_discard_title": "تجاهل التغييرات؟",
+  "tasks_discard_body": "لديك تغييرات غير محفوظة. إذا غادرت الآن فستفقدها.",
+  "tasks_discard": "تجاهل"
 }
