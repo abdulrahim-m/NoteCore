@@ -57,6 +57,7 @@ class NotesController extends PagedListController<NoteListItemDto> {
 
   /// Like [loadInitial] but keeps as many pages loaded as before, so the
   /// scroll position survives (used when coming back from the note view).
+  @override
   Future<void> refresh() async {
     await Future.wait([
       loadGroups(),

@@ -5,7 +5,7 @@ import 'package:mobile_client/core/rust/api.dart';
 import 'package:mobile_client/features/notes/presentation/controllers/notes_controller.dart';
 import 'package:mobile_client/features/notes/presentation/dialogs/group_management_sheet.dart';
 import 'package:mobile_client/features/notes/presentation/dialogs/group_picker_sheet.dart';
-import 'package:mobile_client/features/notes/presentation/dialogs/tag_picker_sheet.dart';
+import 'package:mobile_client/shared/widgets/tag_picker_sheet.dart';
 import 'package:mobile_client/features/notes/presentation/widgets/group_slider.dart';
 import 'package:mobile_client/features/notes/presentation/widgets/note_card.dart';
 import 'package:mobile_client/l10n/app_localizations.dart';

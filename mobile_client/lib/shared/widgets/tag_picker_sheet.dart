@@ -120,17 +120,31 @@ class _TagPickerSheetState extends State<_TagPickerSheet> {
                       ),
                     ),
                   const SizedBox(height: 12),
-                  TextField(
-                    controller: _field,
-                    onSubmitted: (_) => _create(),
-                    decoration: InputDecoration(
-                      hintText: l10n.notes_new_tag,
-                      isDense: true,
-                      suffixIcon: IconButton(
-                        icon: const Icon(Icons.add),
-                        onPressed: _create,
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          controller: _field,
+                          onSubmitted: (_) => _create(),
+                          decoration: InputDecoration(
+                            hintText: l10n.notes_new_tag,
+                            isDense: true,
+                          ),
+                        ),
                       ),
-                    ),
+                      const SizedBox(width: 8),
+                      ElevatedButton(
+                        onPressed: _create,
+                        child: Icon(Icons.add),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Theme.of(context).colorScheme.primary,
+                          foregroundColor: Theme.of(context).colorScheme.surface,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadiusGeometry.all(Radius.circular(5))
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 12),
                   SizedBox(

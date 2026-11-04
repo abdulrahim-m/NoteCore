@@ -16,10 +16,9 @@ import 'package:mobile_client/shared/controllers/section_list_controller.dart';
 /// [showCompleted] reveals everything.
 class ShortTasksController extends SectionListController<ShortTaskSectionDto> {
   ShortTasksController({
-    required ShortTasksApi api,
+    required this._api,
     required SearchFilters filters,
-  }) : _api = api,
-       super(filters);
+  }) : super(filters);
 
   static const _itemLinger = Duration(milliseconds: 700);
   static const _collapseAfter = Duration(milliseconds: 700);

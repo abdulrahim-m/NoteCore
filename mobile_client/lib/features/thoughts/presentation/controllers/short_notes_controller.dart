@@ -10,9 +10,9 @@ import 'package:mobile_client/shared/widgets/search_filters.dart';
 class ShortNotesController
     extends PagedListController<ShortNoteSectionListItemDto> {
   ShortNotesController({
-    required ShortNotesApi api,
+    required this._api,
     required this.filters,
-  }) : _api = api {
+  }) {
     filters.queryChanges.addListener(_onQueryChanged);
   }
 

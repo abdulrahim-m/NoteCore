@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_client/features/notes/presentation/dialogs/tag_picker_sheet.dart';
+import 'package:mobile_client/shared/widgets/tag_picker_sheet.dart';
 import 'package:mobile_client/l10n/app_localizations.dart';
 import 'package:mobile_client/shared/controllers/searchable_list_controller.dart';
 import 'package:mobile_client/shared/controllers/section_list_controller.dart';

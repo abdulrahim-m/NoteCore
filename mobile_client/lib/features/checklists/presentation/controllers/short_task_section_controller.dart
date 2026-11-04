@@ -7,9 +7,8 @@ class ShortTaskSectionController
     extends SectionEditorController<ShortTaskItemDto> {
   ShortTaskSectionController({
     required int sectionId,
-    required ShortTasksApi api,
-  }) : _api = api,
-       super(sectionId);
+    required this._api,
+  }) : super(sectionId);
 
   final ShortTasksApi _api;
 

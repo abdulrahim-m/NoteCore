@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobile_client/core/di/injection.dart';
-import 'package:mobile_client/features/notes/presentation/dialogs/tag_picker_sheet.dart';
+import 'package:mobile_client/shared/widgets/tag_picker_sheet.dart';
 import 'package:mobile_client/l10n/app_localizations.dart';
 import 'package:mobile_client/shared/dialogs/dialogs.dart';
 import 'package:mobile_client/shared/widgets/item_composer.dart';

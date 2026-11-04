@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mobile_client/core/di/injection.dart';
 import 'package:mobile_client/core/rust/api/tasks.dart';
 import 'package:mobile_client/core/rust/dto/task.dart';
-import 'package:mobile_client/features/notes/presentation/dialogs/tag_picker_sheet.dart';
+import 'package:mobile_client/shared/widgets/tag_picker_sheet.dart';
 import 'package:mobile_client/features/tasks/presentation/controllers/task_editor_controller.dart';
 import 'package:mobile_client/features/tasks/presentation/widgets/schedule_editor.dart';
 import 'package:mobile_client/features/tasks/presentation/widgets/task_labels.dart';

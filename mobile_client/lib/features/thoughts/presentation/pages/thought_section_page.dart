@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobile_client/core/di/injection.dart';
 import 'package:mobile_client/core/rust/api/short_notes.dart';
-import 'package:mobile_client/features/notes/presentation/dialogs/tag_picker_sheet.dart';
+import 'package:mobile_client/shared/widgets/tag_picker_sheet.dart';
 import 'package:mobile_client/features/thoughts/presentation/controllers/short_note_section_controller.dart';
 import 'package:mobile_client/shared/widgets/auto_save_text_field.dart';
 import 'package:mobile_client/l10n/app_localizations.dart';
