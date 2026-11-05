@@ -11,14 +11,17 @@ class AppTheme {
       brightness: Brightness.light,
       scaffoldBackgroundColor: colors.lightBackground,
 
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: colors.primary,
+      // Directly map colors instead of using fromSeed to prevent blue fallbacks
+      colorScheme: ColorScheme(
         brightness: Brightness.light,
         primary: colors.primary,
+        onPrimary: Colors.white,
         secondary: colors.secondary,
+        onSecondary: Colors.white,
         surface: colors.lightSurface,
-        error: colors.error,
         onSurface: colors.lightTextPrimary,
+        error: colors.error,
+        onError: Colors.white,
       ),
 
       textTheme: TextTheme(
@@ -83,14 +86,17 @@ class AppTheme {
       brightness: Brightness.dark,
       scaffoldBackgroundColor: colors.darkBackground,
 
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: colors.primary,
+      // Directly map colors instead of using fromSeed
+      colorScheme: ColorScheme(
         brightness: Brightness.dark,
         primary: colors.primary,
+        onPrimary: colors.darkBackground,
         secondary: colors.secondary,
+        onSecondary: colors.darkBackground,
         surface: colors.darkSurface,
-        error: colors.error,
         onSurface: colors.darkTextPrimary,
+        error: colors.error,
+        onError: Colors.black,
       ),
 
       textTheme: TextTheme(
