@@ -10,6 +10,9 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get help => 'Help';
+
+  @override
   String get app_title => 'NoteCore';
 
   @override
@@ -540,4 +543,48 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tasks_due_before => 'Due before';
+
+  @override
+  String get settings_title => 'Settings';
+
+  @override
+  String get settings_appearance => 'Appearance';
+
+  @override
+  String get settings_theme => 'Theme';
+
+  @override
+  String get settings_font_size => 'Font size';
+
+  @override
+  String get settings_font_preview =>
+      'The quick brown fox jumps over the lazy dog';
+
+  @override
+  String get settings_general => 'General';
+
+  @override
+  String get settings_language => 'Language';
+
+  @override
+  String get settings_language_default => 'Device default';
+
+  @override
+  String get settings_reset_time => 'Daily reset time';
+
+  @override
+  String get settings_reset_time_hint => 'Hour at which periodic tasks reset';
+
+  @override
+  String get settings_reset_defaults => 'Reset to defaults';
+
+  @override
+  String get settings_reset_title => 'Reset settings?';
+
+  @override
+  String get settings_reset_body =>
+      'All settings return to their default values.';
+
+  @override
+  String get settings_reset_action => 'Reset';
 }

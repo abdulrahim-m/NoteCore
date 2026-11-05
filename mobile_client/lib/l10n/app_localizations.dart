@@ -98,6 +98,12 @@ abstract class AppLocalizations {
     Locale('en'),
   ];
 
+  /// No description provided for @help.
+  ///
+  /// In en, this message translates to:
+  /// **'Help'**
+  String get help;
+
   /// No description provided for @app_title.
   ///
   /// In en, this message translates to:
@@ -967,6 +973,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Due before'**
   String get tasks_due_before;
+
+  /// No description provided for @settings_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settings_title;
+
+  /// No description provided for @settings_appearance.
+  ///
+  /// In en, this message translates to:
+  /// **'Appearance'**
+  String get settings_appearance;
+
+  /// No description provided for @settings_theme.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme'**
+  String get settings_theme;
+
+  /// No description provided for @settings_font_size.
+  ///
+  /// In en, this message translates to:
+  /// **'Font size'**
+  String get settings_font_size;
+
+  /// No description provided for @settings_font_preview.
+  ///
+  /// In en, this message translates to:
+  /// **'The quick brown fox jumps over the lazy dog'**
+  String get settings_font_preview;
+
+  /// No description provided for @settings_general.
+  ///
+  /// In en, this message translates to:
+  /// **'General'**
+  String get settings_general;
+
+  /// No description provided for @settings_language.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get settings_language;
+
+  /// No description provided for @settings_language_default.
+  ///
+  /// In en, this message translates to:
+  /// **'Device default'**
+  String get settings_language_default;
+
+  /// No description provided for @settings_reset_time.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily reset time'**
+  String get settings_reset_time;
+
+  /// No description provided for @settings_reset_time_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Hour at which periodic tasks reset'**
+  String get settings_reset_time_hint;
+
+  /// No description provided for @settings_reset_defaults.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset to defaults'**
+  String get settings_reset_defaults;
+
+  /// No description provided for @settings_reset_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset settings?'**
+  String get settings_reset_title;
+
+  /// No description provided for @settings_reset_body.
+  ///
+  /// In en, this message translates to:
+  /// **'All settings return to their default values.'**
+  String get settings_reset_body;
+
+  /// No description provided for @settings_reset_action.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get settings_reset_action;
 }
 
 class _AppLocalizationsDelegate

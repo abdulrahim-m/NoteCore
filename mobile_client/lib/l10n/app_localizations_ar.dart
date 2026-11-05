@@ -10,6 +10,9 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
+  String get help => 'مساعدة';
+
+  @override
   String get app_title => 'NoteCore';
 
   @override
@@ -540,4 +543,47 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get tasks_due_before => 'الاستحقاق قبل';
+
+  @override
+  String get settings_title => 'الإعدادات';
+
+  @override
+  String get settings_appearance => 'المظهر';
+
+  @override
+  String get settings_theme => 'السمة';
+
+  @override
+  String get settings_font_size => 'حجم الخط';
+
+  @override
+  String get settings_font_preview => 'نص تجريبي لمعاينة حجم الخط';
+
+  @override
+  String get settings_general => 'عام';
+
+  @override
+  String get settings_language => 'اللغة';
+
+  @override
+  String get settings_language_default => 'لغة الجهاز';
+
+  @override
+  String get settings_reset_time => 'وقت إعادة التعيين اليومي';
+
+  @override
+  String get settings_reset_time_hint =>
+      'الساعة التي تُعاد فيها المهام الدورية';
+
+  @override
+  String get settings_reset_defaults => 'استعادة الإعدادات الافتراضية';
+
+  @override
+  String get settings_reset_title => 'استعادة الإعدادات؟';
+
+  @override
+  String get settings_reset_body => 'ستعود كل الإعدادات إلى قيمها الافتراضية.';
+
+  @override
+  String get settings_reset_action => 'استعادة';
 }

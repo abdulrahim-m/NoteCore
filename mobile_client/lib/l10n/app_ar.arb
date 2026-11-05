@@ -1,5 +1,7 @@
 {
   "@@locale": "ar",
+  
+  "help": "مساعدة",
 
   "app_title": "NoteCore",
   "shell_navBar_note_view": "ملاحظات",
@@ -257,5 +259,24 @@
   "tasks_all_types": "كل الأنواع",
   "tasks_empty_finished": "لا توجد مهام منتهية بعد",
   "tasks_due_after": "الاستحقاق بعد",
-  "tasks_due_before": "الاستحقاق قبل"
+  "tasks_due_before": "الاستحقاق قبل",
+
+
+
+
+
+  "settings_title": "الإعدادات",
+  "settings_appearance": "المظهر",
+  "settings_theme": "السمة",
+  "settings_font_size": "حجم الخط",
+  "settings_font_preview": "نص تجريبي لمعاينة حجم الخط",
+  "settings_general": "عام",
+  "settings_language": "اللغة",
+  "settings_language_default": "لغة الجهاز",
+  "settings_reset_time": "وقت إعادة التعيين اليومي",
+  "settings_reset_time_hint": "الساعة التي تُعاد فيها المهام الدورية",
+  "settings_reset_defaults": "استعادة الإعدادات الافتراضية",
+  "settings_reset_title": "استعادة الإعدادات؟",
+  "settings_reset_body": "ستعود كل الإعدادات إلى قيمها الافتراضية.",
+  "settings_reset_action": "استعادة"
 }
