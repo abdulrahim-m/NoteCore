@@ -7,6 +7,7 @@ import 'package:mobile_client/features/checklists/presentation/pages/checklist_s
 import 'package:mobile_client/features/checklists/presentation/pages/checklists_page.dart';
 import 'package:mobile_client/features/notes/presentation/pages/note_page.dart';
 import 'package:mobile_client/features/notes/presentation/pages/notes_page.dart';
+import 'package:mobile_client/features/settings/presentation/pages/settings_page.dart';
 import 'package:mobile_client/features/tasks/presentation/pages/task_page.dart';
 import 'package:mobile_client/features/tasks/presentation/pages/tasks_page.dart';
 import 'package:mobile_client/features/thoughts/presentation/pages/thought_section_page.dart';
@@ -105,5 +106,6 @@ final appRouter = GoRouter(
         ),
       ],
     ),
+    GoRoute(path: '/settings', builder: (_, _) => const SettingsPage()),
   ],
 );

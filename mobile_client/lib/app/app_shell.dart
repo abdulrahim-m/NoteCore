@@ -45,13 +45,15 @@ class AppShell extends StatelessWidget {
                   onPressed: () {
                     // TODO: Options?
                   },
+                  tooltip: l10n.help,
                   icon: const Icon(Icons.question_mark),
                 ),
                 IconButton(
                   onPressed: () {
-                    // TODO: Options?
+                    context.push('/settings');
                   },
-                  icon: const Icon(Icons.more_vert),
+                  tooltip: l10n.settings_title,
+                  icon: const Icon(Icons.settings),
                 ),
               ],
             ),
