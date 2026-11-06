@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_client/core/guide/guide_target.dart';
 import 'package:mobile_client/core/rust/dto/note.dart';
 import 'package:mobile_client/l10n/app_localizations.dart';
 
@@ -27,7 +28,9 @@ class GroupSlider extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            child: ListView(
+            child: GuideTarget(
+              id: 'groups',
+              child: ListView(
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsetsDirectional.only(start: 12, end: 4),
               children: [
@@ -45,11 +48,15 @@ class GroupSlider extends StatelessWidget {
                   ),
               ],
             ),
+            ),
           ),
-          IconButton(
-            tooltip: l10n.notes_manage_groups,
-            onPressed: onManage,
-            icon: const Icon(Icons.edit_note),
+          GuideTarget(
+            id: 'manage-groups',
+            child: IconButton(
+              tooltip: l10n.notes_manage_groups,
+              onPressed: onManage,
+              icon: const Icon(Icons.edit_note),
+            ),
           ),
         ],
       ),

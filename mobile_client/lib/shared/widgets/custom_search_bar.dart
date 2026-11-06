@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_client/core/guide/guide_target.dart';
 import 'package:mobile_client/l10n/app_localizations.dart';
 
 class CustomSearchBar extends StatelessWidget {
@@ -26,37 +27,43 @@ class CustomSearchBar extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            child: TextField(
-              controller: controller,
-              onChanged: onChanged,
-              textInputAction: TextInputAction.search,
-              decoration: InputDecoration(
-                hintText: hint,
-                isDense: true,
-                prefixIcon: const Icon(Icons.search),
-                suffixIcon: ValueListenableBuilder<TextEditingValue>(
-                  valueListenable: controller,
-                  builder: (_, value, _) => value.text.isEmpty
-                      ? const SizedBox.shrink()
-                      : IconButton(
-                          icon: const Icon(Icons.close),
-                          onPressed: () {
-                            controller.clear();
-                            onChanged('');
-                          },
-                        ),
+            child: GuideTarget(
+              id: 'search',
+              child: TextField(
+                controller: controller,
+                onChanged: onChanged,
+                textInputAction: TextInputAction.search,
+                decoration: InputDecoration(
+                  hintText: hint,
+                  isDense: true,
+                  prefixIcon: const Icon(Icons.search),
+                  suffixIcon: ValueListenableBuilder<TextEditingValue>(
+                    valueListenable: controller,
+                    builder: (_, value, _) => value.text.isEmpty
+                        ? const SizedBox.shrink()
+                        : IconButton(
+                            icon: const Icon(Icons.close),
+                            onPressed: () {
+                              controller.clear();
+                              onChanged('');
+                            },
+                          ),
+                  ),
                 ),
               ),
             ),
           ),
           const SizedBox(width: 8),
-          IconButton.filledTonal(
-            tooltip: l10n.general_filters,
-            onPressed: onFilterTap,
-            icon: Badge(
-              isLabelVisible: filterCount > 0,
-              label: Text('$filterCount'),
-              child: const Icon(Icons.filter_list),
+          GuideTarget(
+            id: 'filters',
+            child: IconButton.filledTonal(
+              tooltip: l10n.general_filters,
+              onPressed: onFilterTap,
+              icon: Badge(
+                isLabelVisible: filterCount > 0,
+                label: Text('$filterCount'),
+                child: const Icon(Icons.filter_list),
+              ),
             ),
           ),
         ],

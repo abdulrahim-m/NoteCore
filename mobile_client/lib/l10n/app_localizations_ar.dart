@@ -10,9 +10,6 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
-  String get help => 'مساعدة';
-
-  @override
   String get app_title => 'NoteCore';
 
   @override
@@ -586,4 +583,200 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get settings_reset_action => 'استعادة';
+
+  @override
+  String get guide_tooltip => 'دليل الصفحة';
+
+  @override
+  String get guide_next => 'التالي';
+
+  @override
+  String get guide_back => 'السابق';
+
+  @override
+  String get guide_skip => 'تخطي';
+
+  @override
+  String get guide_done => 'تم';
+
+  @override
+  String get guide_search_title => 'البحث';
+
+  @override
+  String get guide_search_body =>
+      'اكتب هنا للبحث. تتحدث القائمة أثناء الكتابة، ويرافقك نفس البحث بين الصفحات.';
+
+  @override
+  String get guide_filters_title => 'المرشحات والوسوم';
+
+  @override
+  String get guide_filters_body =>
+      'اضغط على زر المرشحات في نهاية حقل البحث لفتح لوحة المرشحات: صفّ القائمة بالوسوم وبالتاريخ. يعرض الرقم على الزر عدد المرشحات المفعّلة.';
+
+  @override
+  String get guide_refresh => 'اسحب للأسفل للتحديث.';
+
+  @override
+  String get guide_notes_intro_title => 'الملاحظات';
+
+  @override
+  String get guide_notes_intro_body =>
+      'هنا توجد ملاحظاتك: نصوص أطول يمكنك تنسيقها. إليك جولة سريعة فيما يمكنك فعله في هذه الصفحة.';
+
+  @override
+  String get guide_notes_create_title => 'ملاحظة جديدة';
+
+  @override
+  String get guide_notes_create_body =>
+      'اضغط + لإنشاء ملاحظة والبدء بالكتابة فورًا. تُحفظ الملاحظات تلقائيًا.';
+
+  @override
+  String get guide_notes_groups_title => 'المجموعات';
+
+  @override
+  String get guide_notes_groups_body =>
+      'تُنظَّم الملاحظات في مجموعات. اضغط على مجموعة لعرض ملاحظاتها فقط، أو اختر الأولى لعرض كل شيء. زر الإدارة في نهاية الصف يتيح لك إنشاء المجموعات وإعادة تسميتها وحذفها.';
+
+  @override
+  String get guide_notes_list_title => 'ملاحظاتك';
+
+  @override
+  String get guide_notes_list_body => 'اضغط على ملاحظة لفتحها وتعديلها.';
+
+  @override
+  String get guide_notes_select_title => 'تحديد الملاحظات';
+
+  @override
+  String get guide_notes_select_body =>
+      'اضغط مطولًا على ملاحظة لتحديدها، ثم اضغط على ملاحظات أخرى لإضافتها. يتيح لك الشريط العلوي إضافة وسوم أو نقل الملاحظات المحددة إلى مجموعة أخرى أو حذفها.';
+
+  @override
+  String get guide_thoughts_intro_title => 'الأفكار';
+
+  @override
+  String get guide_thoughts_intro_body =>
+      'الأفكار أقسام يضم كل منها ملاحظات قصيرة من سطر واحد. مناسبة لتدوين الأفكار بسرعة.';
+
+  @override
+  String get guide_thoughts_create_title => 'قسم جديد';
+
+  @override
+  String get guide_thoughts_create_body =>
+      'اضغط + وأعطِ القسم اسمًا. يُفتح فورًا لتبدأ بإضافة الأفكار.';
+
+  @override
+  String get guide_thoughts_view_title => 'التخطيط';
+
+  @override
+  String get guide_thoughts_view_body =>
+      'بدّل بين عرض الأقسام كشبكة أو كقائمة.';
+
+  @override
+  String get guide_thoughts_list_title => 'أقسامك';
+
+  @override
+  String get guide_thoughts_list_body =>
+      'اضغط على قسم لفتحه، وأضف الأفكار وعدّلها، أو اسحب فكرة جانبًا لحذفها.';
+
+  @override
+  String get guide_thoughts_select_title => 'تحديد الأقسام';
+
+  @override
+  String get guide_thoughts_select_body =>
+      'اضغط مطولًا على قسم لتحديده. يتيح لك الشريط العلوي إعادة تسميته أو إضافة وسوم أو حذف الأقسام المحددة مع أفكارها.';
+
+  @override
+  String get guide_tasks_intro_title => 'المهام';
+
+  @override
+  String get guide_tasks_intro_body =>
+      'يمكن أن تكون المهام لمرة واحدة، أو دورية تعود في الأيام التي تختارها. إليك طريقة عمل هذه الصفحة.';
+
+  @override
+  String get guide_tasks_create_title => 'مهمة جديدة';
+
+  @override
+  String get guide_tasks_create_body =>
+      'اضغط + لفتح محرر المهام: حدد العنوان والملاحظات وتاريخ الاستحقاق والمهام الفرعية، أو اجعل المهمة تتكرر. تُحفظ المهمة عند التأكيد.';
+
+  @override
+  String get guide_tasks_filters_body =>
+      'اضغط على زر المرشحات في نهاية حقل البحث. إضافةً إلى الوسوم والتواريخ، تضم اللوحة مرشحات مخصصة للمهام.';
+
+  @override
+  String get guide_tasks_views_title => 'العروض';
+
+  @override
+  String get guide_tasks_views_body =>
+      'بدّل بين المهام غير المنجزة والمنجزة، واستخدم القائمة لعرض كل المهام أو المهام لمرة واحدة فقط أو الدورية فقط.';
+
+  @override
+  String get guide_tasks_upcoming_title => 'القادمة';
+
+  @override
+  String get guide_tasks_upcoming_body =>
+      'يعرض الشريط العلوي ما يحين موعده قريبًا لتتمكن من إنجازه دون تمرير. يظهر في عرض المهام غير المنجزة لكل المهام.';
+
+  @override
+  String get guide_tasks_list_title => 'مهامك';
+
+  @override
+  String get guide_tasks_list_body =>
+      'اضغط على مهمة لتعديلها، واستخدم مربع الاختيار لتحديدها كمنجزة. افتح السهم في المهمة لتحديد مهامها الفرعية دون فتح التعديل؛ ولا يشترط إنجاز المهام الفرعية لإنجاز المهمة.';
+
+  @override
+  String get guide_tasks_select_title => 'تحديد المهام';
+
+  @override
+  String get guide_tasks_select_body =>
+      'اضغط مطولًا على مهمة لتحديدها، ثم استخدم الشريط العلوي للتصرف في كل المهام المحددة دفعة واحدة.';
+
+  @override
+  String get guide_checklists_intro_title => 'قوائم المراجعة';
+
+  @override
+  String get guide_checklists_intro_body =>
+      'قوائم المراجعة أقسام من عناصر بسيطة بمربع اختيار فقط: قوائم التسوق والسفر وأي شيء سريع.';
+
+  @override
+  String get guide_checklists_create_title => 'قائمة جديدة';
+
+  @override
+  String get guide_checklists_create_body =>
+      'اضغط + وسمِّ القائمة. تُفتح فورًا لتضيف العناصر.';
+
+  @override
+  String get guide_checklists_completed_title => 'العناصر المكتملة';
+
+  @override
+  String get guide_checklists_completed_body =>
+      'تُخفى العناصر المحددة، والقوائم التي اكتملت كلها، لتبقى القائمة قصيرة. فعّل هذا الخيار لإظهارها من جديد.';
+
+  @override
+  String get guide_checklists_list_title => 'قوائمك';
+
+  @override
+  String get guide_checklists_list_body =>
+      'وسّع قائمة لتحديد عناصرها هنا مباشرة، أو اضغط عليها لفتحها وتعديلها.';
+
+  @override
+  String get guide_checklists_select_title => 'تحديد القوائم';
+
+  @override
+  String get guide_checklists_select_body =>
+      'اضغط مطولًا على قائمة لتحديدها. يتيح لك الشريط العلوي إعادة تسميتها أو إضافة وسوم أو حذف القوائم المحددة مع عناصرها.';
+
+  @override
+  String get guide_notes_manage_title => 'إدارة المجموعات';
+
+  @override
+  String get guide_notes_manage_body =>
+      'أنشئ مجموعاتك وأعد تسميتها واحذفها من هنا.';
+
+  @override
+  String get guide_tasks_kind_title => 'نوع المهام';
+
+  @override
+  String get guide_tasks_kind_body =>
+      'اعرض كل المهام، أو المهام لمرة واحدة فقط، أو المهام الدورية المتكررة فقط.';
 }

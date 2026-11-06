@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobile_client/core/di/injection.dart';
+import 'package:mobile_client/core/guide/guide_target.dart';
 import 'package:mobile_client/core/rust/api/short_notes.dart';
 import 'package:mobile_client/shared/widgets/tag_picker_sheet.dart';
 import 'package:mobile_client/features/thoughts/presentation/controllers/short_notes_controller.dart';
@@ -139,11 +140,14 @@ class _ThoughtsPageState extends State<ThoughtsPage> {
             drawer: TagsDrawer(controller: _filters),
             floatingActionButton: _c.selecting
                 ? null
-                : FloatingActionButton(
-                    heroTag: null,
-                    tooltip: l10n.thoughts_new_section,
-                    onPressed: _create,
-                    child: const Icon(Icons.add),
+                : GuideTarget(
+                    id: 'create',
+                    child: FloatingActionButton(
+                      heroTag: null,
+                      tooltip: l10n.thoughts_new_section,
+                      onPressed: _create,
+                      child: const Icon(Icons.add),
+                    ),
                   ),
             body: Column(
               children: [
@@ -190,7 +194,9 @@ class _ThoughtsPageState extends State<ThoughtsPage> {
                                 padding: const EdgeInsetsDirectional.only(
                                   end: 8,
                                 ),
-                                child: IconButton(
+                                child: GuideTarget(
+                                  id: 'view',
+                                  child: IconButton(
                                   visualDensity: VisualDensity.compact,
                                   tooltip: _c.grid
                                       ? l10n.thoughts_list_view
@@ -202,12 +208,13 @@ class _ThoughtsPageState extends State<ThoughtsPage> {
                                         : Icons.grid_view,
                                   ),
                                 ),
+                                ),
                               ),
                             ),
                           ],
                         ),
                 ),
-                Expanded(child: _buildBody(l10n)),
+                Expanded(child: GuideTarget(id: 'list', child: _buildBody(l10n))),
               ],
             ),
           ),
@@ -257,7 +264,7 @@ class _ThoughtsPageState extends State<ThoughtsPage> {
 
     Widget cardAt(int i) {
       final s = _c.items[i];
-      return SectionCard(
+      final card = SectionCard(
         key: ValueKey(s.id),
         section: s,
         compact: _c.grid,
@@ -266,6 +273,9 @@ class _ThoughtsPageState extends State<ThoughtsPage> {
         onLongPress: () => _c.toggleSelection(s.id),
         onTap: () => _c.selecting ? _c.toggleSelection(s.id) : _open(s.id),
       );
+      return i == 0
+          ? GuideTarget(key: ValueKey('guide-${s.id}'), id: 'item', child: card)
+          : card;
     }
 
     return RefreshIndicator(

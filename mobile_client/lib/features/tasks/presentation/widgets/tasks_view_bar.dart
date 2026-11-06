@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_client/core/guide/guide_target.dart';
 import 'package:mobile_client/features/tasks/presentation/controllers/tasks_controller.dart';
 import 'package:mobile_client/features/tasks/presentation/widgets/task_labels.dart';
 import 'package:mobile_client/l10n/app_localizations.dart';
@@ -18,7 +19,9 @@ class TasksViewBar extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(12, 8, 12, 0),
       child: Row(
         children: [
-          SegmentedButton<TaskStatus>(
+          GuideTarget(
+            id: 'status',
+            child: SegmentedButton<TaskStatus>(
             showSelectedIcon: false,
             style: SegmentedButton.styleFrom(visualDensity: VisualDensity.compact),
             segments: [
@@ -34,8 +37,11 @@ class TasksViewBar extends StatelessWidget {
             selected: {c.status},
             onSelectionChanged: (s) => c.setStatus(s.first),
           ),
+          ),
           const Spacer(),
-          PopupMenuButton<TaskKind>(
+          GuideTarget(
+            id: 'kind',
+            child: PopupMenuButton<TaskKind>(
             initialValue: c.kind,
             onSelected: c.setKind,
             itemBuilder: (_) => [
@@ -70,6 +76,7 @@ class TasksViewBar extends StatelessWidget {
                 ],
               ),
             ),
+          ),
           ),
         ],
       ),
