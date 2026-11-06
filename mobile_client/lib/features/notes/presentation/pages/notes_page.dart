@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobile_client/core/di/injection.dart';
+import 'package:mobile_client/core/guide/guide_target.dart';
 import 'package:mobile_client/core/rust/api.dart';
 import 'package:mobile_client/features/notes/presentation/controllers/notes_controller.dart';
 import 'package:mobile_client/features/notes/presentation/dialogs/group_management_sheet.dart';
@@ -122,11 +123,14 @@ class _NotesPageState extends State<NotesPage> {
             drawer: TagsDrawer(controller: _filters),
             floatingActionButton: _c.selecting
                 ? null
-                : FloatingActionButton(
-                    heroTag: null,
-                    tooltip: l10n.notes_new_note,
-                    onPressed: _createNote,
-                    child: const Icon(Icons.add),
+                : GuideTarget(
+                    id: 'create',
+                    child: FloatingActionButton(
+                      heroTag: null,
+                      tooltip: l10n.notes_new_note,
+                      onPressed: _createNote,
+                      child: const Icon(Icons.add),
+                    ),
                   ),
             body: Column(
               children: [
@@ -179,7 +183,7 @@ class _NotesPageState extends State<NotesPage> {
                           ],
                         ),
                 ),
-                Expanded(child: _buildList(l10n)),
+                Expanded(child: GuideTarget(id: 'list', child: _buildList(l10n))),
               ],
             ),
           ),
@@ -245,7 +249,7 @@ class _NotesPageState extends State<NotesPage> {
             );
           }
           final note = _c.notes[i];
-          return NoteCard(
+          final card = NoteCard(
             key: ValueKey(note.id),
             note: note,
             selecting: _c.selecting,
@@ -259,6 +263,9 @@ class _NotesPageState extends State<NotesPage> {
               }
             },
           );
+          return i == 0
+              ? GuideTarget(key: ValueKey('guide-${note.id}'), id: 'item', child: card)
+              : card;
         },
       ),
     );

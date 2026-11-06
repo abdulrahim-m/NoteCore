@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobile_client/core/di/injection.dart';
+import 'package:mobile_client/core/guide/guide_target.dart';
 import 'package:mobile_client/l10n/app_localizations.dart';
 import 'package:mobile_client/shared/controllers/searchable_list_controller.dart';
 import 'package:mobile_client/shared/widgets/custom_search_bar.dart';
@@ -8,6 +9,9 @@ import 'package:mobile_client/shared/widgets/search_filters.dart';
 import 'package:mobile_client/shared/widgets/selection_bar.dart';
 import 'package:mobile_client/shared/widgets/tags_drawer.dart';
 
+/// Tab page for any searchable list (sections, tasks, ...): shared search bar +
+/// tag drawer, long-press selection bar, create FAB, pull to refresh, paging.
+/// Pages provide the controller and how the content looks ([slivers]).
 class SearchableListPage<C extends SearchableListController<T>, T>
     extends StatefulWidget {
   const SearchableListPage({
@@ -28,8 +32,10 @@ class SearchableListPage<C extends SearchableListController<T>, T>
 
   final C Function(SearchFilters filters) create;
 
+  /// Route of an item's page, e.g. `/thoughts/7`.
   final String Function(int id) routeOf;
 
+  /// The content slivers; [open] opens an item's page (and refreshes after).
   final List<Widget> Function(
     BuildContext context,
     C controller,
@@ -37,11 +43,14 @@ class SearchableListPage<C extends SearchableListController<T>, T>
   )
   slivers;
 
+  /// How many items are actually shown (may be fewer than loaded).
   final int Function(C controller) visibleCount;
 
+  /// Text of the empty state when not searching.
   final String Function(C controller) emptyText;
   final IconData emptyIcon;
 
+  /// What the create button does; [open] can open the page of a new item.
   final Future<void> Function(
     BuildContext context,
     C controller,
@@ -50,11 +59,14 @@ class SearchableListPage<C extends SearchableListController<T>, T>
   onCreate;
   final String createTooltip;
 
+  /// Buttons of the selection bar.
   final List<Widget> Function(BuildContext context, C controller)
   selectionActions;
 
+  /// Optional extra filters shown in the filter drawer (under the dates).
   final Widget Function(BuildContext context, C controller)? customFilters;
 
+  /// Optional row under the search bar (view toggles, filters, ...).
   final Widget Function(BuildContext context, C controller)? toolbar;
 
   final String searchHint;
@@ -80,7 +92,7 @@ class _SearchableListPageState<C extends SearchableListController<T>, T>
     _filters.onError = _showMessage;
     _scroll.addListener(_onScroll);
     _filters.loadTags();
-    _c.reload();
+    _c.reload(); // uses whatever search is already typed on another page
   }
 
   @override
@@ -103,6 +115,8 @@ class _SearchableListPageState<C extends SearchableListController<T>, T>
     if (pos.pixels >= pos.maxScrollExtent - 300) _c.loadMore();
   }
 
+  /// A short page may not be scrollable (or may show nothing because the rest
+  /// is hidden); keep loading until it is.
   void _fillViewportIfNeeded() {
     if (!mounted || !_c.hasMore || _c.loading || _c.loadingMore) return;
     if (widget.visibleCount(_c) == 0) {
@@ -117,7 +131,7 @@ class _SearchableListPageState<C extends SearchableListController<T>, T>
   // -------------------------------------------------------------- actions
   Future<void> _open(int id) async {
     await context.push(widget.routeOf(id));
-    if (mounted) _c.reload(keepPages: true);
+    if (mounted) _c.reload(keepPages: true); // name / count / tags may differ
   }
 
   // ---------------------------------------------------------------- build
@@ -143,11 +157,17 @@ class _SearchableListPageState<C extends SearchableListController<T>, T>
             ),
             floatingActionButton: _c.selecting
                 ? null
-                : FloatingActionButton(
-                    heroTag: null,
-                    tooltip: widget.createTooltip,
-                    onPressed: () => widget.onCreate(context, _c, _open),
-                    child: const Icon(Icons.add),
+                : GuideTarget(
+                    id: 'create',
+                    child: FloatingActionButton(
+                      // Every tab has its own FAB; without a null hero tag
+                      // Flutter throws "multiple heroes share the same tag"
+                      // when a page is pushed on top of the tab shell.
+                      heroTag: null,
+                      tooltip: widget.createTooltip,
+                      onPressed: () => widget.onCreate(context, _c, _open),
+                      child: const Icon(Icons.add),
+                    ),
                   ),
             body: Column(
               children: [
@@ -166,6 +186,7 @@ class _SearchableListPageState<C extends SearchableListController<T>, T>
                             CustomSearchBar(
                               hint: widget.searchHint,
                               controller: _filters.textController,
+                              // the shared controller already drives the search
                               onChanged: (_) {},
                               onFilterTap: () =>
                                   _scaffoldKey.currentState?.openDrawer(),
@@ -176,7 +197,7 @@ class _SearchableListPageState<C extends SearchableListController<T>, T>
                           ],
                         ),
                 ),
-                Expanded(child: _buildBody(l10n)),
+                Expanded(child: GuideTarget(id: 'list', child: _buildBody(l10n))),
               ],
             ),
           ),
@@ -224,6 +245,8 @@ class _SearchableListPageState<C extends SearchableListController<T>, T>
       );
     }
 
+    // One scrollable whatever the layout (only the slivers change), so
+    // toggling grid/list never attaches the controller to two scroll views.
     return RefreshIndicator(
       onRefresh: _c.refresh,
       child: CustomScrollView(

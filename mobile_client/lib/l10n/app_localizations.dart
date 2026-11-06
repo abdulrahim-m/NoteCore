@@ -967,6 +967,432 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Due before'**
   String get tasks_due_before;
+
+  /// No description provided for @settings_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settings_title;
+
+  /// No description provided for @settings_appearance.
+  ///
+  /// In en, this message translates to:
+  /// **'Appearance'**
+  String get settings_appearance;
+
+  /// No description provided for @settings_theme.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme'**
+  String get settings_theme;
+
+  /// No description provided for @settings_font_size.
+  ///
+  /// In en, this message translates to:
+  /// **'Font size'**
+  String get settings_font_size;
+
+  /// No description provided for @settings_font_preview.
+  ///
+  /// In en, this message translates to:
+  /// **'The quick brown fox jumps over the lazy dog'**
+  String get settings_font_preview;
+
+  /// No description provided for @settings_general.
+  ///
+  /// In en, this message translates to:
+  /// **'General'**
+  String get settings_general;
+
+  /// No description provided for @settings_language.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get settings_language;
+
+  /// No description provided for @settings_language_default.
+  ///
+  /// In en, this message translates to:
+  /// **'Device default'**
+  String get settings_language_default;
+
+  /// No description provided for @settings_reset_time.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily reset time'**
+  String get settings_reset_time;
+
+  /// No description provided for @settings_reset_time_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Hour at which periodic tasks reset'**
+  String get settings_reset_time_hint;
+
+  /// No description provided for @settings_reset_defaults.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset to defaults'**
+  String get settings_reset_defaults;
+
+  /// No description provided for @settings_reset_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset settings?'**
+  String get settings_reset_title;
+
+  /// No description provided for @settings_reset_body.
+  ///
+  /// In en, this message translates to:
+  /// **'All settings return to their default values.'**
+  String get settings_reset_body;
+
+  /// No description provided for @settings_reset_action.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get settings_reset_action;
+
+  /// No description provided for @guide_tooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Page guide'**
+  String get guide_tooltip;
+
+  /// No description provided for @guide_next.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get guide_next;
+
+  /// No description provided for @guide_back.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get guide_back;
+
+  /// No description provided for @guide_skip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get guide_skip;
+
+  /// No description provided for @guide_done.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get guide_done;
+
+  /// No description provided for @guide_search_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get guide_search_title;
+
+  /// No description provided for @guide_search_body.
+  ///
+  /// In en, this message translates to:
+  /// **'Type here to search. The list updates as you type, and the same search follows you between pages.'**
+  String get guide_search_body;
+
+  /// No description provided for @guide_filters_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Filters and tags'**
+  String get guide_filters_title;
+
+  /// No description provided for @guide_filters_body.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the filter button at the end of the search field to open the filter panel: narrow the list by tags and by date. A number on the button shows how many filters are active.'**
+  String get guide_filters_body;
+
+  /// No description provided for @guide_refresh.
+  ///
+  /// In en, this message translates to:
+  /// **'Pull down to refresh.'**
+  String get guide_refresh;
+
+  /// No description provided for @guide_notes_intro_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Notes'**
+  String get guide_notes_intro_title;
+
+  /// No description provided for @guide_notes_intro_body.
+  ///
+  /// In en, this message translates to:
+  /// **'This is where your notes live: longer text you can format. Here is a quick tour of what you can do on this page.'**
+  String get guide_notes_intro_body;
+
+  /// No description provided for @guide_notes_create_title.
+  ///
+  /// In en, this message translates to:
+  /// **'New note'**
+  String get guide_notes_create_title;
+
+  /// No description provided for @guide_notes_create_body.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap + to create a note and start writing right away. Notes save automatically.'**
+  String get guide_notes_create_body;
+
+  /// No description provided for @guide_notes_groups_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Groups'**
+  String get guide_notes_groups_title;
+
+  /// No description provided for @guide_notes_groups_body.
+  ///
+  /// In en, this message translates to:
+  /// **'Notes are organized in groups. Tap a group to see only its notes, or pick the first one to see everything. The manage button at the end of the row lets you create, rename and delete groups.'**
+  String get guide_notes_groups_body;
+
+  /// No description provided for @guide_notes_list_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Your notes'**
+  String get guide_notes_list_title;
+
+  /// No description provided for @guide_notes_list_body.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap a note to open and edit it.'**
+  String get guide_notes_list_body;
+
+  /// No description provided for @guide_notes_select_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Selecting notes'**
+  String get guide_notes_select_title;
+
+  /// No description provided for @guide_notes_select_body.
+  ///
+  /// In en, this message translates to:
+  /// **'Long-press a note to select it, then tap more notes to add them. The bar at the top lets you add tags, move the selected notes to another group, or delete them.'**
+  String get guide_notes_select_body;
+
+  /// No description provided for @guide_thoughts_intro_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Thoughts'**
+  String get guide_thoughts_intro_title;
+
+  /// No description provided for @guide_thoughts_intro_body.
+  ///
+  /// In en, this message translates to:
+  /// **'Thoughts are sections that each hold short one-line notes. Perfect for ideas you want to jot down fast.'**
+  String get guide_thoughts_intro_body;
+
+  /// No description provided for @guide_thoughts_create_title.
+  ///
+  /// In en, this message translates to:
+  /// **'New section'**
+  String get guide_thoughts_create_title;
+
+  /// No description provided for @guide_thoughts_create_body.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap + and give the section a name. It opens right away so you can start adding thoughts.'**
+  String get guide_thoughts_create_body;
+
+  /// No description provided for @guide_thoughts_view_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Layout'**
+  String get guide_thoughts_view_title;
+
+  /// No description provided for @guide_thoughts_view_body.
+  ///
+  /// In en, this message translates to:
+  /// **'Switch between a grid and a list of sections.'**
+  String get guide_thoughts_view_body;
+
+  /// No description provided for @guide_thoughts_list_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Your sections'**
+  String get guide_thoughts_list_title;
+
+  /// No description provided for @guide_thoughts_list_body.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap a section to open it, add thoughts, edit them, or swipe a thought to delete it.'**
+  String get guide_thoughts_list_body;
+
+  /// No description provided for @guide_thoughts_select_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Selecting sections'**
+  String get guide_thoughts_select_title;
+
+  /// No description provided for @guide_thoughts_select_body.
+  ///
+  /// In en, this message translates to:
+  /// **'Long-press a section to select it. The bar at the top lets you rename it, add tags, or delete the selected sections together with their thoughts.'**
+  String get guide_thoughts_select_body;
+
+  /// No description provided for @guide_tasks_intro_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Tasks'**
+  String get guide_tasks_intro_title;
+
+  /// No description provided for @guide_tasks_intro_body.
+  ///
+  /// In en, this message translates to:
+  /// **'Tasks can be one-time, or periodic so they come back on the days you choose. Here is how this page works.'**
+  String get guide_tasks_intro_body;
+
+  /// No description provided for @guide_tasks_create_title.
+  ///
+  /// In en, this message translates to:
+  /// **'New task'**
+  String get guide_tasks_create_title;
+
+  /// No description provided for @guide_tasks_create_body.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap + to open the task editor: set a title, notes, a due date, sub-tasks, or make the task repeat. Tasks are saved when you confirm.'**
+  String get guide_tasks_create_body;
+
+  /// No description provided for @guide_tasks_filters_body.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the filter button at the end of the search field. Besides tags and dates, the panel has filters made just for tasks.'**
+  String get guide_tasks_filters_body;
+
+  /// No description provided for @guide_tasks_views_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Views'**
+  String get guide_tasks_views_title;
+
+  /// No description provided for @guide_tasks_views_body.
+  ///
+  /// In en, this message translates to:
+  /// **'Switch between unfinished and finished tasks, and use the menu to show all tasks, only one-time tasks, or only periodic tasks.'**
+  String get guide_tasks_views_body;
+
+  /// No description provided for @guide_tasks_upcoming_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Upcoming'**
+  String get guide_tasks_upcoming_title;
+
+  /// No description provided for @guide_tasks_upcoming_body.
+  ///
+  /// In en, this message translates to:
+  /// **'The strip at the top shows what is due soon, so you can check it off without scrolling. It appears in the unfinished view of all tasks.'**
+  String get guide_tasks_upcoming_body;
+
+  /// No description provided for @guide_tasks_list_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Your tasks'**
+  String get guide_tasks_list_title;
+
+  /// No description provided for @guide_tasks_list_body.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap a task to edit it, and use its checkbox to mark it done. Open the arrow on a task to check its sub-tasks without editing; finishing a task does not require its sub-tasks to be checked.'**
+  String get guide_tasks_list_body;
+
+  /// No description provided for @guide_tasks_select_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Selecting tasks'**
+  String get guide_tasks_select_title;
+
+  /// No description provided for @guide_tasks_select_body.
+  ///
+  /// In en, this message translates to:
+  /// **'Long-press a task to select it, then use the bar at the top to act on all selected tasks at once.'**
+  String get guide_tasks_select_body;
+
+  /// No description provided for @guide_checklists_intro_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Checklists'**
+  String get guide_checklists_intro_title;
+
+  /// No description provided for @guide_checklists_intro_body.
+  ///
+  /// In en, this message translates to:
+  /// **'Checklists are sections of simple items with just a checkbox: shopping lists, packing lists, anything quick.'**
+  String get guide_checklists_intro_body;
+
+  /// No description provided for @guide_checklists_create_title.
+  ///
+  /// In en, this message translates to:
+  /// **'New checklist'**
+  String get guide_checklists_create_title;
+
+  /// No description provided for @guide_checklists_create_body.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap + and name the checklist. It opens right away so you can add items.'**
+  String get guide_checklists_create_body;
+
+  /// No description provided for @guide_checklists_completed_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed items'**
+  String get guide_checklists_completed_title;
+
+  /// No description provided for @guide_checklists_completed_body.
+  ///
+  /// In en, this message translates to:
+  /// **'Checked items, and checklists with everything checked, are hidden to keep the list short. Turn this on to see them again.'**
+  String get guide_checklists_completed_body;
+
+  /// No description provided for @guide_checklists_list_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Your checklists'**
+  String get guide_checklists_list_title;
+
+  /// No description provided for @guide_checklists_list_body.
+  ///
+  /// In en, this message translates to:
+  /// **'Expand a checklist to tick its items right here, or tap it to open and edit it.'**
+  String get guide_checklists_list_body;
+
+  /// No description provided for @guide_checklists_select_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Selecting checklists'**
+  String get guide_checklists_select_title;
+
+  /// No description provided for @guide_checklists_select_body.
+  ///
+  /// In en, this message translates to:
+  /// **'Long-press a checklist to select it. The bar at the top lets you rename it, add tags, or delete the selected checklists together with their items.'**
+  String get guide_checklists_select_body;
+
+  /// No description provided for @guide_notes_manage_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage groups'**
+  String get guide_notes_manage_title;
+
+  /// No description provided for @guide_notes_manage_body.
+  ///
+  /// In en, this message translates to:
+  /// **'Create, rename and delete your groups here.'**
+  String get guide_notes_manage_body;
+
+  /// No description provided for @guide_tasks_kind_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Type of tasks'**
+  String get guide_tasks_kind_title;
+
+  /// No description provided for @guide_tasks_kind_body.
+  ///
+  /// In en, this message translates to:
+  /// **'Show all tasks, only one-time tasks, or only periodic tasks that repeat.'**
+  String get guide_tasks_kind_body;
 }
 
 class _AppLocalizationsDelegate

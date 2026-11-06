@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_client/core/di/injection.dart';
+import 'package:mobile_client/core/guide/guide_target.dart';
 import 'package:mobile_client/core/rust/api/short_tasks.dart';
 import 'package:mobile_client/core/rust/dto/short_task.dart';
 import 'package:mobile_client/features/checklists/presentation/controllers/short_tasks_controller.dart';
@@ -34,11 +35,14 @@ class ChecklistsPage extends StatelessWidget {
         alignment: AlignmentDirectional.centerStart,
         child: Padding(
           padding: const EdgeInsetsDirectional.only(start: 12),
-          child: FilterChip(
-            visualDensity: VisualDensity.compact,
-            label: Text(l10n.checklists_show_completed),
-            selected: c.showCompleted,
-            onSelected: (_) => c.toggleShowCompleted(),
+          child: GuideTarget(
+            id: 'completed',
+            child: FilterChip(
+              visualDensity: VisualDensity.compact,
+              label: Text(l10n.checklists_show_completed),
+              selected: c.showCompleted,
+              onSelected: (_) => c.toggleShowCompleted(),
+            ),
           ),
         ),
       ),
@@ -51,7 +55,7 @@ class ChecklistsPage extends StatelessWidget {
               itemCount: sections.length,
               itemBuilder: (_, i) {
                 final s = sections[i];
-                return ChecklistCard(
+                final card = ChecklistCard(
                   key: ValueKey(s.id),
                   section: s,
                   items: c.visibleItems(s),
@@ -64,6 +68,13 @@ class ChecklistsPage extends StatelessWidget {
                   onOpen: () => open(s.id),
                   onToggleItem: (itemId) => c.toggleItem(s.id, itemId),
                 );
+                return i == 0
+                    ? GuideTarget(
+                        key: ValueKey('guide-${s.id}'),
+                        id: 'item',
+                        child: card,
+                      )
+                    : card;
               },
             ),
           ),

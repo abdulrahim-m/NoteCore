@@ -8,6 +8,7 @@ import 'package:mobile_client/core/rust/api/short_tasks.dart';
 import 'package:mobile_client/core/rust/api/tasks.dart';
 import 'package:mobile_client/core/rust/error.dart';
 import 'package:mobile_client/core/rust/frb_generated.dart';
+import 'package:mobile_client/core/settings/settings_controller.dart';
 import 'package:mobile_client/shared/widgets/search_filters.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -26,6 +27,10 @@ void main() async {
     getIt.registerSingleton<SearchFilters>(SearchFilters(core.tags()));
     getIt.registerSingleton<ShortTasksApi>(core.shortTasks());
     getIt.registerSingleton<TasksApi>(core.tasks());
+
+    final settings = SettingsController(core);
+    await settings.load();
+    getIt.registerSingleton<SettingsController>(settings);
   } on ApiError catch (e) {
     print("======================== An error has occurred while initializing: ${e.message}");
   }

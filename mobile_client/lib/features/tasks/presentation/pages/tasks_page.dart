@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_client/core/di/injection.dart';
+import 'package:mobile_client/core/guide/guide_target.dart';
 import 'package:mobile_client/core/rust/api/tasks.dart';
 import 'package:mobile_client/core/rust/dto/task.dart';
 import 'package:mobile_client/features/tasks/presentation/controllers/tasks_controller.dart';
@@ -11,6 +12,9 @@ import 'package:mobile_client/l10n/app_localizations.dart';
 import 'package:mobile_client/shared/views/searchable_list_page.dart';
 import 'package:mobile_client/shared/widgets/section_selection_actions.dart';
 
+/// "Tasks" tab: search, one slim row to pick unfinished/finished and the kind
+/// of tasks, and the list. The default view (all + unfinished) starts with a
+/// compact upcoming strip. Task-only filters live in the filter drawer.
 class TasksPage extends StatelessWidget {
   const TasksPage({super.key});
 
@@ -22,6 +26,7 @@ class TasksPage extends StatelessWidget {
     return SearchableListPage<TasksController, TaskDto>(
       create: (filters) =>
           TasksController(api: getIt<TasksApi>(), filters: filters),
+      // id < 0 = a new task
       routeOf: (id) => id < 0 ? '/tasks/new' : '/tasks/$id',
       onCreate: (context, c, open) => open(-1),
       createTooltip: l10n.tasks_new,
@@ -49,10 +54,13 @@ class TasksPage extends StatelessWidget {
         return [
           if (c.showsUpcoming) ...[
             SliverToBoxAdapter(
-              child: UpcomingStrip(
-                entries: c.upcoming,
-                onOpen: open,
-                onToggle: c.toggleDone,
+              child: GuideTarget(
+                id: 'upcoming',
+                child: UpcomingStrip(
+                  entries: c.upcoming,
+                  onOpen: open,
+                  onToggle: c.toggleDone,
+                ),
               ),
             ),
             SliverToBoxAdapter(
@@ -71,7 +79,7 @@ class TasksPage extends StatelessWidget {
               itemCount: tasks.length,
               itemBuilder: (_, i) {
                 final t = tasks[i];
-                return TaskCard(
+                final card = TaskCard(
                   key: ValueKey(t.id),
                   task: t,
                   selecting: c.selecting,
@@ -83,6 +91,13 @@ class TasksPage extends StatelessWidget {
                   onToggleExpanded: () => c.toggleExpanded(t.id),
                   onToggleSubTask: (i) => c.toggleSubTask(t.id, i),
                 );
+                return i == 0
+                    ? GuideTarget(
+                        key: ValueKey('guide-${t.id}'),
+                        id: 'item',
+                        child: card,
+                      )
+                    : card;
               },
             ),
           ),

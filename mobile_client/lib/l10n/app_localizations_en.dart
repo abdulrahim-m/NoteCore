@@ -540,4 +540,244 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tasks_due_before => 'Due before';
+
+  @override
+  String get settings_title => 'Settings';
+
+  @override
+  String get settings_appearance => 'Appearance';
+
+  @override
+  String get settings_theme => 'Theme';
+
+  @override
+  String get settings_font_size => 'Font size';
+
+  @override
+  String get settings_font_preview =>
+      'The quick brown fox jumps over the lazy dog';
+
+  @override
+  String get settings_general => 'General';
+
+  @override
+  String get settings_language => 'Language';
+
+  @override
+  String get settings_language_default => 'Device default';
+
+  @override
+  String get settings_reset_time => 'Daily reset time';
+
+  @override
+  String get settings_reset_time_hint => 'Hour at which periodic tasks reset';
+
+  @override
+  String get settings_reset_defaults => 'Reset to defaults';
+
+  @override
+  String get settings_reset_title => 'Reset settings?';
+
+  @override
+  String get settings_reset_body =>
+      'All settings return to their default values.';
+
+  @override
+  String get settings_reset_action => 'Reset';
+
+  @override
+  String get guide_tooltip => 'Page guide';
+
+  @override
+  String get guide_next => 'Next';
+
+  @override
+  String get guide_back => 'Back';
+
+  @override
+  String get guide_skip => 'Skip';
+
+  @override
+  String get guide_done => 'Done';
+
+  @override
+  String get guide_search_title => 'Search';
+
+  @override
+  String get guide_search_body =>
+      'Type here to search. The list updates as you type, and the same search follows you between pages.';
+
+  @override
+  String get guide_filters_title => 'Filters and tags';
+
+  @override
+  String get guide_filters_body =>
+      'Tap the filter button at the end of the search field to open the filter panel: narrow the list by tags and by date. A number on the button shows how many filters are active.';
+
+  @override
+  String get guide_refresh => 'Pull down to refresh.';
+
+  @override
+  String get guide_notes_intro_title => 'Notes';
+
+  @override
+  String get guide_notes_intro_body =>
+      'This is where your notes live: longer text you can format. Here is a quick tour of what you can do on this page.';
+
+  @override
+  String get guide_notes_create_title => 'New note';
+
+  @override
+  String get guide_notes_create_body =>
+      'Tap + to create a note and start writing right away. Notes save automatically.';
+
+  @override
+  String get guide_notes_groups_title => 'Groups';
+
+  @override
+  String get guide_notes_groups_body =>
+      'Notes are organized in groups. Tap a group to see only its notes, or pick the first one to see everything. The manage button at the end of the row lets you create, rename and delete groups.';
+
+  @override
+  String get guide_notes_list_title => 'Your notes';
+
+  @override
+  String get guide_notes_list_body => 'Tap a note to open and edit it.';
+
+  @override
+  String get guide_notes_select_title => 'Selecting notes';
+
+  @override
+  String get guide_notes_select_body =>
+      'Long-press a note to select it, then tap more notes to add them. The bar at the top lets you add tags, move the selected notes to another group, or delete them.';
+
+  @override
+  String get guide_thoughts_intro_title => 'Thoughts';
+
+  @override
+  String get guide_thoughts_intro_body =>
+      'Thoughts are sections that each hold short one-line notes. Perfect for ideas you want to jot down fast.';
+
+  @override
+  String get guide_thoughts_create_title => 'New section';
+
+  @override
+  String get guide_thoughts_create_body =>
+      'Tap + and give the section a name. It opens right away so you can start adding thoughts.';
+
+  @override
+  String get guide_thoughts_view_title => 'Layout';
+
+  @override
+  String get guide_thoughts_view_body =>
+      'Switch between a grid and a list of sections.';
+
+  @override
+  String get guide_thoughts_list_title => 'Your sections';
+
+  @override
+  String get guide_thoughts_list_body =>
+      'Tap a section to open it, add thoughts, edit them, or swipe a thought to delete it.';
+
+  @override
+  String get guide_thoughts_select_title => 'Selecting sections';
+
+  @override
+  String get guide_thoughts_select_body =>
+      'Long-press a section to select it. The bar at the top lets you rename it, add tags, or delete the selected sections together with their thoughts.';
+
+  @override
+  String get guide_tasks_intro_title => 'Tasks';
+
+  @override
+  String get guide_tasks_intro_body =>
+      'Tasks can be one-time, or periodic so they come back on the days you choose. Here is how this page works.';
+
+  @override
+  String get guide_tasks_create_title => 'New task';
+
+  @override
+  String get guide_tasks_create_body =>
+      'Tap + to open the task editor: set a title, notes, a due date, sub-tasks, or make the task repeat. Tasks are saved when you confirm.';
+
+  @override
+  String get guide_tasks_filters_body =>
+      'Tap the filter button at the end of the search field. Besides tags and dates, the panel has filters made just for tasks.';
+
+  @override
+  String get guide_tasks_views_title => 'Views';
+
+  @override
+  String get guide_tasks_views_body =>
+      'Switch between unfinished and finished tasks, and use the menu to show all tasks, only one-time tasks, or only periodic tasks.';
+
+  @override
+  String get guide_tasks_upcoming_title => 'Upcoming';
+
+  @override
+  String get guide_tasks_upcoming_body =>
+      'The strip at the top shows what is due soon, so you can check it off without scrolling. It appears in the unfinished view of all tasks.';
+
+  @override
+  String get guide_tasks_list_title => 'Your tasks';
+
+  @override
+  String get guide_tasks_list_body =>
+      'Tap a task to edit it, and use its checkbox to mark it done. Open the arrow on a task to check its sub-tasks without editing; finishing a task does not require its sub-tasks to be checked.';
+
+  @override
+  String get guide_tasks_select_title => 'Selecting tasks';
+
+  @override
+  String get guide_tasks_select_body =>
+      'Long-press a task to select it, then use the bar at the top to act on all selected tasks at once.';
+
+  @override
+  String get guide_checklists_intro_title => 'Checklists';
+
+  @override
+  String get guide_checklists_intro_body =>
+      'Checklists are sections of simple items with just a checkbox: shopping lists, packing lists, anything quick.';
+
+  @override
+  String get guide_checklists_create_title => 'New checklist';
+
+  @override
+  String get guide_checklists_create_body =>
+      'Tap + and name the checklist. It opens right away so you can add items.';
+
+  @override
+  String get guide_checklists_completed_title => 'Completed items';
+
+  @override
+  String get guide_checklists_completed_body =>
+      'Checked items, and checklists with everything checked, are hidden to keep the list short. Turn this on to see them again.';
+
+  @override
+  String get guide_checklists_list_title => 'Your checklists';
+
+  @override
+  String get guide_checklists_list_body =>
+      'Expand a checklist to tick its items right here, or tap it to open and edit it.';
+
+  @override
+  String get guide_checklists_select_title => 'Selecting checklists';
+
+  @override
+  String get guide_checklists_select_body =>
+      'Long-press a checklist to select it. The bar at the top lets you rename it, add tags, or delete the selected checklists together with their items.';
+
+  @override
+  String get guide_notes_manage_title => 'Manage groups';
+
+  @override
+  String get guide_notes_manage_body =>
+      'Create, rename and delete your groups here.';
+
+  @override
+  String get guide_tasks_kind_title => 'Type of tasks';
+
+  @override
+  String get guide_tasks_kind_body =>
+      'Show all tasks, only one-time tasks, or only periodic tasks that repeat.';
 }

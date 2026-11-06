@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mobile_client/core/guide/page_guides.dart';
 import 'package:mobile_client/l10n/app_localizations.dart';
 
 class AppShell extends StatelessWidget {
@@ -42,16 +43,18 @@ class AppShell extends StatelessWidget {
               ),
               actions: [
                 IconButton(
-                  onPressed: () {
-                    // TODO: Options?
-                  },
+                  tooltip: l10n.guide_tooltip,
+                  // Tour of the page that is open right now.
+                  onPressed: () =>
+                      startGuideForTab(context, navigationShell.currentIndex),
                   icon: const Icon(Icons.question_mark),
                 ),
                 IconButton(
                   onPressed: () {
-                    // TODO: Options?
+                    context.push('/settings');
                   },
-                  icon: const Icon(Icons.more_vert),
+                  tooltip: l10n.settings_title,
+                  icon: const Icon(Icons.settings),
                 ),
               ],
             ),

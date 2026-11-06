@@ -3,10 +3,12 @@ import 'package:go_router/go_router.dart';
 import 'package:mobile_client/app/app_shell.dart';
 import 'package:mobile_client/core/context/app_context.dart';
 import 'package:mobile_client/core/di/injection.dart';
+import 'package:mobile_client/core/guide/guide_target.dart';
 import 'package:mobile_client/features/checklists/presentation/pages/checklist_section_page.dart';
 import 'package:mobile_client/features/checklists/presentation/pages/checklists_page.dart';
 import 'package:mobile_client/features/notes/presentation/pages/note_page.dart';
 import 'package:mobile_client/features/notes/presentation/pages/notes_page.dart';
+import 'package:mobile_client/features/settings/presentation/pages/settings_page.dart';
 import 'package:mobile_client/features/tasks/presentation/pages/task_page.dart';
 import 'package:mobile_client/features/tasks/presentation/pages/tasks_page.dart';
 import 'package:mobile_client/features/thoughts/presentation/pages/thought_section_page.dart';
@@ -29,7 +31,8 @@ final appRouter = GoRouter(
           routes: [
             GoRoute(
               path: '/notes',
-              builder: (_, _) => const NotesPage(),
+              builder: (_, _) =>
+                  const GuideScope(id: 'notes', child: NotesPage()),
               routes: [
                 GoRoute(
                   path: ':id',
@@ -47,7 +50,8 @@ final appRouter = GoRouter(
           routes: [
             GoRoute(
               path: '/thoughts',
-              builder: (_, _) => const ThoughtsPage(),
+              builder: (_, _) =>
+                  const GuideScope(id: 'thoughts', child: ThoughtsPage()),
               routes: [
                 GoRoute(
                   path: ':id',
@@ -65,7 +69,8 @@ final appRouter = GoRouter(
           routes: [
             GoRoute(
               path: '/tasks',
-              builder: (_, _) => const TasksPage(),
+              builder: (_, _) =>
+                  const GuideScope(id: 'tasks', child: TasksPage()),
               routes: [
                 // `new` must come before `:id`
                 GoRoute(
@@ -89,7 +94,8 @@ final appRouter = GoRouter(
           routes: [
             GoRoute(
               path: '/checklists',
-              builder: (_, _) => const ChecklistsPage(),
+              builder: (_, _) =>
+                  const GuideScope(id: 'checklists', child: ChecklistsPage()),
               routes: [
                 GoRoute(
                   path: ':id',
@@ -105,5 +111,6 @@ final appRouter = GoRouter(
         ),
       ],
     ),
+    GoRoute(path: '/settings', builder: (_, _) => const SettingsPage()),
   ],
 );
