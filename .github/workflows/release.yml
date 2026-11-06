@@ -1,0 +1,49 @@
+name: Build & Upload Release APKs
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build-and-upload:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Setup Rust & Android Targets
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-linux-android, armv7-linux-androideabi, x86_64-linux-android
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Install Dependencies
+        run: flutter pub get
+        working-directory: mobile_client
+
+      - name: Build Universal APK
+        run: flutter build apk --release
+        working-directory: mobile_client
+
+      - name: Build Split per-ABI APKs
+        run: flutter build apk --release --split-per-abi
+        working-directory: mobile_client
+
+      - name: Upload APKs to Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: mobile_client/build/app/outputs/flutter-apk/*.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
